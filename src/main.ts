@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import Vue, { CreateElement, VNode } from 'vue';
 import App from './App.vue';
 import router from './router';
 import { createProvider } from './vue-apollo';
@@ -6,7 +6,7 @@ import { createProvider } from './vue-apollo';
 Vue.config.productionTip = false;
 
 new Vue({
-	router,
 	apolloProvider: createProvider(),
-	render: (h) => h(App)
+	render: (h: CreateElement): VNode => h(App),
+	router
 }).$mount('#app');
