@@ -19,6 +19,12 @@ export default new Router({
 			// which is lazy-loaded when the route is visited.
 			// @ts-ignore
 			component: (): Promise<any> => import(/* webpackChunkName: "about" */ './views/about/about.vue')
+		},
+		{
+			path: '/item',
+			name: 'item',
+			// @ts-ignore
+			component: (): Promise<any> => import('./views/item/item.vue')
 		}
 	]
 });

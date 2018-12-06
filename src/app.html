@@ -1,7 +1,10 @@
 <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link>|
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+	<h1 class="SCtitle">Star Citizen Trade Marked</h1>
+	<ul id="menu" class="SCmenu">
+		<li><router-link to="/">Home</router-link></li>
+		<li><router-link to="/about">About</router-link></li>
+		<li><router-link to="/item">Items</router-link></li>
+	</ul>
+	<hr />
+	<router-view id="wrapper"></router-view>
+</div>
