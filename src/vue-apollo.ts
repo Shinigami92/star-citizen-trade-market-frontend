@@ -2,6 +2,7 @@ import ApolloClient from 'apollo-client';
 import Vue from 'vue';
 import VueApollo from 'vue-apollo';
 import { ErrorHandler } from 'vue-apollo/types/options';
+// @ts-ignore
 import { createApolloClient, restartWebsockets } from 'vue-cli-plugin-apollo/graphql-client';
 
 // Install the vue plugin
