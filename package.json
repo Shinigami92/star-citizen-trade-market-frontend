@@ -1,0 +1,31 @@
+{
+	"name": "star-citizen-trade-market-frontend",
+	"version": "0.1.0",
+	"description": "Star Citizen Trade Market Frontend",
+	"author": {
+		"email": "chrissi92@hotmail.de",
+		"name": "Christopher Quadflieg"
+	},
+	"license": "MIT",
+	"private": true,
+	"scripts": {
+		"serve": "vue-cli-service serve",
+		"build": "vue-cli-service build",
+		"lint": "vue-cli-service lint"
+	},
+	"dependencies": {
+		"vue": "~2.5.17",
+		"vue-class-component": "~6.3.2",
+		"vue-property-decorator": "~7.2.0",
+		"vue-router": "~3.0.2"
+	},
+	"devDependencies": {
+		"@vue/cli-plugin-babel": "~3.2.0",
+		"@vue/cli-plugin-typescript": "~3.2.0",
+		"@vue/cli-service": "~3.2.0",
+		"node-sass": "~4.10.0",
+		"sass-loader": "~7.1.0",
+		"typescript": "~3.2.1",
+		"vue-template-compiler": "~2.5.17"
+	}
+}
