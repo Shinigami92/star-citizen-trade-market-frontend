@@ -1,12 +1,16 @@
 <div>
 	<h3 class="SCtitle">Items</h3>
-	<table>
+	<table class="SCtable">
 		<thead>
+			<th>ID</th>
 			<th>Name</th>
+			<th>Category</th>
 		</thead>
 		<tbody>
-			<tr>
-				Test
+			<tr v-for="commodity in commodities">
+				<td class="mono">{{ commodity.id }}</td>
+				<td>{{ commodity.name }}</td>
+				<td>{{ commodity.commodityCategory.name }}</td>
 			</tr>
 		</tbody>
 	</table>
