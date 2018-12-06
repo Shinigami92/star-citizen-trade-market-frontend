@@ -1,9 +1,12 @@
-<div id="app">
+<div id="app" :style="{ fontSize: fontSize + 'pt' }">
 	<h1 class="SCtitle">Star Citizen Trade Marked</h1>
 	<ul id="menu" class="SCmenu">
 		<li><router-link to="/">Home</router-link></li>
 		<li><router-link to="/item">Items</router-link></li>
 		<li><router-link to="/about">About</router-link></li>
+		<li class="unselectable">
+			<span @click="increaseFontSize()">A+</span>|<span @click="decreaseFontSize()">A-</span>
+		</li>
 	</ul>
 	<hr />
 	<router-view id="wrapper"></router-view>
