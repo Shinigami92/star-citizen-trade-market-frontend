@@ -4,6 +4,10 @@ import { Component, Vue } from 'vue-property-decorator';
 export default class App extends Vue {
 	public fontSize: number = 12;
 
+	constructor() {
+		super();
+	}
+
 	public increaseFontSize(): void {
 		if (this.fontSize < 16) {
 			this.fontSize++;
