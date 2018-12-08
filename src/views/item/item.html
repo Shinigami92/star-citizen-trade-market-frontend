@@ -1,17 +1,10 @@
-<div>
-	<h3 class="SCtitle">Items</h3>
-	<table class="SCtable">
-		<thead>
-			<th>ID</th>
-			<th>Name</th>
-			<th>Category</th>
-		</thead>
-		<tbody>
-			<tr v-for="commodity in commodities">
-				<td class="mono">{{ commodity.id }}</td>
-				<td>{{ commodity.name }}</td>
-				<td>{{ commodity.commodityCategory.name }}</td>
-			</tr>
-		</tbody>
-	</table>
-</div>
+<v-layout align-space-between justify-start column>
+	<h1 class="display-1">Commodities</h1>
+	<v-data-table :headers="headers" :items="commodities" :pagination.sync="pagination" class="elevation-1">
+		<template slot="items" slot-scope="props">
+			<td class="mono">{{ props.item.id }}</td>
+			<td>{{ props.item.name }}</td>
+			<td>{{ props.item.commodityCategory.name }}</td>
+		</template>
+	</v-data-table>
+</v-layout>

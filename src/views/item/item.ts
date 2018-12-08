@@ -18,4 +18,30 @@ import { Component, Vue } from 'vue-property-decorator';
 		`
 	}
 })
-export default class ItemDashboard extends Vue {}
+export default class ItemDashboard extends Vue {
+	public pagination: {
+		descending?: boolean;
+		page?: number;
+		rowsPerPage?: number;
+		sortBy?: string;
+		totalItems?: number;
+	} = {
+		rowsPerPage: 10
+	};
+
+	public headers: Array<{
+		text: string;
+		value: string;
+		align?: 'left' | 'center' | 'right';
+		sortable?: boolean;
+		class?: string[] | string;
+		width?: string;
+	}> = [
+		{ text: 'ID ', value: 'id', width: '400' },
+		{ text: 'Name ', value: 'name' },
+		{ text: 'Category ', value: 'commodityCategory.name' }
+	];
+	constructor() {
+		super();
+	}
+}
