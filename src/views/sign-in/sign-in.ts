@@ -45,6 +45,8 @@ export default class SignUp extends Vue {
 				}
 			});
 			localStorage.setItem('auth', JSON.stringify(result.data.signIn));
+			this.$router.push('/');
+			this.$router.go(0);
 		} catch (error) {
 			console.error(error.graphQLErrors);
 			this.errors = error.graphQLErrors as GraphQLError[];
