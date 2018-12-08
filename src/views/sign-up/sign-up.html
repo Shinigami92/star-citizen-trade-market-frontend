@@ -1,0 +1,27 @@
+<div>
+	<h2 class="SCtitle">SignUp</h2>
+	<ApolloMutation :mutation="mutation" :variables="variables" @done="signUp()">
+		<template slot-scope="{ mutate, error }">
+			<form class="l" v-on:submit.prevent="formValid && mutate()">
+				<div>
+					<div><label for="username">Username</label> <input type="text" v-model="username" required /></div>
+					<div class="sc-hint">The username you use to log into the app later</div>
+					<div class="sc-error">{{ error.gqlError.message.message[0].constraints.length }}</div>
+				</div>
+				<hr />
+				<div>
+					<label for="handle">Star Citizen Handle</label> <input type="text" v-model="handle" required />
+				</div>
+				<div><label for="email">Email</label> <input type="text" v-model="email" required /></div>
+				<div>
+					<label for="confirmEmail">Confirm Email</label>
+					<input type="text" v-model="confirmEmail" required />
+				</div>
+				<div><input type="submit" value="Sign Up" /></div>
+			</form>
+			<div>
+				<p>{{ error }}</p>
+			</div>
+		</template>
+	</ApolloMutation>
+</div>

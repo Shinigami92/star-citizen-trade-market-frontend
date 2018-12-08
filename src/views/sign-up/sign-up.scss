@@ -1,0 +1,21 @@
+label {
+	display: inline-block;
+	margin-right: 6px;
+	// min-width: 120px;
+	min-width: unset;
+	max-width: 200px;
+}
+
+.sc-hint {
+	font-size: 80%;
+	color: #337ab7;
+	padding-left: 82px;
+	padding-top: 2px;
+}
+
+.sc-error {
+	font-size: 80%;
+	color: #c00;
+	padding-left: 82px;
+	padding-top: 2px;
+}

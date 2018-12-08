@@ -21,6 +21,12 @@ export default new Router({
 			component: (): Promise<any> => import(/* webpackChunkName: "about" */ './views/about/about.vue')
 		},
 		{
+			path: '/sign-up',
+			name: 'sign-up',
+			// @ts-ignore
+			component: (): Promise<any> => import(/* webpackChunkName: "about" */ './views/sign-up/sign-up.vue')
+		},
+		{
 			path: '/item',
 			name: 'item',
 			// @ts-ignore
