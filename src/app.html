@@ -5,15 +5,30 @@
 				<v-list-tile-action> <v-icon>fas fa-chart-bar</v-icon></v-list-tile-action>
 				<v-list-tile-content>Commodities</v-list-tile-content>
 			</v-list-tile>
-			<v-divider></v-divider>
-			<v-list-tile to="/my-ships">
-				<v-list-tile-action> <v-icon>fas fa-space-shuttle</v-icon></v-list-tile-action>
-				<v-list-tile-content>My Ships</v-list-tile-content>
-			</v-list-tile>
-			<v-list-tile to="/my-transactions">
-				<v-list-tile-action> <v-icon>fas fa-list</v-icon></v-list-tile-action>
-				<v-list-tile-content>My Transactions</v-list-tile-content>
-			</v-list-tile>
+			<template v-if="currentUser">
+				<v-divider></v-divider>
+				<v-list-tile to="/my-ships">
+					<v-list-tile-action> <v-icon>fas fa-space-shuttle</v-icon></v-list-tile-action>
+					<v-list-tile-content>My Ships</v-list-tile-content>
+				</v-list-tile>
+				<v-list-tile to="/my-transactions">
+					<v-list-tile-action> <v-icon>fas fa-list</v-icon></v-list-tile-action>
+					<v-list-tile-content>My Transactions</v-list-tile-content>
+				</v-list-tile>
+				<template v-if="currentUser.roles.includes('ADMIN')">
+					<v-divider></v-divider>
+					<v-list-group>
+						<v-list-tile slot="activator">
+							<v-list-tile-content>
+								<v-list-tile-title> Administration </v-list-tile-title>
+							</v-list-tile-content>
+						</v-list-tile>
+						<v-list-tile to="/administration/game-version">
+							<v-list-tile-content>Game Versions</v-list-tile-content>
+						</v-list-tile>
+					</v-list-group>
+				</template>
+			</template>
 		</v-list>
 	</v-navigation-drawer>
 	<v-toolbar app fixed clipped-left>
