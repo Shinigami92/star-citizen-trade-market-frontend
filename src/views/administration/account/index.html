@@ -1,0 +1,12 @@
+<v-layout align-space-between justify-start column>
+	<h1 class="display-1">Accounts</h1>
+	<v-data-table :headers="headers" :items="elements" :pagination.sync="pagination" class="elevation-1">
+		<template slot="items" slot-scope="props">
+			<td class="mono">{{ props.item.id }}</td>
+			<td>{{ props.item.username }}</td>
+			<td>{{ props.item.handle }}</td>
+			<!-- <td>{{ props.item.email }}</td> -->
+			<td>{{ props.item.roles.join(', ') }}</td>
+		</template>
+	</v-data-table>
+</v-layout>

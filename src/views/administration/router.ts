@@ -6,5 +6,11 @@ export const administrationRoutes: RouteConfig[] = [
 		name: 'game-version',
 		// @ts-ignore
 		component: (): Promise<any> => import('./game-version/index.vue')
+	},
+	{
+		path: '/administration/account',
+		name: 'account',
+		// @ts-ignore
+		component: (): Promise<any> => import('./account/index.vue')
 	}
 ];
