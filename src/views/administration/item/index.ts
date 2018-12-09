@@ -30,7 +30,7 @@ export default class Index extends Vue {
 		{ text: 'Name ', value: 'name' },
 		{ text: 'Type ', value: 'type' },
 		{ text: 'First Time Seen ', value: 'inGameSince' },
-		{ text: 'Since Version ', value: 'inGameSinceVersion' },
+		{ text: 'Since Version ', value: 'inGameSinceVersion.identifier' },
 		{ text: 'ID ', value: 'id', width: '306' }
 	];
 	constructor() {
