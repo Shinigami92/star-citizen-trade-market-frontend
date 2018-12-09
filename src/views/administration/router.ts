@@ -24,5 +24,11 @@ export const administrationRoutes: RouteConfig[] = [
 		name: 'administration-location',
 		// @ts-ignore
 		component: (): Promise<any> => import('./location/index.vue')
+	},
+	{
+		path: '/administration/location-type',
+		name: 'administration-location-type',
+		// @ts-ignore
+		component: (): Promise<any> => import('./location-type/index.vue')
 	}
 ];
