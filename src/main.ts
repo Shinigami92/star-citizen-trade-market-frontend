@@ -1,10 +1,10 @@
 import '@fortawesome/fontawesome-free/css/all.css';
 import Vue, { CreateElement, VNode } from 'vue';
 import App from './app.vue';
+import { createProvider } from './plugins/apollo';
 import './plugins/moment';
 import './plugins/vuetify';
 import router from './router';
-import { createProvider } from './vue-apollo';
 
 Vue.config.productionTip = false;
 
