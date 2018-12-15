@@ -4,6 +4,9 @@
 	background-color: #000b11;
 
 	.theme--dark {
+		&.v-card {
+			background-color: #0a2433;
+		}
 		&.v-toolbar {
 			background-color: #0a2433;
 		}

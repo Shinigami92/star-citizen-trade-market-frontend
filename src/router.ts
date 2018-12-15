@@ -34,10 +34,10 @@ export default new Router({
 			component: (): Promise<any> => import('./views/sign-in/sign-in.vue')
 		},
 		{
-			path: '/item',
-			name: 'item',
+			path: '/trading',
+			name: 'trading',
 			// @ts-ignore
-			component: (): Promise<any> => import('./views/item/item.vue')
+			component: (): Promise<any> => import('./views/trading/trading.vue')
 		},
 		...administrationRoutes
 	]
