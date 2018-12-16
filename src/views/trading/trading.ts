@@ -24,7 +24,7 @@ export default class TradingDashboard extends Vue {
 	};
 
 	public headers: VDataTableHeader[] = [
-		{ text: 'Commodity ', value: 'item.name', width: '400' },
+		{ text: 'Commodity ', value: 'item.name' },
 		{ text: 'Start ', value: 'startLocation.name' },
 		{ text: 'End ', value: 'endLocation.name' },
 		{ text: 'Buy Price ', value: 'buyItemPrice.unitPrice' },
