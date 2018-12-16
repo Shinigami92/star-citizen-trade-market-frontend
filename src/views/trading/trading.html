@@ -8,6 +8,7 @@
 						<v-autocomplete
 							v-model="startLocation"
 							:items="locations"
+							return-object
 							item-text="name"
 							label="Start Location"
 							prepend-icon="fas fa-plane-departure"
@@ -19,6 +20,7 @@
 						<v-autocomplete
 							v-model="endLocation"
 							:items="locations"
+							return-object
 							item-text="name"
 							label="End Location"
 							prepend-icon="fas fa-plane-arrival"
@@ -26,14 +28,19 @@
 						></v-autocomplete>
 					</v-flex>
 					<v-flex xs12 md3>
-						<v-text-field type="number" min="1" v-model="maxScu" label="Max SCU"></v-text-field>
+						<v-text-field type="number" min="1" v-model.number="maxScu" label="Max SCU"></v-text-field>
 					</v-flex>
 					<v-flex xs12 md3>
-						<v-text-field type="number" min="1" v-model="startCurrency" label="Start aUEC"></v-text-field>
+						<v-text-field
+							type="number"
+							min="1"
+							v-model.number="startCurrency"
+							label="Start aUEC"
+						></v-text-field>
 					</v-flex>
 					<v-flex xs12 md12>
 						<v-layout row>
-							<v-btn color="primary">Search</v-btn>
+							<v-btn color="primary" @click="search()">Search</v-btn>
 							<v-spacer></v-spacer>
 							<v-btn @click="reportPricesModal = true" color="accent">Report Prices</v-btn>
 							<report-price
@@ -49,6 +56,9 @@
 									</v-list-tile>
 									<v-list-tile @click="">
 										<v-list-tile-title>Add new Commodity</v-list-tile-title>
+									</v-list-tile>
+									<v-list-tile @click="">
+										<v-list-tile-title>Add new Game Version</v-list-tile-title>
 									</v-list-tile>
 								</v-list>
 							</v-menu>

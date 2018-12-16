@@ -1,17 +1,54 @@
 import ReportPrice from '@/components/report-prices/report-prices';
+import { Location, Trade } from '@/shared/graphql.schema';
 import { VDataTableHeader, VDataTablePagination } from '@/shared/vuetify/v-data-table';
+import { DocumentNode } from 'graphql';
 import gql from 'graphql-tag';
 import { QueryResult } from 'vue-apollo/types/vue-apollo';
 import { Component, Vue } from 'vue-property-decorator';
+
+const TRADE_QUERY: DocumentNode = gql`
+	query tradeData($searchInput: TradeSearchInput) {
+		trades(searchInput: $searchInput) {
+			buyItemPrice {
+				id
+				unitPrice
+				type
+			}
+			sellItemPrice {
+				id
+				unitPrice
+				type
+			}
+			item {
+				id
+				name
+			}
+			startLocation {
+				id
+				name
+			}
+			endLocation {
+				id
+				name
+			}
+			profit
+			margin
+			scanTime
+			scannedInGameVersion {
+				identifier
+			}
+		}
+	}
+`;
 
 @Component({
 	components: { ReportPrice }
 })
 export default class TradingDashboard extends Vue {
-	public readonly locations: any[] = [];
-	public readonly trades: any[] = [];
-	public startLocation: any | null = null;
-	public endLocation: any | null = null;
+	public readonly locations: Location[] = [];
+	public readonly trades: Trade[] = [];
+	public startLocation: Location | null = null;
+	public endLocation: Location | null = null;
 	public maxScu: number = 1;
 	public startCurrency: number = 1;
 
@@ -40,80 +77,27 @@ export default class TradingDashboard extends Vue {
 
 	public async reportPricesModalClosed(): Promise<void> {
 		this.reportPricesModal = false;
+		await this.search();
+	}
+
+	public async search(): Promise<void> {
 		const queryResult: QueryResult<any> = await this.$apollo.query({
-			query: gql`
-				query tradeData {
-					trades {
-						buyItemPrice {
-							id
-							unitPrice
-							type
-						}
-						sellItemPrice {
-							id
-							unitPrice
-							type
-						}
-						item {
-							id
-							name
-						}
-						startLocation {
-							id
-							name
-						}
-						endLocation {
-							id
-							name
-						}
-						profit
-						margin
-						scanTime
-						scannedInGameVersion {
-							identifier
-						}
-					}
+			query: TRADE_QUERY,
+			variables: {
+				searchInput: {
+					startLocationId: this.startLocation ? this.startLocation.id : undefined,
+					endLocationId: this.endLocation ? this.endLocation.id : undefined
 				}
-			`
+			}
 		});
 		this.trades.splice(0, this.trades.length);
-		this.trades.push(queryResult.data.trades);
+		this.trades.push(...queryResult.data.trades);
 	}
 
 	protected async beforeMount(): Promise<void> {
 		const queryResult: QueryResult<any> = await this.$apollo.query({
 			query: gql`
 				query tradeData {
-					trades {
-						buyItemPrice {
-							id
-							unitPrice
-							type
-						}
-						sellItemPrice {
-							id
-							unitPrice
-							type
-						}
-						item {
-							id
-							name
-						}
-						startLocation {
-							id
-							name
-						}
-						endLocation {
-							id
-							name
-						}
-						profit
-						margin
-						scanTime
-						scannedInGameVersion {
-							identifier
-						}
-					}
 					locations {
 						id
 						name
@@ -121,8 +105,7 @@ export default class TradingDashboard extends Vue {
 				}
 			`
 		});
-		console.log(queryResult.data);
 		this.locations.push(...queryResult.data.locations);
-		this.trades.push(...queryResult.data.trades);
+		await this.search();
 	}
 }
