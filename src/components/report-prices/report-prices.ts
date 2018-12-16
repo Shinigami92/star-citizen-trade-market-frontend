@@ -1,4 +1,4 @@
-import { Commodity, Location } from '@/shared/graphql.schema';
+import { Commodity, GameVersion, Location } from '@/shared/graphql.schema';
 import { VDataTableHeader } from '@/shared/vuetify/v-data-table';
 import gql from 'graphql-tag';
 import { QueryResult } from 'vue-apollo/types/vue-apollo';
@@ -40,9 +40,12 @@ export default class ReportPrice extends Vue {
 	public quantity: number = 1;
 	public price: number = 1;
 
-	public selectedCommodity: any = null;
+	public selectedCommodity: Commodity | null = null;
+
+	public selectedGameVersion: GameVersion | null = null;
 
 	public readonly itemPrices: any[] = [];
+	public gameVersions: GameVersion[] = [];
 
 	public headers: VDataTableHeader[] = [
 		{ text: 'Commodity ', value: 'commodity.name' },
@@ -105,7 +108,8 @@ export default class ReportPrice extends Vue {
 							locationId: this.location!.id,
 							price: itemPrice.price,
 							quantity: itemPrice.quantity,
-							type: itemPrice.type
+							type: itemPrice.type,
+							gameVersionId: this.selectedGameVersion ? this.selectedGameVersion.id : undefined
 						}
 					},
 					context: { headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')!).token}` } }
@@ -115,5 +119,20 @@ export default class ReportPrice extends Vue {
 		await Promise.all(promises);
 
 		this.$emit('close');
+	}
+
+	protected async beforeMount(): Promise<void> {
+		const gameVersionResult: QueryResult<any> = await this.$apollo.query({
+			query: gql`
+				query gameVersions {
+					gameVersions {
+						id
+						identifier
+					}
+				}
+			`
+		});
+		this.gameVersions = gameVersionResult.data.gameVersions;
+		this.selectedGameVersion = this.gameVersions[0];
 	}
 }

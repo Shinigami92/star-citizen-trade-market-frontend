@@ -4,13 +4,24 @@
 		<v-card-text>
 			<v-container grid-list-md>
 				<v-layout row wrap>
-					<v-flex md12>
+					<v-flex md8>
 						<v-autocomplete
 							v-model="location"
 							:items="locations"
 							return-object
 							item-text="name"
 							label="Location"
+							required
+						>
+						</v-autocomplete>
+					</v-flex>
+					<v-flex md4>
+						<v-autocomplete
+							v-model="selectedGameVersion"
+							:items="gameVersions"
+							return-object
+							item-text="identifier"
+							label="Game Version"
 							required
 						>
 						</v-autocomplete>
