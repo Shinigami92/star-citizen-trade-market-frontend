@@ -1,4 +1,4 @@
-import { Commodity, CreateItemPriceInput, GameVersion, Location } from '@/shared/graphql.schema';
+import { Commodity, CreateItemPriceInput, GameVersion, ItemPriceType, Location } from '@/shared/graphql.schema';
 import { VDataTableHeader } from '@/shared/vuetify/v-data-table';
 import gql from 'graphql-tag';
 import { QueryResult } from 'vue-apollo/types/vue-apollo';
@@ -39,6 +39,7 @@ export default class ReportPrice extends Vue {
 	@Prop({ default: 1 })
 	public quantity: number = 1;
 	public price: number = 1;
+	public type: ItemPriceType = ItemPriceType.BUY;
 
 	public selectedCommodity: Commodity | null = null;
 
@@ -77,7 +78,7 @@ export default class ReportPrice extends Vue {
 			commodity: this.selectedCommodity,
 			quantity: this.quantity,
 			price: this.price,
-			type: 'BUY'
+			type: this.type
 		});
 	}
 

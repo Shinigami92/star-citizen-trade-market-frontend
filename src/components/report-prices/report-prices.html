@@ -27,7 +27,7 @@
 						</v-autocomplete>
 					</v-flex>
 					<v-divider></v-divider>
-					<v-flex md5>
+					<v-flex md4>
 						<v-autocomplete
 							v-model="selectedCommodity"
 							:items="commodities"
@@ -48,6 +48,12 @@
 							v-model.number="price"
 							label="Total Price"
 						></v-text-field>
+					</v-flex>
+					<v-flex>
+						<v-btn-toggle v-model="type" mandatory>
+							<v-btn color="success" value="BUY">BUY</v-btn>
+							<v-btn color="accent" value="SELL">SELL</v-btn>
+						</v-btn-toggle>
 					</v-flex>
 					<v-flex>
 						<v-btn color="accent" @click="addItemPrice()" :disabled="invalidCommodity">Add</v-btn>
