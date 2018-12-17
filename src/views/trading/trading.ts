@@ -104,7 +104,7 @@ export default class TradingDashboard extends Vue {
 					endLocationId: this.endLocation ? this.endLocation.id : undefined
 				}
 			},
-			fetchPolicy: 'cache-and-network'
+			fetchPolicy: 'network-only'
 		});
 		this.trades.splice(0, this.trades.length);
 		this.trades.push(...queryResult.data.trades);
