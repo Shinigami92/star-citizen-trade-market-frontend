@@ -104,6 +104,7 @@ export interface CreateItemPriceInput {
 	scanTime?: Date;
 	type: ItemPriceType;
 	visibility?: ItemPriceVisibility;
+	scannedInGameVersionId?: string;
 }
 
 export interface CreateLocationInput {
@@ -134,6 +135,10 @@ export interface CreateLostTransactionDetailInput {
 	timestamp?: Date;
 }
 
+export interface CreateManufacturerInput {
+	name: string;
+}
+
 export interface CreateOrganizationInput {
 	name: string;
 	spectrumId: string;
@@ -145,6 +150,16 @@ export interface CreatePossessionInput {
 	purchasePrice: number;
 	purchaseCurrency: PurchaseCurrency;
 	purchaseDate?: Date;
+}
+
+export interface CreateShipInput {
+	name: string;
+	inGameSinceVersionId: string;
+	inGameSince?: Date;
+	scu: number;
+	manufacturerId: string;
+	focus: string;
+	size: number;
 }
 
 export interface CreateSoldTransactionDetailInput {
@@ -183,6 +198,7 @@ export interface TradeSearchInput {
 	endLocationId?: string;
 	maxScu?: number;
 	startCurrency?: number;
+	gameVersionId?: string;
 }
 
 export interface Item {
@@ -227,6 +243,15 @@ export interface CommodityCategory {
 	name: string;
 }
 
+export interface FallbackItem extends Item {
+	id: string;
+	name: string;
+	inGameSinceVersionId: string;
+	inGameSinceVersion: GameVersion;
+	inGameSince?: Date;
+	type: ItemType;
+}
+
 export interface GameVersion {
 	id: string;
 	identifier: string;
@@ -242,9 +267,12 @@ export interface ItemPrice {
 	location: Location;
 	price: number;
 	quantity: number;
+	unitPrice: number;
 	scanTime: Date;
 	type: ItemPriceType;
 	visibility: ItemPriceVisibility;
+	scannedInGameVersionId: string;
+	scannedInGameVersion: GameVersion;
 }
 
 export interface Location {
@@ -264,6 +292,11 @@ export interface LocationType {
 	name: string;
 }
 
+export interface Manufacturer {
+	id: string;
+	name: string;
+}
+
 export interface IMutation {
 	signUp(createAccountInput: CreateAccountInput): Account | Promise<Account>;
 	createCommodityCategory(
@@ -273,8 +306,10 @@ export interface IMutation {
 	createItemPrice(createItemPriceInput: CreateItemPriceInput): ItemPrice | Promise<ItemPrice>;
 	createCommodity(createCommodityInput: CreateCommodityInput): Commodity | Promise<Commodity>;
 	createItem(createItemInput: CreateItemInput): Item | Promise<Item>;
+	createShip(createShipInput: CreateShipInput): Ship | Promise<Ship>;
 	createLocationType(createLocationTypeInput: CreateLocationTypeInput): LocationType | Promise<LocationType>;
 	createLocation(createLocationInput: CreateLocationInput): Location | Promise<Location>;
+	createManufacturer(createManufacturerInput: CreateManufacturerInput): Manufacturer | Promise<Manufacturer>;
 	joinOrganization(joinOrganizationInput: JoinOrganizationInput): OrganizationMember | Promise<OrganizationMember>;
 	createOrganization(createOrganizationInput: CreateOrganizationInput): Organization | Promise<Organization>;
 	createPossession(createPossessionInput: CreatePossessionInput): Possession | Promise<Possession>;
@@ -335,10 +370,14 @@ export interface IQuery {
 	commodity(id: string): Commodity | Promise<Commodity>;
 	items(): Item[] | Promise<Item[]>;
 	item(id: string): Item | Promise<Item>;
+	ships(): Ship[] | Promise<Ship[]>;
+	ship(id: string): Ship | Promise<Ship>;
 	locationTypes(): LocationType[] | Promise<LocationType[]>;
 	locationType(id: string): LocationType | Promise<LocationType>;
 	locations(): Location[] | Promise<Location[]>;
 	location(id: string): Location | Promise<Location>;
+	manufacturers(): Manufacturer[] | Promise<Manufacturer[]>;
+	manufacturer(id: string): Manufacturer | Promise<Manufacturer>;
 	organizationMembers(): OrganizationMember[] | Promise<OrganizationMember[]>;
 	organizationMember(organizationId: string, accountId: string): OrganizationMember | Promise<OrganizationMember>;
 	organizations(): Organization[] | Promise<Organization[]>;
@@ -353,6 +392,20 @@ export interface IQuery {
 	temp__(): boolean | Promise<boolean>;
 }
 
+export interface Ship extends Item {
+	id: string;
+	name: string;
+	inGameSinceVersionId: string;
+	inGameSinceVersion: GameVersion;
+	inGameSince?: Date;
+	type: ItemType;
+	scu: number;
+	manufacturerId: string;
+	manufacturer: Manufacturer;
+	focus: string;
+	size: number;
+}
+
 export interface ISubscription {
 	accountSignedUp(): Account | Promise<Account>;
 	commodityCategoryCreated(): CommodityCategory | Promise<CommodityCategory>;
@@ -360,8 +413,10 @@ export interface ISubscription {
 	itemPriceCreated(): ItemPrice | Promise<ItemPrice>;
 	commodityCreated(): Commodity | Promise<Commodity>;
 	itemCreated(): Item | Promise<Item>;
+	shipCreated(): Ship | Promise<Ship>;
 	locationTypeCreated(): LocationType | Promise<LocationType>;
 	locationCreated(): Location | Promise<Location>;
+	manufacturerCreated(): Manufacturer | Promise<Manufacturer>;
 	organizationMemberCreated(): OrganizationMember | Promise<OrganizationMember>;
 	organizationCreated(): Organization | Promise<Organization>;
 	possessionCreated(): Possession | Promise<Possession>;
@@ -372,6 +427,14 @@ export interface ISubscription {
 export interface Trade {
 	buyItemPrice: ItemPrice;
 	sellItemPrice: ItemPrice;
+	item: Item;
+	startLocation: Location;
+	endLocation: Location;
+	profit: number;
+	margin: number;
+	scanTime: Date;
+	scannedInGameVersionId: string;
+	scannedInGameVersion: GameVersion;
 }
 
 export interface Transaction {
