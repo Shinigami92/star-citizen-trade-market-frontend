@@ -11,6 +11,12 @@ import { Component, Model, Prop, Vue } from 'vue-property-decorator';
 				locations {
 					id
 					name
+					type {
+						name
+					}
+					parentLocation {
+						name
+					}
 				}
 			}
 		`,
@@ -69,8 +75,17 @@ export default class ReportPrice extends Vue {
 		return this.location === null || this.itemPrices.length === 0;
 	}
 
-	public displayWithCommodity(x: Commodity): string {
-		return `${x.name} (${x.commodityCategory.name})`;
+	public displayWithLocation(location: Location): string {
+		let displayValue: string = location.name;
+		displayValue += ` (${location.type.name})`;
+		if (location.parentLocation) {
+			displayValue += ` - (${location.parentLocation.name})`;
+		}
+		return displayValue;
+	}
+
+	public displayWithCommodity(commodity: Commodity): string {
+		return `${commodity.name} (${commodity.commodityCategory.name})`;
 	}
 
 	public addItemPrice(): void {

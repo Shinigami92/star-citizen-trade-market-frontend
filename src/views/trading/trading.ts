@@ -77,6 +77,15 @@ export default class TradingDashboard extends Vue {
 		super();
 	}
 
+	public displayWithLocation(location: Location): string {
+		let displayValue: string = location.name;
+		displayValue += ` (${location.type.name})`;
+		if (location.parentLocation) {
+			displayValue += ` - (${location.parentLocation.name})`;
+		}
+		return displayValue;
+	}
+
 	public async reportPricesModalClosed(): Promise<void> {
 		this.reportPricesModal = false;
 		await this.search();
@@ -107,6 +116,12 @@ export default class TradingDashboard extends Vue {
 					locations {
 						id
 						name
+						type {
+							name
+						}
+						parentLocation {
+							name
+						}
 					}
 				}
 			`

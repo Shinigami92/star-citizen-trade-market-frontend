@@ -9,7 +9,7 @@
 							v-model="startLocation"
 							:items="locations"
 							return-object
-							item-text="name"
+							:item-text="displayWithLocation"
 							label="Start Location"
 							prepend-icon="fas fa-plane-departure"
 							clearable
@@ -21,7 +21,7 @@
 							v-model="endLocation"
 							:items="locations"
 							return-object
-							item-text="name"
+							:item-text="displayWithLocation"
 							label="End Location"
 							prepend-icon="fas fa-plane-arrival"
 							clearable
