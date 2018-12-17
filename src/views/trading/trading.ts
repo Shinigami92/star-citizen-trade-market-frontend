@@ -50,14 +50,14 @@ export default class TradingDashboard extends Vue {
 	public readonly trades: Trade[] = [];
 	public startLocation: Location | null = null;
 	public endLocation: Location | null = null;
-	public maxScu: number = 1;
-	public startCurrency: number = 1;
+	// public maxScu: number = 1;
+	// public startCurrency: number = 1;
 
 	public reportPricesModal: boolean = false;
 	public createCommodityModal: boolean = false;
 
 	public pagination: VDataTablePagination = {
-		rowsPerPage: 10,
+		rowsPerPage: 25,
 		sortBy: 'profit',
 		descending: true
 	};
@@ -96,21 +96,22 @@ export default class TradingDashboard extends Vue {
 	}
 
 	public async search(): Promise<void> {
-		const queryResult: QueryResult<any> = await this.$apollo.query({
+		const queryResult: QueryResult<{ trades: Trade[] }> = await this.$apollo.query({
 			query: TRADE_QUERY,
 			variables: {
 				searchInput: {
 					startLocationId: this.startLocation ? this.startLocation.id : undefined,
 					endLocationId: this.endLocation ? this.endLocation.id : undefined
 				}
-			}
+			},
+			fetchPolicy: 'cache-and-network'
 		});
 		this.trades.splice(0, this.trades.length);
 		this.trades.push(...queryResult.data.trades);
 	}
 
 	protected async beforeMount(): Promise<void> {
-		const queryResult: QueryResult<any> = await this.$apollo.query({
+		const queryResult: QueryResult<{ locations: Location[] }> = await this.$apollo.query({
 			query: gql`
 				query tradeData {
 					locations {
