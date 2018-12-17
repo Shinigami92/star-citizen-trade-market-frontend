@@ -28,13 +28,14 @@
 					</v-flex>
 					<v-divider></v-divider>
 					<v-flex md5>
-						<v-select
+						<v-autocomplete
+							v-model="selectedCommodity"
 							:items="commodities"
 							:item-text="displayWithCommodity"
-							v-model="selectedCommodity"
 							return-object
 							label="Commodity"
-						></v-select>
+						>
+						</v-autocomplete>
 					</v-flex>
 					<v-flex md2>
 						<v-text-field type="number" min="1" v-model.number="quantity" label="Quantity"></v-text-field>
