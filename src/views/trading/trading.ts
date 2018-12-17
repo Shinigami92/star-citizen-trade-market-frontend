@@ -1,3 +1,4 @@
+import CreateCommodity from '@/components/create-commodity/create-commodity';
 import ReportPrice from '@/components/report-prices/report-prices';
 import { Location, Trade } from '@/shared/graphql.schema';
 import { VDataTableHeader, VDataTablePagination } from '@/shared/vuetify/v-data-table';
@@ -42,7 +43,7 @@ const TRADE_QUERY: DocumentNode = gql`
 `;
 
 @Component({
-	components: { ReportPrice }
+	components: { ReportPrice, CreateCommodity }
 })
 export default class TradingDashboard extends Vue {
 	public readonly locations: Location[] = [];
@@ -53,6 +54,7 @@ export default class TradingDashboard extends Vue {
 	public startCurrency: number = 1;
 
 	public reportPricesModal: boolean = false;
+	public createCommodityModal: boolean = false;
 
 	public pagination: VDataTablePagination = {
 		rowsPerPage: 10,
@@ -78,6 +80,10 @@ export default class TradingDashboard extends Vue {
 	public async reportPricesModalClosed(): Promise<void> {
 		this.reportPricesModal = false;
 		await this.search();
+	}
+
+	public async createCommodityModalClosed(): Promise<void> {
+		this.createCommodityModal = false;
 	}
 
 	public async search(): Promise<void> {

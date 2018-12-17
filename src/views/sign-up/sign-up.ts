@@ -40,6 +40,8 @@ export default class SignUp extends Vue {
 
 	public async submit(): Promise<void> {
 		try {
+			this.errors = null;
+			this.errorMessage = null;
 			const result: QueryResult<any> = await this.$apollo.mutate({
 				mutation: gql`
 					mutation SignUp($user: CreateAccountInput!) {
