@@ -1,4 +1,4 @@
-import { Commodity, GameVersion, Location } from '@/shared/graphql.schema';
+import { Commodity, CreateItemPriceInput, GameVersion, Location } from '@/shared/graphql.schema';
 import { VDataTableHeader } from '@/shared/vuetify/v-data-table';
 import gql from 'graphql-tag';
 import { QueryResult } from 'vue-apollo/types/vue-apollo';
@@ -109,8 +109,8 @@ export default class ReportPrice extends Vue {
 							price: itemPrice.price,
 							quantity: itemPrice.quantity,
 							type: itemPrice.type,
-							gameVersionId: this.selectedGameVersion ? this.selectedGameVersion.id : undefined
-						}
+							scannedInGameVersionId: this.selectedGameVersion ? this.selectedGameVersion.id : undefined
+						} as CreateItemPriceInput
 					},
 					context: { headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')!).token}` } }
 				})
