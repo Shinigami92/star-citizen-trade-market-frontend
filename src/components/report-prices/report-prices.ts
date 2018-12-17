@@ -118,6 +118,8 @@ export default class ReportPrice extends Vue {
 		}
 		await Promise.all(promises);
 
+		this.itemPrices.splice(0, this.itemPrices.length);
+
 		this.$emit('close');
 	}
 
