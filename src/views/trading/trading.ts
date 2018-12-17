@@ -4,7 +4,7 @@ import { VDataTableHeader, VDataTablePagination } from '@/shared/vuetify/v-data-
 import { DocumentNode } from 'graphql';
 import gql from 'graphql-tag';
 import { QueryResult } from 'vue-apollo/types/vue-apollo';
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Watch } from 'vue-property-decorator';
 
 const TRADE_QUERY: DocumentNode = gql`
 	query tradeData($searchInput: TradeSearchInput) {
@@ -106,6 +106,16 @@ export default class TradingDashboard extends Vue {
 			`
 		});
 		this.locations.push(...queryResult.data.locations);
+		await this.search();
+	}
+
+	@Watch('startLocation')
+	protected async onStartLocationChanged(): Promise<void> {
+		await this.search();
+	}
+
+	@Watch('endLocation')
+	protected async onEndLocationChanged(): Promise<void> {
 		await this.search();
 	}
 }
