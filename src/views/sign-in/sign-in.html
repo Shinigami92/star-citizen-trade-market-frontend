@@ -1,16 +1,29 @@
 <v-layout align-start justify-start column>
-	<h1 class="display-1">SignIn</h1>
-	<v-form ref="form" v-model="valid" lazy-validation style="width: 400px">
-		<v-text-field v-model="username" :rules="usernameRules" label="Username" required></v-text-field>
-		<v-text-field
-			v-model="password"
-			:type="showPassword ? 'text' : 'password'"
-			:rules="passwordRules"
-			label="Password"
-			required
-			:append-icon="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"
-			@click:append="showPassword = !showPassword"
-		></v-text-field>
-		<v-btn :disabled="!valid" @click="submit">Sign In</v-btn>
-	</v-form>
+	<h1 class="display-1">Sign In</h1>
+	<v-layout row>
+		<v-flex md5>
+			<v-form ref="form" v-model="valid" lazy-validation style="width: 400px">
+				<v-layout column>
+					<v-text-field
+						v-model="username"
+						:rules="usernameRules"
+						label="Username"
+						autocomplete="off"
+						required
+					></v-text-field>
+					<v-text-field
+						v-model="password"
+						:type="showPassword ? 'text' : 'password'"
+						:rules="passwordRules"
+						label="Password"
+						autocomplete="off"
+						required
+						:append-icon="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"
+						@click:append="showPassword = !showPassword"
+					></v-text-field>
+					<v-btn :disabled="!valid" @click="submit">Sign In</v-btn>
+				</v-layout>
+			</v-form>
+		</v-flex>
+	</v-layout>
 </v-layout>

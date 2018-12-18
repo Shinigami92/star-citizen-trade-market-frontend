@@ -1,3 +1,4 @@
+import { AuthToken } from '@/shared/graphql.schema';
 import { GraphQLError } from 'graphql';
 import gql from 'graphql-tag';
 import { QueryResult } from 'vue-apollo/types/vue-apollo';
@@ -28,7 +29,7 @@ export default class SignUp extends Vue {
 
 	public async submit(): Promise<void> {
 		try {
-			const result: QueryResult<any> = await this.$apollo.query({
+			const result: QueryResult<{ signIn: AuthToken }> = await this.$apollo.query({
 				query: gql`
 					query SignIn($username: String!, $password: String!) {
 						signIn(username: $username, password: $password) {
@@ -45,7 +46,7 @@ export default class SignUp extends Vue {
 				}
 			});
 			localStorage.setItem('auth', JSON.stringify(result.data.signIn));
-			this.$router.push('/');
+			this.$router.push('/trading');
 			this.$router.go(0);
 		} catch (error) {
 			console.error(error.graphQLErrors);
