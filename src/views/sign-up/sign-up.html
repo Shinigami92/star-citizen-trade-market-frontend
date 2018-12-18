@@ -1,31 +1,52 @@
 <v-layout align-start justify-start column>
-	<h1 class="display-1">SignUp</h1>
-	<v-form ref="form" v-model="valid" lazy-validation style="width: 400px">
-		<v-text-field
-			v-model="username"
-			:rules="usernameRules"
-			label="Username"
-			hint="The username you use to log into the app later"
-			required
-		></v-text-field>
-		<v-text-field
-			v-model="handle"
-			:rules="handleRules"
-			:counter="50"
-			label="Star Citizen Handle"
-			required
-		></v-text-field>
-		<v-text-field v-model="email" :rules="emailRules" label="E-Mail" required></v-text-field>
-		<v-text-field
-			v-model="confirmEmail"
-			:rules="confirmEmailRules"
-			label="Confirm E-Mail"
-			autocomplete="off"
-			required
-		></v-text-field>
-		<v-btn :disabled="!valid" @click="submit">Sign Up</v-btn>
-	</v-form>
-	<div>
-		<p>{{ errorMessage && errorMessage.message }}</p>
-	</div>
+	<h1 class="display-1">Sign Up</h1>
+	<v-layout row wrap>
+		<v-flex md5>
+			<v-form ref="form" v-model="valid" lazy-validation>
+				<v-layout column>
+					<v-text-field
+						v-model="username"
+						:rules="usernameRules"
+						label="Username"
+						autocomplete="off"
+						hint="The username you use to log into the app later"
+						required
+					></v-text-field>
+					<v-text-field
+						v-model="handle"
+						:rules="handleRules"
+						:counter="50"
+						label="Star Citizen Handle"
+						autocomplete="off"
+						required
+					></v-text-field>
+					<v-text-field
+						v-model="email"
+						:rules="emailRules"
+						label="E-Mail"
+						autocomplete="off"
+						required
+						ref="emailInput"
+					></v-text-field>
+					<v-text-field
+						v-model="confirmEmail"
+						:rules="confirmEmailRules"
+						label="Confirm E-Mail"
+						autocomplete="off"
+						required
+					></v-text-field>
+					<v-btn :disabled="!valid" @click="submit">Sign Up</v-btn>
+				</v-layout>
+			</v-form>
+		</v-flex>
+		<v-flex offset-md1 md6>
+			<v-layout column>
+				<p>
+					You will receive the access data with password to your specified E-Mail address. The mail will be
+					sent from <em class="mono">sctrademarket@gmail.com</em>
+				</p>
+				<p v-if="errorMessage && errorMessage.message" class="red--text">{{ errorMessage.message }}</p>
+			</v-layout>
+		</v-flex>
+	</v-layout>
 </v-layout>

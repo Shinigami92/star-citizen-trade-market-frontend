@@ -31,7 +31,8 @@ export default class SignUp extends Vue {
 	];
 	public readonly confirmEmailRules: ValidationRule[] = [
 		(v: string): boolean | string => !!v || 'Confirm E-Mail is required',
-		(v: string): boolean | string => v !== this.email || 'Must be equals to E-Mail'
+		(v: string): boolean | string =>
+			v === (this.$refs.emailInput as HTMLInputElement).value || 'Must be equals to E-Mail'
 	];
 
 	constructor() {
@@ -60,6 +61,7 @@ export default class SignUp extends Vue {
 				}
 			});
 			console.log(result.data);
+			this.$router.push('/sign-in');
 		} catch (error) {
 			console.error(error.graphQLErrors);
 			this.errors = error.graphQLErrors as GraphQLError[];
