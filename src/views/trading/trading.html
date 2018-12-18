@@ -68,7 +68,7 @@
 									<v-list-tile @click="createCommodityModal = true">
 										<v-list-tile-title>Add new Commodity</v-list-tile-title>
 									</v-list-tile>
-									<v-list-tile @click="">
+									<v-list-tile @click="createGameVersionModal = true">
 										<v-list-tile-title>Add new Game Version</v-list-tile-title>
 									</v-list-tile>
 								</v-list>
@@ -77,6 +77,10 @@
 								:open="createCommodityModal"
 								@close="createCommodityModalClosed()"
 							></create-commodity>
+							<create-game-version
+								:open="createGameVersionModal"
+								@close="createGameVersionModalClosed()"
+							></create-game-version>
 						</v-layout>
 					</v-flex>
 				</v-layout>
