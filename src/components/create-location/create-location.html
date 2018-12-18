@@ -1,0 +1,55 @@
+<v-dialog v-model="open" persistent max-width="540px">
+	<v-card>
+		<v-card-title> <span class="headline">Register new Location</span> </v-card-title>
+		<v-card-text>
+			<v-container grid-list-md>
+				<v-layout row wrap>
+					<v-flex md12>
+						<v-text-field v-model="name" :rules="nameRules" label="Name" required></v-text-field>
+					</v-flex>
+					<v-flex md8>
+						<v-autocomplete
+							v-model="selectedType"
+							:items="locationTypes"
+							return-object
+							item-text="name"
+							label="Type"
+							required
+						>
+						</v-autocomplete>
+					</v-flex>
+					<v-flex md4>
+						<v-autocomplete
+							v-model="selectedGameVersion"
+							:items="gameVersions"
+							return-object
+							item-text="identifier"
+							label="Exists since version"
+							required
+						>
+						</v-autocomplete>
+					</v-flex>
+					<v-flex md12>
+						<v-autocomplete
+							v-model="selectedParent"
+							:items="locations"
+							return-object
+							:item-text="displayWithLocation"
+							label="Parent"
+							clearable
+						>
+						</v-autocomplete>
+					</v-flex>
+					<v-flex md12 v-if="errorMessage">
+						<p class="red--text">{{ errorMessage.message }}</p>
+					</v-flex>
+				</v-layout>
+			</v-container>
+		</v-card-text>
+		<v-card-actions>
+			<v-spacer></v-spacer>
+			<v-btn color="warning" @click="$emit('close')">Cancel</v-btn>
+			<v-btn color="success" @click="create()" :disabled="invalid">Create</v-btn>
+		</v-card-actions>
+	</v-card>
+</v-dialog>

@@ -62,7 +62,7 @@
 							<v-menu offset-y>
 								<v-btn slot="activator" color="secondary">Miss Something?</v-btn>
 								<v-list>
-									<v-list-tile @click="">
+									<v-list-tile @click="createLocationModal = true">
 										<v-list-tile-title>Add new Location</v-list-tile-title>
 									</v-list-tile>
 									<v-list-tile @click="createCommodityModal = true">
@@ -81,6 +81,10 @@
 								:open="createGameVersionModal"
 								@close="createGameVersionModalClosed()"
 							></create-game-version>
+							<create-location
+								:open="createLocationModal"
+								@close="createLocationModalClosed()"
+							></create-location>
 						</v-layout>
 					</v-flex>
 				</v-layout>
