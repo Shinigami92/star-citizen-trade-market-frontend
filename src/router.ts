@@ -23,6 +23,12 @@ export default new Router({
 			component: (): Promise<any> => import('./views/sign-in/sign-in.vue')
 		},
 		{
+			path: '/privacy-policy',
+			name: 'privacy-policy',
+			// @ts-ignore
+			component: (): Promise<any> => import('./views/privacy-policy/privacy-policy.vue')
+		},
+		{
 			path: '/trading',
 			name: 'trading',
 			// @ts-ignore

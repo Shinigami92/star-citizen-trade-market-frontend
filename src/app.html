@@ -2,17 +2,17 @@
 	<v-navigation-drawer v-model="drawer" clipped fixed app>
 		<v-list dense>
 			<v-list-tile to="/trading">
-				<v-list-tile-action> <v-icon>fas fa-chart-bar</v-icon></v-list-tile-action>
+				<v-list-tile-action><v-icon>fas fa-chart-bar</v-icon></v-list-tile-action>
 				<v-list-tile-content>Trading</v-list-tile-content>
 			</v-list-tile>
 			<template v-if="currentUser">
 				<v-divider></v-divider>
 				<v-list-tile to="/my-ships">
-					<v-list-tile-action> <v-icon>fas fa-space-shuttle</v-icon></v-list-tile-action>
+					<v-list-tile-action><v-icon>fas fa-space-shuttle</v-icon></v-list-tile-action>
 					<v-list-tile-content>My Ships</v-list-tile-content>
 				</v-list-tile>
 				<v-list-tile to="/my-transactions">
-					<v-list-tile-action> <v-icon>fas fa-list</v-icon></v-list-tile-action>
+					<v-list-tile-action><v-icon>fas fa-list</v-icon></v-list-tile-action>
 					<v-list-tile-content>My Transactions</v-list-tile-content>
 				</v-list-tile>
 				<template v-if="currentUser.roles.includes('ADMIN')">
@@ -20,7 +20,7 @@
 					<v-list-group>
 						<v-list-tile slot="activator">
 							<v-list-tile-content>
-								<v-list-tile-title> Administration </v-list-tile-title>
+								<v-list-tile-title>Administration</v-list-tile-title>
 							</v-list-tile-content>
 						</v-list-tile>
 						<v-list-tile to="/administration/account">
@@ -48,19 +48,20 @@
 		<v-toolbar-title>Star Citizen Trade Market</v-toolbar-title>
 		<v-spacer></v-spacer>
 		<template v-if="!currentUser">
-			<v-btn icon to="/sign-up"><v-icon>fas fa-user-plus</v-icon> </v-btn>
-			<v-btn icon to="/sign-in"><v-icon>fas fa-sign-in-alt</v-icon> </v-btn>
+			<v-btn icon to="/sign-up"><v-icon>fas fa-user-plus</v-icon></v-btn>
+			<v-btn icon to="/sign-in"><v-icon>fas fa-sign-in-alt</v-icon></v-btn>
 		</template>
 		<template v-else>
 			<span>Sign in as {{ currentUser.username }}</span>
-			<v-btn icon @click="signOut"><v-icon>fas fa-sign-in-alt</v-icon> </v-btn>
+			<v-btn icon @click="signOut"><v-icon>fas fa-sign-in-alt</v-icon></v-btn>
 		</template>
 	</v-toolbar>
 	<v-content>
-		<v-container fluid fill-height><router-view></router-view> </v-container>
+		<v-container fluid fill-height><router-view></router-view></v-container>
 	</v-content>
 	<v-footer app fixed>
-		<span>&nbsp;Copyright &copy; 2018 Christopher Quadflieg aka Shinigami</span>
+		<span>&nbsp;Copyright &copy; 2018 Christopher Quadflieg aka Shinigami</span> <span>&nbsp;|&nbsp;</span>
+		<router-link to="/privacy-policy">Privacy Policy</router-link>
 		<v-spacer></v-spacer>
 		<v-btn href="https://github.com/Shinigami92/star-citizen-trade-market-api" target="_blank" flat icon>
 			<v-icon>fab fa-github</v-icon>
