@@ -1,6 +1,6 @@
 import CreateCommodity from '@/components/create-commodity/create-commodity';
 import ReportPrice from '@/components/report-prices/report-prices';
-import { Location, Trade } from '@/shared/graphql.schema';
+import { GameVersion, Location, Trade } from '@/shared/graphql.schema';
 import { VDataTableHeader, VDataTablePagination } from '@/shared/vuetify/v-data-table';
 import { DocumentNode } from 'graphql';
 import gql from 'graphql-tag';
@@ -47,9 +47,11 @@ const TRADE_QUERY: DocumentNode = gql`
 })
 export default class TradingDashboard extends Vue {
 	public readonly locations: Location[] = [];
+	public readonly gameVersions: GameVersion[] = [];
 	public readonly trades: Trade[] = [];
 	public startLocation: Location | null = null;
 	public endLocation: Location | null = null;
+	public gameVersion: GameVersion | null = null;
 	// public maxScu: number = 1;
 	// public startCurrency: number = 1;
 
@@ -88,30 +90,38 @@ export default class TradingDashboard extends Vue {
 
 	public async reportPricesModalClosed(): Promise<void> {
 		this.reportPricesModal = false;
-		await this.search();
+		await this.search({ fetchPolicy: 'network-only' });
 	}
 
 	public async createCommodityModalClosed(): Promise<void> {
 		this.createCommodityModal = false;
 	}
 
-	public async search(): Promise<void> {
+	public async search({
+		fetchPolicy
+	}: {
+		fetchPolicy?: 'cache-first' | 'cache-and-network' | 'network-only' | 'cache-only' | 'no-cache' | 'standby';
+	} = {}): Promise<void> {
 		const queryResult: QueryResult<{ trades: Trade[] }> = await this.$apollo.query({
 			query: TRADE_QUERY,
 			variables: {
 				searchInput: {
 					startLocationId: this.startLocation ? this.startLocation.id : undefined,
-					endLocationId: this.endLocation ? this.endLocation.id : undefined
+					endLocationId: this.endLocation ? this.endLocation.id : undefined,
+					gameVersionId: this.gameVersion ? this.gameVersion.id : undefined
 				}
 			},
-			fetchPolicy: 'network-only'
+			fetchPolicy
 		});
 		this.trades.splice(0, this.trades.length);
 		this.trades.push(...queryResult.data.trades);
 	}
 
 	protected async beforeMount(): Promise<void> {
-		const queryResult: QueryResult<{ locations: Location[] }> = await this.$apollo.query({
+		const queryResult: QueryResult<{
+			locations: Location[];
+			gameVersions: GameVersion[];
+		}> = await this.$apollo.query({
 			query: gql`
 				query tradeData {
 					locations {
@@ -124,11 +134,17 @@ export default class TradingDashboard extends Vue {
 							name
 						}
 					}
+					gameVersions {
+						id
+						identifier
+					}
 				}
 			`
 		});
+		this.gameVersions.push(...queryResult.data.gameVersions);
+		this.gameVersion = this.gameVersions[0];
 		this.locations.push(...queryResult.data.locations);
-		await this.search();
+		await this.search({ fetchPolicy: 'network-only' });
 	}
 
 	@Watch('startLocation')
@@ -138,6 +154,11 @@ export default class TradingDashboard extends Vue {
 
 	@Watch('endLocation')
 	protected async onEndLocationChanged(): Promise<void> {
+		await this.search();
+	}
+
+	@Watch('gameVersion')
+	protected async onGameVersionChanged(): Promise<void> {
 		await this.search();
 	}
 }

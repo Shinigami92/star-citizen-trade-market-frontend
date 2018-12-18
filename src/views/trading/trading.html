@@ -4,7 +4,7 @@
 		<v-form ref="filterForm">
 			<v-container>
 				<v-layout row wrap>
-					<v-flex xs12 md6>
+					<v-flex xs12 md5>
 						<v-autocomplete
 							v-model="startLocation"
 							:items="locations"
@@ -16,7 +16,7 @@
 						>
 						</v-autocomplete>
 					</v-flex>
-					<v-flex xs12 md6>
+					<v-flex xs12 md5>
 						<v-autocomplete
 							v-model="endLocation"
 							:items="locations"
@@ -26,6 +26,17 @@
 							prepend-icon="fas fa-plane-arrival"
 							clearable
 						></v-autocomplete>
+					</v-flex>
+					<v-flex md2>
+						<v-autocomplete
+							v-model="gameVersion"
+							:items="gameVersions"
+							return-object
+							item-text="identifier"
+							label="Game Version"
+							required
+						>
+						</v-autocomplete>
 					</v-flex>
 					<!-- <v-flex xs12 md3>
 						<v-text-field type="number" min="1" v-model.number="maxScu" label="Max SCU"></v-text-field>
