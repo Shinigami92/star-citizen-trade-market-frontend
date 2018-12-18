@@ -51,7 +51,7 @@
 					</v-flex> -->
 					<v-flex xs12 md12>
 						<v-layout row>
-							<v-btn color="primary" @click="search()">Search</v-btn>
+							<v-btn color="primary" @click="search({ fetchPolicy: 'network-only' })">Search</v-btn>
 							<v-spacer></v-spacer>
 							<v-btn @click="reportPricesModal = true" color="accent">Report Prices</v-btn>
 							<report-price
