@@ -1,9 +1,8 @@
 import { CreateGameVersionInput } from '@/shared/graphql.schema';
+import { ValidationRule } from '@/shared/validation-rule';
 import { GraphQLError } from 'graphql';
 import gql from 'graphql-tag';
 import { Component, Model, Vue } from 'vue-property-decorator';
-
-export type ValidationRule<V = string> = (v: V) => V | boolean;
 
 @Component
 export default class CreateGameVersion extends Vue {

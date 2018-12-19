@@ -1,10 +1,9 @@
+import { ValidationRule } from '@/shared/validation-rule';
 import { GraphQLError } from 'graphql';
 import gql from 'graphql-tag';
 import { isEmail } from 'validator';
 import { QueryResult } from 'vue-apollo/types/vue-apollo';
 import { Component, Vue } from 'vue-property-decorator';
-
-export type ValidationRule<V = string> = (v: V) => V | boolean;
 
 @Component
 export default class SignUp extends Vue {

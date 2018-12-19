@@ -1,10 +1,9 @@
 import { CreateLocationInput, GameVersion, Location, LocationType } from '@/shared/graphql.schema';
+import { ValidationRule } from '@/shared/validation-rule';
 import { GraphQLError } from 'graphql';
 import gql from 'graphql-tag';
 import { QueryResult } from 'vue-apollo/types/vue-apollo';
 import { Component, Model, Vue } from 'vue-property-decorator';
-
-export type ValidationRule<V = string> = (v: V) => V | boolean;
 
 @Component
 export default class CreateLocation extends Vue {
