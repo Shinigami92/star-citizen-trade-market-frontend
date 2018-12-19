@@ -91,7 +91,13 @@
 			</v-container>
 		</v-form>
 	</v-card>
-	<v-data-table :headers="headers" :items="trades" :pagination.sync="pagination" class="elevation-1">
+	<v-data-table
+		:headers="headers"
+		:items="trades"
+		:pagination.sync="pagination"
+		no-data-text="You may have set the filter too high or the currently selected version has not yet received price reports"
+		class="elevation-1"
+	>
 		<template slot="items" slot-scope="props">
 			<td>{{ props.item.item.name }}</td>
 			<td>{{ props.item.startLocation.name }}</td>
