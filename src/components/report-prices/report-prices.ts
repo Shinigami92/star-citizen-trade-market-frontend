@@ -112,14 +112,14 @@ export default class ReportPrice extends Vue {
 			promises.push(
 				this.$apollo.mutate({
 					mutation: gql`
-						mutation CreateItemPrice($itemPrice: CreateItemPriceInput!) {
-							createItemPrice(createItemPriceInput: $itemPrice) {
+						mutation CreateItemPrice($input: CreateItemPriceInput!) {
+							createItemPrice(input: $input) {
 								id
 							}
 						}
 					`,
 					variables: {
-						itemPrice: {
+						input: {
 							itemId: itemPrice.commodity.id,
 							locationId: this.location!.id,
 							price: itemPrice.price,

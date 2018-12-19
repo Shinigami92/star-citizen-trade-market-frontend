@@ -50,15 +50,15 @@ export default class CreateLocation extends Vue {
 			this.errorMessage = null;
 			await this.$apollo.mutate({
 				mutation: gql`
-					mutation CreateLocation($location: CreateLocationInput!) {
-						createLocation(createLocationInput: $location) {
+					mutation CreateLocation($input: CreateLocationInput!) {
+						createLocation(input: $input) {
 							id
 							name
 						}
 					}
 				`,
 				variables: {
-					location: {
+					input: {
 						name: this.name,
 						parentLocationId: this.selectedParent ? this.selectedParent.id : undefined,
 						typeId: this.selectedType!.id,

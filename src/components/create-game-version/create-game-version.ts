@@ -1,3 +1,4 @@
+import { CreateGameVersionInput } from '@/shared/graphql.schema';
 import { GraphQLError } from 'graphql';
 import gql from 'graphql-tag';
 import { Component, Model, Vue } from 'vue-property-decorator';
@@ -34,17 +35,17 @@ export default class CreateGameVersion extends Vue {
 			this.errorMessage = null;
 			await this.$apollo.mutate({
 				mutation: gql`
-					mutation CreateGameVersion($gameVersion: CreateGameVersionInput!) {
-						createGameVersion(createGameVersionInput: $gameVersion) {
+					mutation CreateGameVersion($input: CreateGameVersionInput!) {
+						createGameVersion(input: $input) {
 							id
 							identifier
 						}
 					}
 				`,
 				variables: {
-					gameVersion: {
+					input: {
 						identifier: this.identifier
-					}
+					} as CreateGameVersionInput
 				},
 				context: { headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')!).token}` } }
 			});

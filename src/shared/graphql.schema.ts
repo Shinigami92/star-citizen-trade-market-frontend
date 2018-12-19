@@ -87,6 +87,7 @@ export interface CreateFirstTransactionDetailInput {
 
 export interface CreateGameVersionInput {
 	identifier: string;
+	release?: Date;
 }
 
 export interface CreateItemInput {
@@ -201,6 +202,23 @@ export interface TradeSearchInput {
 	gameVersionId?: string;
 }
 
+export interface UpdateGameVersionInput {
+	identifier?: string;
+	release?: Date;
+}
+
+export interface UpdateItemPriceInput {
+	scannedById?: string;
+	itemId?: string;
+	locationId?: string;
+	price?: number;
+	quantity?: number;
+	scanTime?: Date;
+	type?: ItemPriceType;
+	visibility?: ItemPriceVisibility;
+	scannedInGameVersionId?: string;
+}
+
 export interface Item {
 	id: string;
 	name: string;
@@ -255,6 +273,7 @@ export interface FallbackItem extends Item {
 export interface GameVersion {
 	id: string;
 	identifier: string;
+	release?: Date;
 }
 
 export interface ItemPrice {
@@ -302,13 +321,15 @@ export interface IMutation {
 	createCommodityCategory(
 		createCommodityCategoryInput: CreateCommodityCategoryInput
 	): CommodityCategory | Promise<CommodityCategory>;
-	createGameVersion(createGameVersionInput: CreateGameVersionInput): GameVersion | Promise<GameVersion>;
-	createItemPrice(createItemPriceInput: CreateItemPriceInput): ItemPrice | Promise<ItemPrice>;
+	createGameVersion(input: CreateGameVersionInput): GameVersion | Promise<GameVersion>;
+	updateGameVersion(id: string, input: UpdateGameVersionInput): GameVersion | Promise<GameVersion>;
+	createItemPrice(input: CreateItemPriceInput): ItemPrice | Promise<ItemPrice>;
+	updateItemPrice(id: string, input: UpdateItemPriceInput): ItemPrice | Promise<ItemPrice>;
 	createCommodity(createCommodityInput: CreateCommodityInput): Commodity | Promise<Commodity>;
 	createItem(createItemInput: CreateItemInput): Item | Promise<Item>;
 	createShip(createShipInput: CreateShipInput): Ship | Promise<Ship>;
 	createLocationType(createLocationTypeInput: CreateLocationTypeInput): LocationType | Promise<LocationType>;
-	createLocation(createLocationInput: CreateLocationInput): Location | Promise<Location>;
+	createLocation(input: CreateLocationInput): Location | Promise<Location>;
 	createManufacturer(createManufacturerInput: CreateManufacturerInput): Manufacturer | Promise<Manufacturer>;
 	joinOrganization(joinOrganizationInput: JoinOrganizationInput): OrganizationMember | Promise<OrganizationMember>;
 	createOrganization(createOrganizationInput: CreateOrganizationInput): Organization | Promise<Organization>;
@@ -410,7 +431,9 @@ export interface ISubscription {
 	accountSignedUp(): Account | Promise<Account>;
 	commodityCategoryCreated(): CommodityCategory | Promise<CommodityCategory>;
 	gameVersionCreated(): GameVersion | Promise<GameVersion>;
+	gameVersionUpdated(): GameVersion | Promise<GameVersion>;
 	itemPriceCreated(): ItemPrice | Promise<ItemPrice>;
+	itemPriceUpdated(): ItemPrice | Promise<ItemPrice>;
 	commodityCreated(): Commodity | Promise<Commodity>;
 	itemCreated(): Item | Promise<Item>;
 	shipCreated(): Ship | Promise<Ship>;
