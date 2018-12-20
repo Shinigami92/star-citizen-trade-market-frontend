@@ -197,9 +197,12 @@ export interface JoinOrganizationInput {
 export interface TradeSearchInput {
 	startLocationId?: string;
 	endLocationId?: string;
-	maxScu?: number;
-	startCurrency?: number;
+	itemIds?: string[];
 	gameVersionId?: string;
+}
+
+export interface UpdateCommodityCategoryInput {
+	name?: string;
 }
 
 export interface UpdateCommodityInput {
@@ -224,6 +227,37 @@ export interface UpdateItemPriceInput {
 	type?: ItemPriceType;
 	visibility?: ItemPriceVisibility;
 	scannedInGameVersionId?: string;
+}
+
+export interface UpdateLocationInput {
+	name?: string;
+	parentLocationId?: string;
+	typeId?: string;
+	inGameSinceVersionId?: string;
+	inGameSince?: Date;
+}
+
+export interface UpdateLocationTypeInput {
+	name?: string;
+}
+
+export interface UpdateManufacturerInput {
+	name?: string;
+}
+
+export interface UpdateOrganizationInput {
+	name?: string;
+	spectrumId?: string;
+}
+
+export interface UpdateShipInput {
+	name?: string;
+	inGameSinceVersionId?: string;
+	inGameSince?: Date;
+	scu?: number;
+	manufacturerId?: string;
+	focus?: string;
+	size?: number;
 }
 
 export interface Item {
@@ -324,9 +358,11 @@ export interface Manufacturer {
 }
 
 export interface IMutation {
-	signUp(createAccountInput: CreateAccountInput): Account | Promise<Account>;
-	createCommodityCategory(
-		createCommodityCategoryInput: CreateCommodityCategoryInput
+	signUp(input: CreateAccountInput): Account | Promise<Account>;
+	createCommodityCategory(input: CreateCommodityCategoryInput): CommodityCategory | Promise<CommodityCategory>;
+	updateCommodityCategory(
+		id: string,
+		input: UpdateCommodityCategoryInput
 	): CommodityCategory | Promise<CommodityCategory>;
 	createGameVersion(input: CreateGameVersionInput): GameVersion | Promise<GameVersion>;
 	updateGameVersion(id: string, input: UpdateGameVersionInput): GameVersion | Promise<GameVersion>;
@@ -335,29 +371,32 @@ export interface IMutation {
 	createCommodity(input: CreateCommodityInput): Commodity | Promise<Commodity>;
 	updateCommodity(id: string, input: UpdateCommodityInput): Commodity | Promise<Commodity>;
 	createItem(input: CreateItemInput): Item | Promise<Item>;
-	createShip(createShipInput: CreateShipInput): Ship | Promise<Ship>;
-	createLocationType(createLocationTypeInput: CreateLocationTypeInput): LocationType | Promise<LocationType>;
+	createShip(input: CreateShipInput): Ship | Promise<Ship>;
+	updateShip(id: string, input: UpdateShipInput): Ship | Promise<Ship>;
+	createLocationType(input: CreateLocationTypeInput): LocationType | Promise<LocationType>;
+	updateLocationType(id: string, input: UpdateLocationTypeInput): LocationType | Promise<LocationType>;
 	createLocation(input: CreateLocationInput): Location | Promise<Location>;
-	createManufacturer(createManufacturerInput: CreateManufacturerInput): Manufacturer | Promise<Manufacturer>;
-	joinOrganization(joinOrganizationInput: JoinOrganizationInput): OrganizationMember | Promise<OrganizationMember>;
-	createOrganization(createOrganizationInput: CreateOrganizationInput): Organization | Promise<Organization>;
-	createPossession(createPossessionInput: CreatePossessionInput): Possession | Promise<Possession>;
-	createTransactionDetail(
-		createTransactionDetailInput: CreateTransactionDetailInput
-	): TransactionDetail | Promise<TransactionDetail>;
+	updateLocation(id: string, input: UpdateLocationInput): Location | Promise<Location>;
+	createManufacturer(input: CreateManufacturerInput): Manufacturer | Promise<Manufacturer>;
+	updateManufacturer(id: string, input: UpdateManufacturerInput): Manufacturer | Promise<Manufacturer>;
+	joinOrganization(input: JoinOrganizationInput): OrganizationMember | Promise<OrganizationMember>;
+	createOrganization(input: CreateOrganizationInput): Organization | Promise<Organization>;
+	updateOrganization(id: string, input: UpdateOrganizationInput): Organization | Promise<Organization>;
+	createPossession(input: CreatePossessionInput): Possession | Promise<Possession>;
+	createTransactionDetail(input: CreateTransactionDetailInput): TransactionDetail | Promise<TransactionDetail>;
 	createBoughtTransactionDetail(
-		createBoughtTransactionDetailInput: CreateBoughtTransactionDetailInput
+		input: CreateBoughtTransactionDetailInput
 	): TransactionDetail | Promise<TransactionDetail>;
 	createSoldTransactionDetail(
-		createSoldTransactionDetailInput: CreateSoldTransactionDetailInput
+		input: CreateSoldTransactionDetailInput
 	): TransactionDetail | Promise<TransactionDetail>;
 	createLostTransactionDetail(
-		createBoughtTransactionDetailInput: CreateLostTransactionDetailInput
+		input: CreateLostTransactionDetailInput
 	): TransactionDetail | Promise<TransactionDetail>;
 	createLostBasedOnTransactionDetail(
-		createLostBasedOnTransactionDetailInput: CreateLostBasedOnTransactionDetailInput
+		input: CreateLostBasedOnTransactionDetailInput
 	): TransactionDetail | Promise<TransactionDetail>;
-	createTransaction(createTransactionInput: CreateTransactionInput): Transaction | Promise<Transaction>;
+	createTransaction(input: CreateTransactionInput): Transaction | Promise<Transaction>;
 }
 
 export interface Organization {
@@ -438,6 +477,7 @@ export interface Ship extends Item {
 export interface ISubscription {
 	accountSignedUp(): Account | Promise<Account>;
 	commodityCategoryCreated(): CommodityCategory | Promise<CommodityCategory>;
+	commodityCategoryUpdated(): CommodityCategory | Promise<CommodityCategory>;
 	gameVersionCreated(): GameVersion | Promise<GameVersion>;
 	gameVersionUpdated(): GameVersion | Promise<GameVersion>;
 	itemPriceCreated(): ItemPrice | Promise<ItemPrice>;
@@ -446,11 +486,16 @@ export interface ISubscription {
 	commodityUpdated(): Commodity | Promise<Commodity>;
 	itemCreated(): Item | Promise<Item>;
 	shipCreated(): Ship | Promise<Ship>;
+	shipUpdated(): Ship | Promise<Ship>;
 	locationTypeCreated(): LocationType | Promise<LocationType>;
+	locationTypeUpdated(): LocationType | Promise<LocationType>;
 	locationCreated(): Location | Promise<Location>;
+	locationUpdated(): Location | Promise<Location>;
 	manufacturerCreated(): Manufacturer | Promise<Manufacturer>;
+	manufacturerUpdated(): Manufacturer | Promise<Manufacturer>;
 	organizationMemberCreated(): OrganizationMember | Promise<OrganizationMember>;
 	organizationCreated(): Organization | Promise<Organization>;
+	organizationUpdated(): Organization | Promise<Organization>;
 	possessionCreated(): Possession | Promise<Possession>;
 	transactionDetailCreated(): TransactionDetail | Promise<TransactionDetail>;
 	transactionCreated(): Transaction | Promise<Transaction>;
