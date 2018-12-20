@@ -51,15 +51,15 @@ export default class CreateCommodity extends Vue {
 			this.errorMessage = null;
 			await this.$apollo.mutate({
 				mutation: gql`
-					mutation CreateCommodity($commodity: CreateCommodityInput!) {
-						createCommodity(createCommodityInput: $commodity) {
+					mutation CreateCommodity($input: CreateCommodityInput!) {
+						createCommodity(input: $input) {
 							id
 							name
 						}
 					}
 				`,
 				variables: {
-					commodity: {
+					input: {
 						name: this.name,
 						commodityCategoryId: this.selectedCommodityCategory!.id,
 						inGameSinceVersionId: this.selectedGameVersion ? this.selectedGameVersion.id : undefined
