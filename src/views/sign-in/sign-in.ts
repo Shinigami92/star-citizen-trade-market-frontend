@@ -1,3 +1,4 @@
+import { onLogin } from '@/plugins/apollo';
 import { AuthToken } from '@/shared/graphql.schema';
 import { ValidationRule } from '@/shared/validation-rule';
 import { GraphQLError } from 'graphql';
@@ -45,6 +46,7 @@ export default class SignUp extends Vue {
 				}
 			});
 			localStorage.setItem('auth', JSON.stringify(result.data.signIn));
+			await onLogin(this.$apolloProvider.defaultClient, result.data.signIn.token);
 			this.$router.push('/trading');
 			this.$router.go(0);
 		} catch (error) {

@@ -45,8 +45,7 @@ export default class CreateGameVersion extends Vue {
 					input: {
 						identifier: this.identifier
 					} as CreateGameVersionInput
-				},
-				context: { headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')!).token}` } }
+				}
 			});
 		} catch (error) {
 			console.error(error.graphQLErrors);

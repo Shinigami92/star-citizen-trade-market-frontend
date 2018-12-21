@@ -64,8 +64,7 @@ export default class CreateCommodity extends Vue {
 						commodityCategoryId: this.selectedCommodityCategory!.id,
 						inGameSinceVersionId: this.selectedGameVersion ? this.selectedGameVersion.id : undefined
 					}
-				},
-				context: { headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')!).token}` } }
+				}
 			});
 		} catch (error) {
 			console.error(error.graphQLErrors);

@@ -64,8 +64,7 @@ export default class CreateLocation extends Vue {
 						inGameSinceVersionId: this.selectedGameVersion!.id,
 						inGameSince: new Date().toISOString()
 					} as CreateLocationInput
-				},
-				context: { headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')!).token}` } }
+				}
 			});
 		} catch (error) {
 			console.error(error.graphQLErrors);

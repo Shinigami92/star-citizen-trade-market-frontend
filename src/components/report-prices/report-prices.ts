@@ -127,8 +127,7 @@ export default class ReportPrice extends Vue {
 							type: itemPrice.type,
 							scannedInGameVersionId: this.selectedGameVersion ? this.selectedGameVersion.id : undefined
 						} as CreateItemPriceInput
-					},
-					context: { headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth')!).token}` } }
+					}
 				})
 			);
 		}
