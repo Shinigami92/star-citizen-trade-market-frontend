@@ -2,6 +2,7 @@ import CreateCommodity from '@/components/create-commodity/create-commodity';
 import CreateGameVersion from '@/components/create-game-version/create-game-version';
 import CreateLocation from '@/components/create-location/create-location';
 import ReportPrice from '@/components/report-prices/report-prices';
+import { CurrentUser, currentUser } from '@/shared/current-user';
 import { Commodity, GameVersion, Location, Trade } from '@/shared/graphql.schema';
 import { VDataTableHeader, VDataTablePagination } from '@/shared/vuetify/v-data-table';
 import { DocumentNode } from 'graphql';
@@ -48,6 +49,8 @@ const TRADE_QUERY: DocumentNode = gql`
 	components: { ReportPrice, CreateCommodity, CreateGameVersion, CreateLocation }
 })
 export default class TradingDashboard extends Vue {
+	public readonly currentUser: CurrentUser | null = currentUser();
+
 	public readonly locations: Location[] = [];
 	public readonly gameVersions: GameVersion[] = [];
 	public readonly commodities: Commodity[] = [];

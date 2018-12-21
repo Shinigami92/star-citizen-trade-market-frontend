@@ -66,13 +66,18 @@
 						<v-layout row>
 							<v-btn color="primary" @click="search({ fetchPolicy: 'network-only' })">Search</v-btn>
 							<v-spacer></v-spacer>
-							<v-btn @click="reportPricesModal = true" color="accent">Report Prices</v-btn>
+							<v-btn
+								@click="reportPricesModal = true"
+								color="accent"
+								:disabled="currentUser && !currentUser.hasAnyRole(['USER', 'ADVANCED', 'ADMIN'])"
+								>Report Prices</v-btn
+							>
 							<report-price
 								:open="reportPricesModal"
 								:location="startLocation"
 								@close="reportPricesModalClosed()"
 							></report-price>
-							<v-menu offset-y>
+							<v-menu offset-y :disabled="currentUser && !currentUser.hasAnyRole(['ADVANCED', 'ADMIN'])">
 								<v-btn slot="activator" color="secondary">Miss Something?</v-btn>
 								<v-list>
 									<v-list-tile @click="createLocationModal = true">
