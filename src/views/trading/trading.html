@@ -35,9 +35,22 @@
 							item-text="identifier"
 							label="Game Version"
 							required
-						>
-						</v-autocomplete>
+						></v-autocomplete>
 					</v-flex>
+					<v-flex md5>
+						<v-autocomplete
+							v-model="selectedCommodities"
+							:items="commodities"
+							:item-text="displayWithCommodity"
+							return-object
+							label="Commodities"
+							multiple
+							chips
+							deletable-chips
+							clearable
+						></v-autocomplete>
+					</v-flex>
+					<v-flex md7></v-flex>
 					<!-- <v-flex xs12 md3>
 						<v-text-field type="number" min="1" v-model.number="maxScu" label="Max SCU"></v-text-field>
 					</v-flex>

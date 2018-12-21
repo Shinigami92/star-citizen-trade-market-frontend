@@ -2,7 +2,7 @@ import CreateCommodity from '@/components/create-commodity/create-commodity';
 import CreateGameVersion from '@/components/create-game-version/create-game-version';
 import CreateLocation from '@/components/create-location/create-location';
 import ReportPrice from '@/components/report-prices/report-prices';
-import { GameVersion, Location, Trade } from '@/shared/graphql.schema';
+import { Commodity, GameVersion, Location, Trade } from '@/shared/graphql.schema';
 import { VDataTableHeader, VDataTablePagination } from '@/shared/vuetify/v-data-table';
 import { DocumentNode } from 'graphql';
 import gql from 'graphql-tag';
@@ -50,10 +50,12 @@ const TRADE_QUERY: DocumentNode = gql`
 export default class TradingDashboard extends Vue {
 	public readonly locations: Location[] = [];
 	public readonly gameVersions: GameVersion[] = [];
+	public readonly commodities: Commodity[] = [];
 	public readonly trades: Trade[] = [];
 	public startLocation: Location | null = null;
 	public endLocation: Location | null = null;
 	public gameVersion: GameVersion | null = null;
+	public readonly selectedCommodities: Commodity[] = [];
 	// public maxScu: number = 1;
 	// public startCurrency: number = 1;
 
@@ -92,6 +94,14 @@ export default class TradingDashboard extends Vue {
 		return displayValue;
 	}
 
+	public displayWithCommodity(commodity: Commodity): string {
+		if (Array.isArray(commodity)) {
+			// catches if no commodity have been selected
+			return '';
+		}
+		return `${commodity.name} (${commodity.commodityCategory.name})`;
+	}
+
 	public async reportPricesModalClosed(): Promise<void> {
 		this.reportPricesModal = false;
 		await this.search({ fetchPolicy: 'network-only' });
@@ -120,7 +130,11 @@ export default class TradingDashboard extends Vue {
 				searchInput: {
 					startLocationId: this.startLocation ? this.startLocation.id : undefined,
 					endLocationId: this.endLocation ? this.endLocation.id : undefined,
-					gameVersionId: this.gameVersion ? this.gameVersion.id : undefined
+					gameVersionId: this.gameVersion ? this.gameVersion.id : undefined,
+					itemIds:
+						this.selectedCommodities.length > 0
+							? this.selectedCommodities.map((c: Commodity) => c.id)
+							: undefined
 				}
 			},
 			fetchPolicy
@@ -133,6 +147,7 @@ export default class TradingDashboard extends Vue {
 		const queryResult: QueryResult<{
 			locations: Location[];
 			gameVersions: GameVersion[];
+			commodities: Commodity[];
 		}> = await this.$apollo.query({
 			query: gql`
 				query tradeData {
@@ -150,12 +165,20 @@ export default class TradingDashboard extends Vue {
 						id
 						identifier
 					}
+					commodities {
+						id
+						name
+						commodityCategory {
+							name
+						}
+					}
 				}
 			`
 		});
 		this.gameVersions.push(...queryResult.data.gameVersions);
 		this.gameVersion = this.gameVersions[0];
 		this.locations.push(...queryResult.data.locations);
+		this.commodities.push(...queryResult.data.commodities);
 		await this.search({ fetchPolicy: 'network-only' });
 	}
 
@@ -171,6 +194,11 @@ export default class TradingDashboard extends Vue {
 
 	@Watch('gameVersion')
 	protected async onGameVersionChanged(): Promise<void> {
+		await this.search();
+	}
+
+	@Watch('selectedCommodities')
+	protected async onSelectedCommoditiesChanged(): Promise<void> {
 		await this.search();
 	}
 }
