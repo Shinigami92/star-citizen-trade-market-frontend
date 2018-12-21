@@ -32,7 +32,8 @@ import Vuetify, {
 	VTextField,
 	VToolbar,
 	VToolbarSideIcon,
-	VToolbarTitle
+	VToolbarTitle,
+	VTooltip
 	// @ts-ignore
 } from 'vuetify/lib';
 import 'vuetify/src/stylus/app.styl';
@@ -71,7 +72,8 @@ Vue.use(Vuetify, {
 		VTextField,
 		VToolbar,
 		VToolbarSideIcon,
-		VToolbarTitle
+		VToolbarTitle,
+		VTooltip
 	},
 	theme: {
 		primary: '#096689',
