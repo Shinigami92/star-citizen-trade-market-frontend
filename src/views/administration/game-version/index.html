@@ -3,6 +3,7 @@
 	<v-data-table :headers="headers" :items="elements" :pagination.sync="pagination" class="elevation-1">
 		<template slot="items" slot-scope="props">
 			<td class="mono">{{ props.item.identifier }}</td>
+			<td>{{ props.item.release | moment('LLL') }}</td>
 			<td class="mono">{{ props.item.id }}</td>
 		</template>
 	</v-data-table>

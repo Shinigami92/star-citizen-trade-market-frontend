@@ -9,6 +9,7 @@ import { Component, Vue } from 'vue-property-decorator';
 				elements: gameVersions {
 					id
 					identifier
+					release
 				}
 			}
 		`
@@ -17,12 +18,13 @@ import { Component, Vue } from 'vue-property-decorator';
 export default class Index extends Vue {
 	public pagination: VDataTablePagination = {
 		rowsPerPage: 10,
-		sortBy: 'identifier',
+		sortBy: 'release',
 		descending: true
 	};
 
 	public headers: VDataTableHeader[] = [
 		{ text: 'Identifier ', value: 'identifier' },
+		{ text: 'Release ', value: 'release' },
 		{ text: 'ID ', value: 'id', width: '306' }
 	];
 	constructor() {
