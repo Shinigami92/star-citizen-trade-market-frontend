@@ -1,4 +1,7 @@
 import Vue from 'vue';
+// @ts-ignore
+import DatetimePicker from 'vuetify-datetime-picker';
+import 'vuetify-datetime-picker/src/stylus/main.styl';
 import Vuetify, {
 	VApp,
 	VAutocomplete,
@@ -11,6 +14,7 @@ import Vuetify, {
 	VContainer,
 	VContent,
 	VDataTable,
+	VDatePicker,
 	VDialog,
 	VDivider,
 	VEditDialog,
@@ -29,7 +33,11 @@ import Vuetify, {
 	VNavigationDrawer,
 	VSelect,
 	VSpacer,
+	VTab,
+	VTabItem,
+	VTabs,
 	VTextField,
+	VTimePicker,
 	VToolbar,
 	VToolbarSideIcon,
 	VToolbarTitle,
@@ -51,6 +59,7 @@ Vue.use(Vuetify, {
 		VContainer,
 		VContent,
 		VDataTable,
+		VDatePicker,
 		VDialog,
 		VDivider,
 		VEditDialog,
@@ -69,7 +78,11 @@ Vue.use(Vuetify, {
 		VNavigationDrawer,
 		VSelect,
 		VSpacer,
+		VTab,
+		VTabItem,
+		VTabs,
 		VTextField,
+		VTimePicker,
 		VToolbar,
 		VToolbarSideIcon,
 		VToolbarTitle,
@@ -87,3 +100,5 @@ Vue.use(Vuetify, {
 	customProperties: true,
 	iconfont: 'fa'
 });
+
+Vue.use(DatetimePicker);

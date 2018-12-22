@@ -14,6 +14,13 @@
 						></v-text-field>
 					</v-flex>
 					<v-flex md12> <p>e.g. 3.0.0-live.695052</p> </v-flex>
+					<v-flex md12>
+						<v-datetime-picker
+							v-model="release"
+							label="Release"
+							format="YYYY-MM-DD HH:mm"
+						></v-datetime-picker>
+					</v-flex>
 					<v-flex md12 v-if="errorMessage">
 						<p class="red--text">{{ errorMessage.message }}</p>
 					</v-flex>

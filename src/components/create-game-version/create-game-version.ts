@@ -11,6 +11,10 @@ export default class CreateGameVersion extends Vue {
 
 	public identifier: string = '';
 
+	public release: string | null = null;
+
+	public releaseMenu: boolean = false;
+
 	public readonly identifierRules: ValidationRule[] = [
 		(v: string): boolean | string => !!v || 'Identifier is required',
 		(v: string): boolean | string => v.length >= 16 || 'Identifier must be greater than or equals 16 characters',
@@ -43,7 +47,8 @@ export default class CreateGameVersion extends Vue {
 				`,
 				variables: {
 					input: {
-						identifier: this.identifier
+						identifier: this.identifier,
+						release: this.release !== null ? this.release : undefined
 					} as CreateGameVersionInput
 				}
 			});
