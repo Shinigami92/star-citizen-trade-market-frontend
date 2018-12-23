@@ -5,6 +5,7 @@ import 'vuetify-datetime-picker/src/stylus/main.styl';
 import Vuetify, {
 	VApp,
 	VAutocomplete,
+	VBreadcrumbs,
 	VBtn,
 	VBtnToggle,
 	VCard,
@@ -50,6 +51,7 @@ Vue.use(Vuetify, {
 	components: {
 		VApp,
 		VAutocomplete,
+		VBreadcrumbs,
 		VBtn,
 		VBtnToggle,
 		VCard,

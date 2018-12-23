@@ -35,6 +35,12 @@ export default new Router({
 			component: (): Promise<any> => import('./views/trading/trading.vue')
 		},
 		{
+			path: '/location/:id?',
+			name: 'location',
+			// @ts-ignore
+			component: (): Promise<any> => import('./views/location/location.vue')
+		},
+		{
 			path: '/my-ships',
 			name: 'my-ships',
 			// @ts-ignore
