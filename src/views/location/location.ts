@@ -130,7 +130,8 @@ export default class LocationDashboard extends Vue {
 					}
 				}
 			`,
-			variables: { id: to }
+			variables: { id: to },
+			fetchPolicy: 'no-cache'
 		});
 		this.location = result.data.location;
 		this.breadcrumbItems.splice(0, this.breadcrumbItems.length);

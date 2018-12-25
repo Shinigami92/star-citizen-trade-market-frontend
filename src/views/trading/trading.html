@@ -147,8 +147,12 @@
 	>
 		<template slot="items" slot-scope="props">
 			<td>{{ displayWithCommodity(props.item.item) }}</td>
-			<td>{{ displayWithLocation(props.item.startLocation) }}</td>
-			<td>{{ displayWithLocation(props.item.endLocation) }}</td>
+			<router-link tag="td" :to="'/location/' + props.item.startLocation.id">
+				<span class="cursor-pointer">{{ displayWithLocation(props.item.startLocation) }}</span>
+			</router-link>
+			<router-link tag="td" :to="'/location/' + props.item.endLocation.id">
+				<span class="cursor-pointer">{{ displayWithLocation(props.item.endLocation) }}</span>
+			</router-link>
 			<td class="text-md-right">{{ props.item.buyItemPrice.unitPrice.toFixed(2) }}</td>
 			<td class="text-md-right">{{ props.item.sellItemPrice.unitPrice.toFixed(2) }}</td>
 			<td class="text-md-right">{{ props.item.profit.toFixed(2) }}</td>
