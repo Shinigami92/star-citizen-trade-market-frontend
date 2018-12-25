@@ -1,5 +1,8 @@
 import { Account, Role } from './graphql.schema';
 
+// Name of the localStorage item
+export const CURRENT_USER_DATA: string = 'current-user-data';
+
 export class CurrentUser implements Partial<Account> {
 	public readonly id: string;
 	public readonly username: string;
@@ -28,7 +31,7 @@ export class CurrentUser implements Partial<Account> {
 }
 
 export function currentUser(): CurrentUser | null {
-	const auth: string | null = localStorage.getItem('auth');
+	const auth: string | null = localStorage.getItem(CURRENT_USER_DATA);
 	if (auth === null) {
 		return null;
 	}
