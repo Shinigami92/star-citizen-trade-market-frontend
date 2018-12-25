@@ -52,7 +52,7 @@ export default class SignUp extends Vue {
 					}
 				`,
 				variables: {
-					user: {
+					input: {
 						username: this.username,
 						email: this.email,
 						handle: this.handle
