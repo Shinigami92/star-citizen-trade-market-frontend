@@ -26,21 +26,35 @@ const TRADE_QUERY: DocumentNode = gql`
 			item {
 				id
 				name
+				... on Commodity {
+					commodityCategory {
+						name
+					}
+				}
 			}
 			startLocation {
 				id
 				name
+				type {
+					name
+				}
+				parentLocation {
+					name
+				}
 			}
 			endLocation {
 				id
 				name
+				type {
+					name
+				}
+				parentLocation {
+					name
+				}
 			}
 			profit
 			margin
 			scanTime
-			scannedInGameVersion {
-				identifier
-			}
 		}
 	}
 `;
@@ -81,8 +95,7 @@ export default class TradingDashboard extends Vue {
 		{ text: 'Sell Price ', value: 'sellItemPrice.unitPrice' },
 		{ text: 'Profit ', value: 'profit' },
 		{ text: 'Margin ', value: 'margin' },
-		{ text: 'Scanned ', value: 'scanTime' },
-		{ text: 'Game Version ', value: 'scannedInGameVersion.identifier' }
+		{ text: 'Scanned ', value: 'scanTime' }
 	];
 	constructor() {
 		super();

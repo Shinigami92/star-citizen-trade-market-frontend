@@ -146,15 +146,14 @@
 		class="elevation-1"
 	>
 		<template slot="items" slot-scope="props">
-			<td>{{ props.item.item.name }}</td>
-			<td>{{ props.item.startLocation.name }}</td>
-			<td>{{ props.item.endLocation.name }}</td>
+			<td>{{ displayWithCommodity(props.item.item) }}</td>
+			<td>{{ displayWithLocation(props.item.startLocation) }}</td>
+			<td>{{ displayWithLocation(props.item.endLocation) }}</td>
 			<td class="text-md-right">{{ props.item.buyItemPrice.unitPrice.toFixed(2) }}</td>
 			<td class="text-md-right">{{ props.item.sellItemPrice.unitPrice.toFixed(2) }}</td>
 			<td class="text-md-right">{{ props.item.profit.toFixed(2) }}</td>
 			<td class="text-md-right">{{ props.item.margin.toFixed(2) }} %</td>
 			<td>{{ props.item.scanTime | moment('LLL') }}</td>
-			<td class="mono">{{ props.item.scannedInGameVersion.identifier }}</td>
 		</template>
 	</v-data-table>
 </v-layout>
