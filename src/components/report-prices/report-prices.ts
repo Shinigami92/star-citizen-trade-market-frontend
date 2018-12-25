@@ -1,5 +1,5 @@
 import { Commodity, CreateItemPriceInput, GameVersion, ItemPriceType, Location } from '@/shared/graphql.schema';
-import { VDataTableHeader } from '@/shared/vuetify/v-data-table';
+import { VDataTableHeader, VDataTablePagination } from '@/shared/vuetify/v-data-table';
 import gql from 'graphql-tag';
 import { QueryResult } from 'vue-apollo/types/vue-apollo';
 import { Component, Model, Prop, Vue } from 'vue-property-decorator';
@@ -53,6 +53,10 @@ export default class ReportPrice extends Vue {
 
 	public readonly itemPrices: any[] = [];
 	public gameVersions: GameVersion[] = [];
+
+	public pagination: VDataTablePagination = {
+		sortBy: 'type'
+	};
 
 	public headers: VDataTableHeader[] = [
 		{ text: 'Commodity ', value: 'commodity.name' },
