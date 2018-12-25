@@ -1,3 +1,4 @@
+import { CreateAccountInput } from '@/shared/graphql.schema';
 import { ValidationRule } from '@/shared/validation-rule';
 import { GraphQLError } from 'graphql';
 import gql from 'graphql-tag';
@@ -52,11 +53,11 @@ export default class SignUp extends Vue {
 					}
 				`,
 				variables: {
-					user: {
+					input: {
 						username: this.username,
 						email: this.email,
 						handle: this.handle
-					}
+					} as CreateAccountInput
 				}
 			});
 			console.log(result.data);
