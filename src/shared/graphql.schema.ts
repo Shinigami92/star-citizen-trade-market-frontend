@@ -345,6 +345,7 @@ export interface Location {
 	inGameSinceVersionId: string;
 	inGameSinceVersion: GameVersion;
 	inGameSince?: Date;
+	children: Location[];
 }
 
 export interface LocationType {
@@ -428,6 +429,7 @@ export interface IQuery {
 	accounts(): Account[] | Promise<Account[]>;
 	account(id: string): Account | Promise<Account>;
 	signIn(username: string, password: string): AuthToken | Promise<AuthToken>;
+	me(): Account | Promise<Account>;
 	commodityCategories(): CommodityCategory[] | Promise<CommodityCategory[]>;
 	commodityCategory(id: string): CommodityCategory | Promise<CommodityCategory>;
 	gameVersions(): GameVersion[] | Promise<GameVersion[]>;
