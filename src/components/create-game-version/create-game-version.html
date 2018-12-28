@@ -15,11 +15,14 @@
 					</v-flex>
 					<v-flex md12> <p>e.g. 3.0.0-live.695052</p> </v-flex>
 					<v-flex md12>
-						<v-datetime-picker
-							v-model="release"
-							label="Release"
-							format="YYYY-MM-DD HH:mm"
-						></v-datetime-picker>
+						<v-datetime-picker v-model="release" label="Release" format="YYYY-MM-DD HH:mm">
+							<template slot="dateIcon">
+								<v-icon>fas fa-calendar</v-icon>
+							</template>
+							<template slot="timeIcon">
+								<v-icon>fas fa-clock</v-icon>
+							</template>
+						</v-datetime-picker>
 					</v-flex>
 					<v-flex md12 v-if="errorMessage">
 						<p class="red--text">{{ errorMessage.message }}</p>
