@@ -3,7 +3,7 @@ import CreateGameVersion from '@/components/create-game-version/create-game-vers
 import CreateLocation from '@/components/create-location/create-location';
 import ReportPrice from '@/components/report-prices/report-prices';
 import { CurrentUser, currentUser } from '@/shared/current-user';
-import { Commodity, GameVersion, Location, Trade } from '@/shared/graphql.schema';
+import { Commodity, GameVersion, Location, LocationSearchInput, Trade } from '@/shared/graphql.schema';
 import { VDataTableHeader, VDataTablePagination } from '@/shared/vuetify/v-data-table';
 import { DocumentNode } from 'graphql';
 import gql from 'graphql-tag';
@@ -28,6 +28,7 @@ const TRADE_QUERY: DocumentNode = gql`
 				name
 				... on Commodity {
 					commodityCategory {
+						id
 						name
 					}
 				}
@@ -36,9 +37,11 @@ const TRADE_QUERY: DocumentNode = gql`
 				id
 				name
 				type {
+					id
 					name
 				}
 				parentLocation {
+					id
 					name
 				}
 			}
@@ -46,9 +49,11 @@ const TRADE_QUERY: DocumentNode = gql`
 				id
 				name
 				type {
+					id
 					name
 				}
 				parentLocation {
+					id
 					name
 				}
 			}
@@ -166,14 +171,16 @@ export default class TradingDashboard extends Vue {
 			commodities: Commodity[];
 		}> = await this.$apollo.query({
 			query: gql`
-				query tradeData {
-					locations {
+				query tradeData($locationSearchInput: LocationSearchInput) {
+					locations(searchInput: $locationSearchInput) {
 						id
 						name
 						type {
+							id
 							name
 						}
 						parentLocation {
+							id
 							name
 						}
 					}
@@ -185,11 +192,15 @@ export default class TradingDashboard extends Vue {
 						id
 						name
 						commodityCategory {
+							id
 							name
 						}
 					}
 				}
-			`
+			`,
+			variables: {
+				locationSearchInput: { canTrade: true } as LocationSearchInput
+			}
 		});
 		this.gameVersions.push(...queryResult.data.gameVersions);
 		this.gameVersion = this.gameVersions[0];

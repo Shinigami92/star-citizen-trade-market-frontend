@@ -1,40 +1,17 @@
-import { Commodity, CreateItemPriceInput, GameVersion, ItemPriceType, Location } from '@/shared/graphql.schema';
+import {
+	Commodity,
+	CreateItemPriceInput,
+	GameVersion,
+	ItemPriceType,
+	Location,
+	LocationSearchInput
+} from '@/shared/graphql.schema';
 import { VDataTableHeader, VDataTablePagination } from '@/shared/vuetify/v-data-table';
 import gql from 'graphql-tag';
 import { QueryResult } from 'vue-apollo/types/vue-apollo';
 import { Component, Model, Prop, Vue } from 'vue-property-decorator';
 
-@Component({
-	apollo: {
-		locations: gql`
-			query locations {
-				locations {
-					id
-					name
-					type {
-						name
-					}
-					parentLocation {
-						name
-					}
-				}
-			}
-		`,
-		commodities: gql`
-			query commodities {
-				commodities {
-					id
-					name
-					... on Commodity {
-						commodityCategory {
-							name
-						}
-					}
-				}
-			}
-		`
-	}
-})
+@Component
 export default class ReportPrice extends Vue {
 	@Model('close', { type: Boolean })
 	public open!: boolean;
@@ -52,7 +29,9 @@ export default class ReportPrice extends Vue {
 	public selectedGameVersion: GameVersion | null = null;
 
 	public readonly itemPrices: any[] = [];
-	public gameVersions: GameVersion[] = [];
+	public readonly locations: Location[] = [];
+	public readonly gameVersions: GameVersion[] = [];
+	public readonly commodities: Commodity[] = [];
 
 	public pagination: VDataTablePagination = {
 		sortBy: 'type'
@@ -143,17 +122,48 @@ export default class ReportPrice extends Vue {
 	}
 
 	protected async beforeMount(): Promise<void> {
-		const gameVersionResult: QueryResult<any> = await this.$apollo.query({
+		const queryResult: QueryResult<{
+			locations: Location[];
+			gameVersions: GameVersion[];
+			commodities: Commodity[];
+		}> = await this.$apollo.query({
 			query: gql`
-				query gameVersions {
+				query data($locationSearchInput: LocationSearchInput) {
+					locations(searchInput: $locationSearchInput) {
+						id
+						name
+						type {
+							id
+							name
+						}
+						parentLocation {
+							id
+							name
+						}
+					}
 					gameVersions {
 						id
 						identifier
 					}
+					commodities {
+						id
+						name
+						... on Commodity {
+							commodityCategory {
+								id
+								name
+							}
+						}
+					}
 				}
-			`
+			`,
+			variables: {
+				locationSearchInput: { canTrade: true } as LocationSearchInput
+			}
 		});
-		this.gameVersions = gameVersionResult.data.gameVersions;
+		this.gameVersions.push(...queryResult.data.gameVersions);
+		this.locations.push(...queryResult.data.locations);
+		this.commodities.push(...queryResult.data.commodities);
 		this.selectedGameVersion = this.gameVersions[0];
 	}
 }

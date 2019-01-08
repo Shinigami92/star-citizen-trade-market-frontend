@@ -14,6 +14,7 @@ export default class CreateLocation extends Vue {
 	public selectedParent: Location | null = null;
 	public selectedType: LocationType | null = null;
 	public selectedGameVersion: GameVersion | null = null;
+	public canTrade: boolean = false;
 	public locations: Location[] = [];
 	public locationTypes: LocationType[] = [];
 	public gameVersions: GameVersion[] = [];
@@ -62,7 +63,8 @@ export default class CreateLocation extends Vue {
 						parentLocationId: this.selectedParent ? this.selectedParent.id : undefined,
 						typeId: this.selectedType!.id,
 						inGameSinceVersionId: this.selectedGameVersion!.id,
-						inGameSince: new Date().toISOString()
+						inGameSince: new Date().toISOString(),
+						canTrade: this.canTrade
 					} as CreateLocationInput
 				}
 			});
@@ -88,9 +90,11 @@ export default class CreateLocation extends Vue {
 						id
 						name
 						parentLocation {
+							id
 							name
 						}
 						type {
+							id
 							name
 						}
 					}

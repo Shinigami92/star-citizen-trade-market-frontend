@@ -40,6 +40,7 @@
 						>
 						</v-autocomplete>
 					</v-flex>
+					<v-flex md12><v-checkbox label="Can Trade" v-model="canTrade"></v-checkbox></v-flex>
 					<v-flex md12 v-if="errorMessage">
 						<p class="red--text">{{ errorMessage.message }}</p>
 					</v-flex>

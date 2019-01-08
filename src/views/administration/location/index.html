@@ -19,6 +19,7 @@
 				<span v-if="props.item.inGameSince">{{ props.item.inGameSince | moment('LLL') }}</span>
 			</td>
 			<td class="mono">{{ props.item.inGameSinceVersion.identifier }}</td>
+			<td>{{ props.item.canTrade }}</td>
 			<td class="mono">{{ props.item.id }}</td>
 		</template>
 	</v-data-table>

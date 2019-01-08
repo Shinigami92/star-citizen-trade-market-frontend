@@ -22,6 +22,7 @@ import { Component, Vue } from 'vue-property-decorator';
 						id
 						identifier
 					}
+					canTrade
 				}
 			}
 		`
@@ -39,6 +40,7 @@ export default class Index extends Vue {
 		{ text: 'Parent Location ', value: 'parentLocation.name' },
 		{ text: 'First Time Seen ', value: 'inGameSince' },
 		{ text: 'Since Version ', value: 'inGameSinceVersion.identifier' },
+		{ text: 'Can Trade ', value: 'canTrade' },
 		{ text: 'ID ', value: 'id', width: '306' }
 	];
 	constructor() {

@@ -80,11 +80,14 @@ export default class LocationDashboard extends Vue {
 							id
 							name
 							type {
+								id
 								name
 							}
 							parentLocation {
+								id
 								name
 							}
+							canTrade
 						}
 					}
 				`
@@ -102,6 +105,7 @@ export default class LocationDashboard extends Vue {
 						id
 						name
 						type {
+							id
 							name
 						}
 						parentLocation {
@@ -120,12 +124,15 @@ export default class LocationDashboard extends Vue {
 								}
 							}
 						}
+						canTrade
 						children {
 							id
 							name
 							type {
+								id
 								name
 							}
+							canTrade
 						}
 					}
 				}

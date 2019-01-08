@@ -17,9 +17,11 @@ import { Component, Vue } from 'vue-property-decorator';
 						id
 						name
 						type {
+							id
 							name
 						}
 						parentLocation {
+							id
 							name
 						}
 					}
