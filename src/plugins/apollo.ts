@@ -1,9 +1,52 @@
-import ApolloClient from 'apollo-client';
+import { ApolloCache } from 'apollo-cache';
+import { InMemoryCacheConfig, NormalizedCacheObject } from 'apollo-cache-inmemory';
+import ApolloClient, { ApolloClientOptions } from 'apollo-client';
+import { ApolloLink, FetchResult, NextLink, Observable, Operation } from 'apollo-link';
+import { HttpOptions, UriFunction } from 'apollo-link-http-common';
+import { ClientStateConfig } from 'apollo-link-state';
+import { SubscriptionClient } from 'subscriptions-transport-ws';
 import Vue from 'vue';
 import VueApollo from 'vue-apollo';
 import { ErrorHandler } from 'vue-apollo/types/options';
 // @ts-ignore
 import { createApolloClient, restartWebsockets } from 'vue-cli-plugin-apollo/graphql-client';
+
+interface CreateApolloClientOptions<TCacheShape = NormalizedCacheObject> {
+	httpEndpoint?: string | UriFunction | undefined;
+	wsEndpoint?: string | null;
+	tokenName?: string;
+	persisting?: boolean;
+	ssr?: boolean;
+	websocketsOnly?: boolean;
+	link?: ApolloLink | null;
+	defaultHttpLink?: boolean;
+	httpLinkOptions?: HttpOptions;
+	cache?: ApolloCache<TCacheShape> | null;
+	inMemoryCacheOptions?: InMemoryCacheConfig | null;
+	apollo?: ApolloClientOptions<TCacheShape>;
+	clientState?: ClientStateConfig | null;
+	getAuth?: (tokenName: string) => string | undefined;
+}
+
+type ObservableFetchResult = Observable<FetchResult<Record<string, any>, Record<string, any>>>;
+type RequestObservableFetchResultFunction = (operation: Operation, forward?: NextLink) => ObservableFetchResult;
+
+interface CreatedApolloClient<TCacheShape = NormalizedCacheObject> {
+	apolloClient: ApolloClient<TCacheShape> & {
+		wsClient?: SubscriptionClient;
+	};
+	wsClient?: SubscriptionClient;
+	stateLink?: {
+		writeDefaults(): void;
+		request(operation: Operation, forward?: NextLink): ObservableFetchResult;
+		split(
+			test: (op: Operation) => boolean,
+			left: ApolloLink | RequestObservableFetchResultFunction,
+			right?: ApolloLink | RequestObservableFetchResultFunction
+		): ApolloLink;
+		concat(next: ApolloLink | RequestObservableFetchResultFunction): ApolloLink;
+	};
+}
 
 // Install the vue plugin
 Vue.use(VueApollo);
@@ -20,14 +63,7 @@ export const filesRoot: string =
 Vue.prototype.$filesRoot = filesRoot;
 
 // Config
-const defaultOptions: {
-	httpEndpoint: string;
-	wsEndpoint: string;
-	tokenName: string;
-	persisting: boolean;
-	websocketsOnly: boolean;
-	ssr: boolean;
-} = {
+const defaultOptions: CreateApolloClientOptions = {
 	// You can use `https` for secure connection (recommended in production)
 	httpEndpoint,
 	// You can use `wss` for secure connection (recommended in production)
@@ -62,9 +98,9 @@ const defaultOptions: {
 };
 
 // Call this in the Vue app file
-export function createProvider(options: any = {}): VueApollo {
+export function createProvider(options: CreateApolloClientOptions = {}): VueApollo {
 	// Create apollo client
-	const { apolloClient, wsClient }: any = createApolloClient({
+	const { apolloClient, wsClient }: CreatedApolloClient<NormalizedCacheObject> = createApolloClient({
 		...defaultOptions,
 		...options
 	});
@@ -92,7 +128,10 @@ export function createProvider(options: any = {}): VueApollo {
 }
 
 // Manually call this when user log in
-export async function onLogin(apolloClient: ApolloClient<any> | any, token: string): Promise<void> {
+export async function onLogin(
+	apolloClient: ApolloClient<NormalizedCacheObject> & { wsClient?: SubscriptionClient },
+	token: string
+): Promise<void> {
 	if (token) {
 		localStorage.setItem(APOLLO_AUTH_TOKEN, token);
 	}
@@ -107,7 +146,9 @@ export async function onLogin(apolloClient: ApolloClient<any> | any, token: stri
 }
 
 // Manually call this when user log out
-export async function onLogout(apolloClient: ApolloClient<any> | any): Promise<void> {
+export async function onLogout(
+	apolloClient: ApolloClient<NormalizedCacheObject> & { wsClient?: SubscriptionClient }
+): Promise<void> {
 	localStorage.removeItem(APOLLO_AUTH_TOKEN);
 	if (apolloClient.wsClient) {
 		restartWebsockets(apolloClient.wsClient);
