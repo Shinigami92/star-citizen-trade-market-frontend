@@ -34,7 +34,8 @@ export default class ReportPrice extends Vue {
 	public readonly commodities: Commodity[] = [];
 
 	public pagination: VDataTablePagination = {
-		sortBy: 'type'
+		sortBy: 'type',
+		rowsPerPage: -1
 	};
 
 	public headers: VDataTableHeader[] = [
