@@ -11,7 +11,7 @@ export default class CreateGameVersion extends Vue {
 
 	public identifier: string = '';
 
-	public release: string | null = null;
+	public release: Date | null = null;
 
 	public releaseMenu: boolean = false;
 
@@ -48,7 +48,7 @@ export default class CreateGameVersion extends Vue {
 				variables: {
 					input: {
 						identifier: this.identifier,
-						release: this.release !== null ? this.release : undefined
+						release: this.release !== null ? this.release.toISOString() : undefined
 					} as CreateGameVersionInput
 				}
 			});
