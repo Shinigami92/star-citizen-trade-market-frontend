@@ -5,6 +5,7 @@ import ReportPrice from '@/components/report-prices/report-prices';
 import { CurrentUser, currentUser } from '@/shared/current-user';
 import { Commodity, GameVersion, Location, LocationSearchInput, Trade } from '@/shared/graphql.schema';
 import { VDataTableHeader, VDataTablePagination } from '@/shared/vuetify/v-data-table';
+import { SELECTED_GAME_VERSION } from '@/store/constant';
 import { DocumentNode } from 'graphql';
 import gql from 'graphql-tag';
 import { QueryResult } from 'vue-apollo/types/vue-apollo';
@@ -203,7 +204,12 @@ export default class TradingDashboard extends Vue {
 			}
 		});
 		this.gameVersions.push(...queryResult.data.gameVersions);
-		this.gameVersion = this.gameVersions[0];
+		const selectedGameVersion: string | null = sessionStorage.getItem(SELECTED_GAME_VERSION);
+		if (selectedGameVersion !== null) {
+			this.gameVersion = JSON.parse(selectedGameVersion);
+		} else {
+			this.gameVersion = this.gameVersions[0];
+		}
 		this.locations.push(...queryResult.data.locations);
 		this.commodities.push(...queryResult.data.commodities);
 		await this.search({ fetchPolicy: 'network-only' });
@@ -220,7 +226,8 @@ export default class TradingDashboard extends Vue {
 	}
 
 	@Watch('gameVersion')
-	protected async onGameVersionChanged(): Promise<void> {
+	protected async onGameVersionChanged(value: GameVersion): Promise<void> {
+		sessionStorage.setItem(SELECTED_GAME_VERSION, JSON.stringify(value));
 		await this.search();
 	}
 

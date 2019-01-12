@@ -7,6 +7,7 @@ import {
 	LocationSearchInput
 } from '@/shared/graphql.schema';
 import { VDataTableHeader, VDataTablePagination } from '@/shared/vuetify/v-data-table';
+import { SELECTED_GAME_VERSION } from '@/store/constant';
 import gql from 'graphql-tag';
 import { QueryResult } from 'vue-apollo/types/vue-apollo';
 import { Component, Model, Prop, Vue } from 'vue-property-decorator';
@@ -86,11 +87,7 @@ export default class ReportPrice extends Vue {
 	}
 
 	public async reportItemPrices(): Promise<void> {
-		// TODO: report prices
-		console.log({
-			location: this.location,
-			itemPrices: this.itemPrices
-		});
+		console.log({ location: this.location, itemPrices: this.itemPrices });
 		const promises: Array<Promise<QueryResult<any>>> = [];
 		for (const itemPrice of this.itemPrices) {
 			promises.push(
@@ -165,6 +162,11 @@ export default class ReportPrice extends Vue {
 		this.gameVersions.push(...queryResult.data.gameVersions);
 		this.locations.push(...queryResult.data.locations);
 		this.commodities.push(...queryResult.data.commodities);
-		this.selectedGameVersion = this.gameVersions[0];
+		const selectedGameVersion: string | null = sessionStorage.getItem(SELECTED_GAME_VERSION);
+		if (selectedGameVersion !== null) {
+			this.selectedGameVersion = JSON.parse(selectedGameVersion);
+		} else {
+			this.selectedGameVersion = this.gameVersions[0];
+		}
 	}
 }
