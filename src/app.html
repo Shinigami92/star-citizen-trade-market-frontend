@@ -48,12 +48,21 @@
 					</v-list-group>
 				</template>
 			</template>
+			<div class="text-md-center mt-3">
+				<a href="https://robertsspaceindustries.com/fankit" target="_blank">
+					<img src="./assets/MadeByTheCommunity_White.png" width="284"></img>
+				</a>
+			</div>
 		</v-list>
 	</v-navigation-drawer>
 	<v-toolbar app fixed clipped-left>
 		<v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
 		<v-toolbar-title>Star Citizen Trade Market</v-toolbar-title>
 		<v-spacer></v-spacer>
+		<v-btn icon>
+			<img src="./assets/MadeByTheCommunity_White.png" width="32"></img>
+		</v-btn>
+		<!-- <v-btn icon to="/sign-up"><v-icon>fas fa-user-plus</v-icon></v-btn> -->
 		<template v-if="!currentUser">
 			<v-btn icon to="/sign-up"><v-icon>fas fa-user-plus</v-icon></v-btn>
 			<v-btn icon to="/sign-in"><v-icon>fas fa-sign-in-alt</v-icon></v-btn>
