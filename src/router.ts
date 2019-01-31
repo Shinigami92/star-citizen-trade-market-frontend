@@ -52,6 +52,12 @@ export default new Router({
 			// @ts-ignore
 			component: (): Promise<any> => import('./views/my-transactions/my-transactions.vue')
 		},
+		{
+			path: '/shout-out',
+			name: 'shout-out',
+			// @ts-ignore
+			component: (): Promise<any> => import('./views/shout-out/shout-out.vue')
+		},
 		...administrationRoutes,
 		{
 			path: '*',
