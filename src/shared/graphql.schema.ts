@@ -463,16 +463,15 @@ export interface IQuery {
 	organizationMember(organizationId: string, accountId: string): OrganizationMember | Promise<OrganizationMember>;
 	possessions(): Possession[] | Promise<Possession[]>;
 	possession(id: string): Possession | Promise<Possession>;
+	trades(searchInput?: TradeSearchInput): Trade[] | Promise<Trade[]>;
 	transactions(): Transaction[] | Promise<Transaction[]>;
 	transaction(id: string): Transaction | Promise<Transaction>;
-	trades(searchInput?: TradeSearchInput): Trade[] | Promise<Trade[]>;
 	transactionDetails(): TransactionDetail[] | Promise<TransactionDetail[]>;
 	transactionDetail(id: string): TransactionDetail | Promise<TransactionDetail>;
 	commodities(): Commodity[] | Promise<Commodity[]>;
 	commodity(id: string): Commodity | Promise<Commodity>;
 	ships(): Ship[] | Promise<Ship[]>;
 	ship(id: string): Ship | Promise<Ship>;
-	temp__(): boolean | Promise<boolean>;
 }
 
 export interface Ship extends Item {
