@@ -13,7 +13,7 @@
 		"lint": "vue-cli-service lint"
 	},
 	"dependencies": {
-		"@fortawesome/fontawesome-free": "~5.8.2",
+		"@fortawesome/fontawesome-free": "~5.9.0",
 		"apollo-boost": "~0.4.2",
 		"apollo-cache-inmemory": "~1.6.2",
 		"apollo-client": "~2.6.2",
@@ -29,30 +29,31 @@
 		"vue-property-decorator": "~8.1.1",
 		"vue-router": "~3.0.6",
 		"vuetify": "~1.5.14",
-		"vuetify-datetime-picker": "~1.0.13"
+		"vuetify-datetime-picker": "~1.0.13",
+		"vuetify-tsx": "~0.26.2"
 	},
 	"devDependencies": {
 		"@types/graphql": "~14.2.0",
-		"@types/node": "~12.0.2",
-		"@types/validator": "~10.11.0",
+		"@types/node": "~12.0.8",
+		"@types/validator": "~10.11.1",
 		"@vue/cli-plugin-babel": "~3.8.0",
 		"@vue/cli-plugin-typescript": "~3.8.1",
 		"@vue/cli-service": "~3.8.0",
 		"@vue/cli-shared-utils": "~3.8.0",
 		"graphql-tag": "~2.10.1",
 		"node-sass": "~4.12.0",
-		"prettier": "1.17.1",
+		"prettier": "1.18.2",
 		"sass-loader": "~7.1.0",
 		"stylus": "~0.54.5",
 		"stylus-loader": "~3.0.2",
-		"tslint": "~5.16.0",
+		"tslint": "~5.17.0",
 		"tslint-eslint-rules": "~5.4.0",
-		"typescript": "~3.4.5",
-		"typescript-tslint-plugin": "~0.4.0",
+		"typescript": "~3.5.1",
+		"typescript-tslint-plugin": "~0.5.0",
 		"vue-cli-plugin-apollo": "~0.20.0",
 		"vue-cli-plugin-vuetify": "^0.5.0",
 		"vue-template-compiler": "~2.6.10",
-		"webpack": "~4.32.2"
+		"webpack": "~4.33.0"
 	},
 	"license": "MIT"
 }
