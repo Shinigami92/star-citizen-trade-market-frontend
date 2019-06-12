@@ -36,7 +36,7 @@
 		"object-literal-sort-keys": false,
 		"only-arrow-functions": false,
 		"prefer-template": true,
-		"quotemark": [true, "single", "avoid-escape", "avoid-template"],
+		"quotemark": [true, "single", "jsx-double", "avoid-escape", "avoid-template"],
 		"trailing-comma": {
 			"options": [
 				{
