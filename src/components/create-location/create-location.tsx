@@ -4,6 +4,21 @@ import { GraphQLError } from 'graphql';
 import gql from 'graphql-tag';
 import { QueryResult } from 'vue-apollo/types/vue-apollo';
 import { Component, Model, Vue } from 'vue-property-decorator';
+import {
+	VAutocomplete,
+	VBtn,
+	VCard,
+	VCardActions,
+	VCardText,
+	VCardTitle,
+	VCheckbox,
+	VContainer,
+	VDialog,
+	VFlex,
+	VLayout,
+	VSpacer,
+	VTextField
+} from 'vuetify-tsx';
 
 @Component
 export default class CreateLocation extends Vue {
@@ -76,6 +91,83 @@ export default class CreateLocation extends Vue {
 		}
 
 		this.$emit('close');
+	}
+
+	public render(): JSX.Element {
+		let errorContent: JSX.Element | null = null;
+		if (this.errorMessage) {
+			errorContent = (
+				<VFlex md12>
+					<p class="red--text">{this.errorMessage.message}</p>
+				</VFlex>
+			);
+		}
+		return (
+			<VDialog v-model={this.open} persistent max-width="540px">
+				<VCard>
+					<VCardTitle>
+						<span class="headline">Register new Location</span>
+					</VCardTitle>
+					<VCardText>
+						<VContainer grid-list-md>
+							<VLayout row wrap>
+								<VFlex md12>
+									<VTextField
+										v-model={this.name}
+										rules={this.nameRules}
+										label="Name"
+										required
+									></VTextField>
+								</VFlex>
+								<VFlex md8>
+									<VAutocomplete
+										v-model={this.selectedType}
+										items={this.locationTypes}
+										return-object
+										item-text="name"
+										label="Type"
+										// required
+									></VAutocomplete>
+								</VFlex>
+								<VFlex md4>
+									<VAutocomplete
+										v-model={this.selectedGameVersion}
+										items={this.gameVersions}
+										return-object
+										item-text="identifier"
+										label="Exists since version"
+										// required
+									></VAutocomplete>
+								</VFlex>
+								<VFlex md12>
+									<VAutocomplete
+										v-model={this.selectedParent}
+										items={this.locations}
+										return-object
+										item-text={this.displayWithLocation}
+										label="Parent"
+										clearable
+									></VAutocomplete>
+								</VFlex>
+								<VFlex md12>
+									<VCheckbox label="Can Trade" v-model={this.canTrade}></VCheckbox>
+								</VFlex>
+								{errorContent}
+							</VLayout>
+						</VContainer>
+					</VCardText>
+					<VCardActions>
+						<VSpacer></VSpacer>
+						<VBtn color="warning" onClick={(): this => this.$emit('close')}>
+							Cancel
+						</VBtn>
+						<VBtn color="success" onClick={(): Promise<void> => this.create()} disabled={this.invalid}>
+							Create
+						</VBtn>
+					</VCardActions>
+				</VCard>
+			</VDialog>
+		);
 	}
 
 	protected async beforeMount(): Promise<void> {
