@@ -5,6 +5,19 @@ import gql from 'graphql-tag';
 import { QueryResult } from 'vue-apollo/types/vue-apollo';
 import { Component, Vue, Watch } from 'vue-property-decorator';
 import { Route } from 'vue-router';
+import 'vue-tsx-support/enable-check';
+import {
+	VAutocomplete,
+	VBreadcrumbs,
+	VBtn,
+	VCard,
+	VCardActions,
+	VCardTitle,
+	VContainer,
+	VFlex,
+	VIcon,
+	VLayout
+} from 'vuetify-tsx';
 
 @Component
 export default class LocationDashboard extends Vue {
@@ -32,6 +45,72 @@ export default class LocationDashboard extends Vue {
 			displayValue += ` - (${location.parentLocation.name})`;
 		}
 		return displayValue;
+	}
+
+	public render(): JSX.Element {
+		let content: JSX.Element | JSX.Element[];
+		if (this.location) {
+			const children: JSX.Element[] = [];
+			for (const child of this.location.children) {
+				children.push(
+					<VFlex xs4>
+						<VCard>
+							<VCardTitle primary-title>
+								<div>
+									<h3 class="headline mb-0">{child.name}</h3>
+									<div>Type: {child.type.name}</div>
+									<div>Can Trade: {child.canTrade}</div>
+									{/* <div>{child.description}</div> */}
+								</div>
+							</VCardTitle>
+							<VCardActions>
+								<VBtn to={`/location/${child.id}`} flat color="orange">
+									Details
+								</VBtn>
+							</VCardActions>
+						</VCard>
+					</VFlex>
+				);
+			}
+			content = [
+				<VBreadcrumbs items={this.breadcrumbItems} large>
+					<VIcon slot="divider">fas fa-chevron-right</VIcon>
+				</VBreadcrumbs>,
+				<VContainer grid-list-md fluid>
+					<VLayout row wrap>
+						<VFlex xs12>
+							<VCard>
+								<VCardTitle primary-title>
+									<div>
+										<h3 class="headline mb-0">{this.location.name}</h3>
+										<div>Type: {this.location.type.name}</div>
+										<div>Can Trade: {this.location.canTrade}</div>
+										{/* <div>{location.description}</div> */}
+									</div>
+								</VCardTitle>
+							</VCard>
+						</VFlex>
+						{children}
+					</VLayout>
+				</VContainer>
+			];
+		} else {
+			content = (
+				<VAutocomplete
+					v-model={this.selectedLocation}
+					items={this.locations}
+					return-object
+					item-text={this.displayWithLocation}
+					label="Select Location"
+				></VAutocomplete>
+			);
+		}
+
+		return (
+			<VLayout align-space-between justify-start column>
+				{content}
+			</VLayout>
+		);
 	}
 
 	protected async beforeMount(): Promise<void> {

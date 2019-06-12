@@ -38,7 +38,7 @@ export default new Router({
 			path: '/location/:id?',
 			name: 'location',
 			// @ts-ignore
-			component: (): Promise<any> => import('./views/location/location.vue')
+			component: (): Promise<any> => import('./views/location/location.tsx')
 		},
 		{
 			path: '/my-ships',

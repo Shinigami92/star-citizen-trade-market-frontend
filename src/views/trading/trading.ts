@@ -66,7 +66,12 @@ const TRADE_QUERY: DocumentNode = gql`
 `;
 
 @Component({
-	components: { ReportPrice, CreateCommodity, CreateGameVersion, CreateLocation }
+	components: {
+		ReportPrice,
+		CreateCommodity,
+		CreateGameVersion,
+		CreateLocation
+	}
 })
 export default class TradingDashboard extends Vue {
 	public readonly currentUser: CurrentUser | null = currentUser();

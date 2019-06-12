@@ -5,7 +5,7 @@ export const administrationRoutes: RouteConfig[] = [
 		path: '/administration/account',
 		name: 'administration-account',
 		// @ts-ignore
-		component: (): Promise<any> => import('./account/index.vue')
+		component: (): Promise<any> => import('./account/index.tsx')
 	},
 	{
 		path: '/administration/game-version',
