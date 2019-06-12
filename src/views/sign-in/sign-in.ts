@@ -49,7 +49,6 @@ export default class SignUp extends Vue {
 			localStorage.setItem(CURRENT_USER_DATA, JSON.stringify(result.data.signIn));
 			await onLogin(this.$apolloProvider!.defaultClient, result.data.signIn.token);
 			this.$router.push('/trading');
-			this.$router.go(0);
 		} catch (error) {
 			console.error(error.graphQLErrors);
 			this.errors = error.graphQLErrors as GraphQLError[];
