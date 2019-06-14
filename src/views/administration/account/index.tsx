@@ -46,12 +46,7 @@ export default class Index extends Vue {
 							);
 						}
 					}}
-					pagination={this.pagination}
-					on={{
-						'update:pagination': (pagination: VDataTablePagination): void => {
-							this.pagination = pagination;
-						}
-					}}
+					pagination_sync={this.pagination}
 				/>
 			</VLayout>
 		);
