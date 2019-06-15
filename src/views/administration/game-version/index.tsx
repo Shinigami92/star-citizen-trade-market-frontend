@@ -33,7 +33,12 @@ export default class Index extends Vue {
 				<VDataTable
 					headers={this.headers}
 					items={this.elements}
-					pagination_sync={this.pagination}
+					pagination={this.pagination}
+					on={{
+						'update:pagination': (pagination: VDataTablePagination): void => {
+							this.pagination = pagination;
+						}
+					}}
 					class="elevation-1"
 					scopedSlots={{
 						items: ({ item }: { item: GameVersion }): JSX.Element => (

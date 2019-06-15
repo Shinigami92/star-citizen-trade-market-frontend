@@ -219,7 +219,12 @@ export default class ReportPrice extends Vue {
 										hide-actions
 										class="elevation-1"
 										item-key="id"
-										pagination_sync={this.pagination}
+										pagination={this.pagination}
+										on={{
+											'update:pagination': (pagination: VDataTablePagination): void => {
+												this.pagination = pagination;
+											}
+										}}
 										scopedSlots={{
 											items: ({ item, index }: { item: any; index: number }): JSX.Element => {
 												return (
