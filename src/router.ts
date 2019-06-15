@@ -26,7 +26,7 @@ export default new Router({
 			path: '/privacy-policy',
 			name: 'privacy-policy',
 			// @ts-ignore
-			component: (): Promise<any> => import('./views/privacy-policy/privacy-policy.vue')
+			component: (): Promise<any> => import('./views/privacy-policy/privacy-policy.tsx')
 		},
 		{
 			path: '/trading',
