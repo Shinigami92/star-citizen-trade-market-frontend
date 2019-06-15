@@ -23,7 +23,7 @@ export const administrationRoutes: RouteConfig[] = [
 		path: '/administration/item-price',
 		name: 'administration-item-price',
 		// @ts-ignore
-		component: (): Promise<any> => import('./item-price/index.vue')
+		component: (): Promise<any> => import('./item-price/index.tsx')
 	},
 	{
 		path: '/administration/location',
