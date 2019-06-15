@@ -44,13 +44,13 @@ export default new Router({
 			path: '/my-ships',
 			name: 'my-ships',
 			// @ts-ignore
-			component: (): Promise<any> => import('./views/my-ships/my-ships.vue')
+			component: (): Promise<any> => import('./views/my-ships/my-ships.tsx')
 		},
 		{
 			path: '/my-transactions',
 			name: 'my-transactions',
 			// @ts-ignore
-			component: (): Promise<any> => import('./views/my-transactions/my-transactions.vue')
+			component: (): Promise<any> => import('./views/my-transactions/my-transactions.tsx')
 		},
 		{
 			path: '/shout-out',
