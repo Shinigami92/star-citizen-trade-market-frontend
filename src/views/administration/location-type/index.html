@@ -1,9 +1,0 @@
-<v-layout align-space-between justify-start column>
-	<h1 class="display-1">Location Types</h1>
-	<v-data-table :headers="headers" :items="elements" :pagination.sync="pagination" class="elevation-1">
-		<template slot="items" slot-scope="props">
-			<td class="mono">{{ props.item.name }}</td>
-			<td class="mono">{{ props.item.id }}</td>
-		</template>
-	</v-data-table>
-</v-layout>
