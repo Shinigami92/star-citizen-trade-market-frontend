@@ -56,7 +56,7 @@ export default new Router({
 			path: '/shout-out',
 			name: 'shout-out',
 			// @ts-ignore
-			component: (): Promise<any> => import('./views/shout-out/shout-out.vue')
+			component: (): Promise<any> => import('./views/shout-out/shout-out.tsx')
 		},
 		...administrationRoutes,
 		{
