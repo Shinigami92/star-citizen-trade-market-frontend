@@ -1,9 +1,10 @@
 import { CreateLocationInput, GameVersion, Location, LocationType } from '@/shared/graphql.schema';
 import { ValidationRule } from '@/shared/validation-rule';
+import { ApolloQueryResult } from 'apollo-client';
 import { GraphQLError } from 'graphql';
 import gql from 'graphql-tag';
-import { QueryResult } from 'vue-apollo/types/vue-apollo';
-import { Component, Model, Vue } from 'vue-property-decorator';
+import Vue from 'vue';
+import { Component, Model } from 'vue-property-decorator';
 
 @Component
 export default class CreateLocation extends Vue {
@@ -79,7 +80,7 @@ export default class CreateLocation extends Vue {
 	}
 
 	protected async beforeMount(): Promise<void> {
-		const gameVersionResult: QueryResult<{
+		const gameVersionResult: ApolloQueryResult<{
 			locations: Location[];
 			locationTypes: LocationType[];
 			gameVersions: GameVersion[];

@@ -1,9 +1,10 @@
 import { CurrentUser, currentUser } from '@/shared/current-user';
 import { GameVersion, Location } from '@/shared/graphql.schema';
 import { VBreadcrumbItem } from '@/shared/vuetify/v-breadcrumb';
+import { ApolloQueryResult } from 'apollo-client';
 import gql from 'graphql-tag';
-import { QueryResult } from 'vue-apollo/types/vue-apollo';
-import { Component, Vue, Watch } from 'vue-property-decorator';
+import Vue from 'vue';
+import { Component, Watch } from 'vue-property-decorator';
 import { Route } from 'vue-router';
 
 @Component
@@ -36,7 +37,7 @@ export default class LocationDashboard extends Vue {
 
 	protected async beforeMount(): Promise<void> {
 		this.locationId = this.$route.params.id;
-		const queryResult: QueryResult<{
+		const queryResult: ApolloQueryResult<{
 			gameVersions: GameVersion[];
 		}> = await this.$apollo.query({
 			query: gql`
@@ -73,7 +74,7 @@ export default class LocationDashboard extends Vue {
 		if (to === from) {
 			return;
 		} else if (to === undefined || to === null) {
-			const result: QueryResult<{ locations: Location[] }> = await this.$apollo.query({
+			const result: ApolloQueryResult<{ locations: Location[] }> = await this.$apollo.query({
 				query: gql`
 					query locations {
 						locations {
@@ -98,7 +99,7 @@ export default class LocationDashboard extends Vue {
 			return;
 		}
 
-		const result: QueryResult<{ location: Location }> = await this.$apollo.query({
+		const result: ApolloQueryResult<{ location: Location }> = await this.$apollo.query({
 			query: gql`
 				query location($id: ID!) {
 					location(id: $id) {

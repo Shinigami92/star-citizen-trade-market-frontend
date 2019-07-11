@@ -1,10 +1,11 @@
 import { CreateAccountInput } from '@/shared/graphql.schema';
 import { ValidationRule } from '@/shared/validation-rule';
+import { FetchResult } from 'apollo-link';
 import { GraphQLError } from 'graphql';
 import gql from 'graphql-tag';
 import { isEmail } from 'validator';
-import { QueryResult } from 'vue-apollo/types/vue-apollo';
-import { Component, Vue } from 'vue-property-decorator';
+import Vue from 'vue';
+import { Component } from 'vue-property-decorator';
 
 @Component
 export default class SignUp extends Vue {
@@ -43,7 +44,7 @@ export default class SignUp extends Vue {
 		try {
 			this.errors = null;
 			this.errorMessage = null;
-			const result: QueryResult<any> = await this.$apollo.mutate({
+			const result: FetchResult<any, Record<string, any>, Record<string, any>> = await this.$apollo.mutate({
 				mutation: gql`
 					mutation SignUp($input: CreateAccountInput!) {
 						signUp(input: $input) {

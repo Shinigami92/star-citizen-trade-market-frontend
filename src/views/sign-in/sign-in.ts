@@ -2,10 +2,11 @@ import { onLogin } from '@/plugins/apollo';
 import { CURRENT_USER_DATA } from '@/shared/current-user';
 import { AuthToken } from '@/shared/graphql.schema';
 import { ValidationRule } from '@/shared/validation-rule';
+import { ApolloQueryResult } from 'apollo-client';
 import { GraphQLError } from 'graphql';
 import gql from 'graphql-tag';
-import { QueryResult } from 'vue-apollo/types/vue-apollo';
-import { Component, Vue } from 'vue-property-decorator';
+import Vue from 'vue';
+import { Component } from 'vue-property-decorator';
 
 @Component
 export default class SignUp extends Vue {
@@ -30,7 +31,7 @@ export default class SignUp extends Vue {
 
 	public async submit(): Promise<void> {
 		try {
-			const result: QueryResult<{ signIn: AuthToken }> = await this.$apollo.query({
+			const result: ApolloQueryResult<{ signIn: AuthToken }> = await this.$apollo.query({
 				query: gql`
 					query SignIn($username: String!, $password: String!) {
 						signIn(username: $username, password: $password) {

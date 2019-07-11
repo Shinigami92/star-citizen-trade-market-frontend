@@ -1,6 +1,7 @@
+import { ApolloQueryResult } from 'apollo-client';
 import gql from 'graphql-tag';
-import { QueryResult } from 'vue-apollo/types/vue-apollo';
-import { Component, Vue } from 'vue-property-decorator';
+import Vue from 'vue';
+import Component from 'vue-class-component';
 import { APOLLO_AUTH_TOKEN, onLogout } from './plugins/apollo';
 import { CURRENT_USER_DATA, CurrentUser, currentUser } from './shared/current-user';
 import { Account } from './shared/graphql.schema';
@@ -26,7 +27,7 @@ export default class App extends Vue {
 		if (cu === null) {
 			return;
 		}
-		const queryResult: QueryResult<{ me: Account | null }> = await this.$apollo.query({
+		const queryResult: ApolloQueryResult<{ me: Account | null }> = await this.$apollo.query({
 			query: gql`
 				query me {
 					me {

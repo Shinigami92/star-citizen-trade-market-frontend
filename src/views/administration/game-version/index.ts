@@ -1,6 +1,7 @@
 import { VDataTableHeader, VDataTablePagination } from '@/shared/vuetify/v-data-table';
 import gql from 'graphql-tag';
-import { Component, Vue } from 'vue-property-decorator';
+import Vue from 'vue';
+import { Component } from 'vue-property-decorator';
 
 @Component({
 	apollo: {

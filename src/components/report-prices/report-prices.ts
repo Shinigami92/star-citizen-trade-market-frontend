@@ -8,9 +8,11 @@ import {
 } from '@/shared/graphql.schema';
 import { VDataTableHeader, VDataTablePagination } from '@/shared/vuetify/v-data-table';
 import { SELECTED_GAME_VERSION } from '@/store/constant';
+import { ApolloQueryResult } from 'apollo-client';
+import { FetchResult } from 'apollo-link';
 import gql from 'graphql-tag';
-import { QueryResult } from 'vue-apollo/types/vue-apollo';
-import { Component, Model, Prop, Vue } from 'vue-property-decorator';
+import Vue from 'vue';
+import { Component, Model, Prop } from 'vue-property-decorator';
 
 @Component
 export default class ReportPrice extends Vue {
@@ -88,7 +90,7 @@ export default class ReportPrice extends Vue {
 
 	public async reportItemPrices(): Promise<void> {
 		console.log({ location: this.location, itemPrices: this.itemPrices });
-		const promises: Array<Promise<QueryResult<any>>> = [];
+		const promises: Array<Promise<FetchResult<any, Record<string, any>, Record<string, any>>>> = [];
 		for (const itemPrice of this.itemPrices) {
 			promises.push(
 				this.$apollo.mutate({
@@ -120,7 +122,7 @@ export default class ReportPrice extends Vue {
 	}
 
 	protected async beforeMount(): Promise<void> {
-		const queryResult: QueryResult<{
+		const queryResult: ApolloQueryResult<{
 			locations: Location[];
 			gameVersions: GameVersion[];
 			commodities: Commodity[];

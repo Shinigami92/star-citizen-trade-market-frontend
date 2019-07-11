@@ -6,10 +6,11 @@ import { CurrentUser, currentUser } from '@/shared/current-user';
 import { Commodity, GameVersion, Location, LocationSearchInput, Trade } from '@/shared/graphql.schema';
 import { VDataTableHeader, VDataTablePagination } from '@/shared/vuetify/v-data-table';
 import { SELECTED_GAME_VERSION } from '@/store/constant';
+import { ApolloQueryResult } from 'apollo-client';
 import { DocumentNode } from 'graphql';
 import gql from 'graphql-tag';
-import { QueryResult } from 'vue-apollo/types/vue-apollo';
-import { Component, Vue, Watch } from 'vue-property-decorator';
+import Vue from 'vue';
+import { Component, Watch } from 'vue-property-decorator';
 
 const TRADE_QUERY: DocumentNode = gql`
 	query tradeData($searchInput: TradeSearchInput) {
@@ -146,7 +147,7 @@ export default class TradingDashboard extends Vue {
 	}: {
 		fetchPolicy?: 'cache-first' | 'cache-and-network' | 'network-only' | 'cache-only' | 'no-cache' | 'standby';
 	} = {}): Promise<void> {
-		const queryResult: QueryResult<{ trades: Trade[] }> = await this.$apollo.query({
+		const queryResult: ApolloQueryResult<{ trades: Trade[] }> = await this.$apollo.query({
 			query: TRADE_QUERY,
 			variables: {
 				searchInput: {
@@ -166,7 +167,7 @@ export default class TradingDashboard extends Vue {
 	}
 
 	protected async beforeMount(): Promise<void> {
-		const queryResult: QueryResult<{
+		const queryResult: ApolloQueryResult<{
 			locations: Location[];
 			gameVersions: GameVersion[];
 			commodities: Commodity[];
