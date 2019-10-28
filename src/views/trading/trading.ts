@@ -1,7 +1,7 @@
-import CreateCommodity from '@/components/create-commodity/create-commodity';
-import CreateGameVersion from '@/components/create-game-version/create-game-version';
-import CreateLocation from '@/components/create-location/create-location';
-import ReportPrice from '@/components/report-prices/report-prices';
+import CreateCommodity from '@/components/create-commodity/create-commodity.vue';
+import CreateGameVersion from '@/components/create-game-version/create-game-version.vue';
+import CreateLocation from '@/components/create-location/create-location.vue';
+import ReportPrice from '@/components/report-prices/report-prices.vue';
 import { CurrentUser, currentUser } from '@/shared/current-user';
 import { Commodity, GameVersion, Location, LocationSearchInput, Trade } from '@/shared/graphql.schema';
 import { VDataTableHeader, VDataTablePagination } from '@/shared/vuetify/v-data-table';
