@@ -6,7 +6,7 @@ import { CurrentUser, currentUser } from '@/shared/current-user';
 import { Commodity, GameVersion, Location, LocationSearchInput, Trade } from '@/shared/graphql.schema';
 import { VDataTableHeader, VDataTablePagination } from '@/shared/vuetify/v-data-table';
 import { SELECTED_GAME_VERSION } from '@/store/constant';
-import { ApolloQueryResult } from 'apollo-client';
+import { ApolloQueryResult, FetchPolicy } from 'apollo-client';
 import { DocumentNode } from 'graphql';
 import gql from 'graphql-tag';
 import Vue from 'vue';
@@ -145,7 +145,7 @@ export default class TradingDashboard extends Vue {
 	public async search({
 		fetchPolicy
 	}: {
-		fetchPolicy?: 'cache-first' | 'cache-and-network' | 'network-only' | 'cache-only' | 'no-cache' | 'standby';
+		fetchPolicy?: FetchPolicy;
 	} = {}): Promise<void> {
 		const queryResult: ApolloQueryResult<{ trades: Trade[] }> = await this.$apollo.query({
 			query: TRADE_QUERY,
