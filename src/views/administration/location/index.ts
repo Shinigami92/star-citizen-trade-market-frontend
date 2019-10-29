@@ -1,4 +1,4 @@
-import { VDataTableHeader, VDataTablePagination } from '@/shared/vuetify/v-data-table';
+import { VuetifyTableHeader } from '@/shared/vuetify/v-data-table';
 import gql from 'graphql-tag';
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
@@ -30,19 +30,14 @@ import { Component } from 'vue-property-decorator';
 	}
 })
 export default class Index extends Vue {
-	public pagination: VDataTablePagination = {
-		rowsPerPage: 10,
-		sortBy: 'name'
-	};
-
-	public headers: VDataTableHeader[] = [
-		{ text: 'Name ', value: 'name' },
-		{ text: 'Type ', value: 'type.name' },
-		{ text: 'Parent Location ', value: 'parentLocation.name' },
-		{ text: 'First Time Seen ', value: 'inGameSince' },
-		{ text: 'Since Version ', value: 'inGameSinceVersion.identifier' },
-		{ text: 'Can Trade ', value: 'canTrade' },
-		{ text: 'ID ', value: 'id', width: '306' }
+	public readonly headers: VuetifyTableHeader[] = [
+		{ text: 'Name', width: 240, value: 'name' },
+		{ text: 'Type', width: 150, value: 'type.name' },
+		{ text: 'Parent Location', width: 130, value: 'parentLocation.name' },
+		{ text: 'First Time Seen', width: 240, value: 'inGameSince' },
+		{ text: 'Since Version', width: 190, value: 'inGameSinceVersion.identifier' },
+		{ text: 'Can Trade', width: 100, value: 'canTrade' },
+		{ text: 'ID', width: 340, value: 'id' }
 	];
 	constructor() {
 		super();

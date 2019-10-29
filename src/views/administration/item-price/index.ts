@@ -1,4 +1,4 @@
-import { VDataTableHeader, VDataTablePagination } from '@/shared/vuetify/v-data-table';
+import { VuetifyTableHeader } from '@/shared/vuetify/v-data-table';
 import gql from 'graphql-tag';
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
@@ -46,25 +46,20 @@ import { Component } from 'vue-property-decorator';
 	}
 })
 export default class Index extends Vue {
-	public pagination: VDataTablePagination = {
-		rowsPerPage: 25,
-		sortBy: 'scanTime',
-		descending: true
-	};
-
-	public headers: VDataTableHeader[] = [
-		{ text: 'Item ', value: 'item.name' },
-		{ text: 'Location ', value: 'location.name' },
-		{ text: 'Price ', value: 'price' },
-		{ text: 'Quantity ', value: 'quantity' },
-		{ text: 'Unit Price ', value: 'unitPrice' },
-		{ text: 'Visibility ', value: 'visibility' },
-		{ text: 'Scan Time ', value: 'scanTime', width: '230' },
-		{ text: 'Type ', value: 'type' },
-		{ text: 'Scanned By ', value: 'scannedBy.username' },
-		{ text: 'Scanned In Version ', value: 'scannedInGameVersion.identifier', width: '170' },
-		{ text: 'ID ', value: 'id', width: '306' }
+	public readonly headers: VuetifyTableHeader[] = [
+		{ text: 'Item', width: 250, value: 'item.name' },
+		{ text: 'Location', width: 370, value: 'location.name' },
+		{ text: 'Price', value: 'price' },
+		{ text: 'Quantity', value: 'quantity' },
+		{ text: 'Unit Price', value: 'unitPrice' },
+		{ text: 'Visibility', value: 'visibility' },
+		{ text: 'Scan Time', width: 240, value: 'scanTime' },
+		{ text: 'Type', value: 'type' },
+		{ text: 'Scanned By', value: 'scannedBy.username' },
+		{ text: 'Scanned In Version', width: 190, value: 'scannedInGameVersion.identifier' },
+		{ text: 'ID', width: 340, value: 'id' }
 	];
+
 	constructor() {
 		super();
 	}

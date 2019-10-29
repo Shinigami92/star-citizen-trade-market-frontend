@@ -6,7 +6,7 @@ import {
 	Location,
 	LocationSearchInput
 } from '@/shared/graphql.schema';
-import { VDataTableHeader, VDataTablePagination } from '@/shared/vuetify/v-data-table';
+import { VuetifyTableHeader } from '@/shared/vuetify/v-data-table';
 import { SELECTED_GAME_VERSION } from '@/store/constant';
 import { ApolloQueryResult } from 'apollo-client';
 import { FetchResult } from 'apollo-link';
@@ -20,10 +20,10 @@ export default class ReportPrice extends Vue {
 	public open!: boolean;
 
 	@Prop({ default: null })
-	public location: Location | null = null;
+	public readonly location!: Location | null;
 
 	@Prop({ default: 1 })
-	public quantity: number = 1;
+	public readonly quantity!: number;
 	public price: number = 1;
 	public type: ItemPriceType = ItemPriceType.BUY;
 
@@ -36,13 +36,8 @@ export default class ReportPrice extends Vue {
 	public readonly gameVersions: GameVersion[] = [];
 	public readonly commodities: Commodity[] = [];
 
-	public pagination: VDataTablePagination = {
-		sortBy: 'type',
-		rowsPerPage: -1
-	};
-
-	public headers: VDataTableHeader[] = [
-		{ text: 'Commodity ', value: 'commodity.name' },
+	public readonly headers: VuetifyTableHeader[] = [
+		{ text: 'Commodity ', width: 160, value: 'commodity.name' },
 		{ text: 'Quantity ', value: 'quantity' },
 		{ text: 'Price ', value: 'price' },
 		{ text: 'Price per Unit ', value: 'unitPrice' },

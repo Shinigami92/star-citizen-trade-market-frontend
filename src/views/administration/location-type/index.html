@@ -1,9 +1,22 @@
-<v-layout align-space-between justify-start column>
-	<h1 class="display-1">Location Types</h1>
-	<v-data-table :headers="headers" :items="elements" :pagination.sync="pagination" class="elevation-1">
-		<template slot="items" slot-scope="props">
-			<td class="mono">{{ props.item.name }}</td>
-			<td class="mono">{{ props.item.id }}</td>
-		</template>
-	</v-data-table>
-</v-layout>
+<v-row>
+	<v-col>
+		<h1 class="display-1 mb-2">Location Types</h1>
+		<v-data-table
+			:headers="headers"
+			:items="elements"
+			sort-by="name"
+			:items-per-page="10"
+			class="elevation-1"
+			dense
+		>
+			<template v-slot:body="{ items }">
+				<tbody>
+					<tr v-for="item in items" :key="item.id">
+						<td class="mono">{{ item.name }}</td>
+						<td class="mono">{{ item.id }}</td>
+					</tr>
+				</tbody>
+			</template>
+		</v-data-table>
+	</v-col>
+</v-row>

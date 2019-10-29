@@ -2,111 +2,31 @@ import Vue from 'vue';
 // @ts-ignore
 import DatetimePicker from 'vuetify-datetime-picker';
 import 'vuetify-datetime-picker/src/stylus/main.styl';
-import Vuetify, {
-	VApp,
-	VAutocomplete,
-	VBreadcrumbs,
-	VBtn,
-	VBtnToggle,
-	VCard,
-	VCardActions,
-	VCardText,
-	VCardTitle,
-	VCheckbox,
-	VContainer,
-	VContent,
-	VDataTable,
-	VDatePicker,
-	VDialog,
-	VDivider,
-	VEditDialog,
-	VFlex,
-	VFooter,
-	VForm,
-	VIcon,
-	VImg,
-	VLayout,
-	VList,
-	VListGroup,
-	VListTile,
-	VListTileAction,
-	VListTileContent,
-	VListTileTitle,
-	VMenu,
-	VNavigationDrawer,
-	VResponsive,
-	VSelect,
-	VSpacer,
-	VTab,
-	VTabItem,
-	VTabs,
-	VTextField,
-	VTimePicker,
-	VToolbar,
-	VToolbarSideIcon,
-	VToolbarTitle,
-	VTooltip
-	// @ts-ignore
-} from 'vuetify/lib';
-import 'vuetify/src/stylus/app.styl';
+import 'vuetify/dist/vuetify.min.css';
+import Vuetify from 'vuetify/lib';
 
-Vue.use(Vuetify, {
-	components: {
-		VApp,
-		VAutocomplete,
-		VBreadcrumbs,
-		VBtn,
-		VBtnToggle,
-		VCard,
-		VCardActions,
-		VCardText,
-		VCardTitle,
-		VCheckbox,
-		VContainer,
-		VContent,
-		VDataTable,
-		VDatePicker,
-		VDialog,
-		VDivider,
-		VEditDialog,
-		VFlex,
-		VFooter,
-		VForm,
-		VIcon,
-		VImg,
-		VLayout,
-		VList,
-		VListGroup,
-		VListTile,
-		VListTileAction,
-		VListTileContent,
-		VListTileTitle,
-		VMenu,
-		VNavigationDrawer,
-		VResponsive,
-		VSelect,
-		VSpacer,
-		VTab,
-		VTabItem,
-		VTabs,
-		VTextField,
-		VTimePicker,
-		VToolbar,
-		VToolbarSideIcon,
-		VToolbarTitle,
-		VTooltip
-	},
-	theme: {
-		primary: '#096689',
-		secondary: '#0E1F79',
-		accent: '#DA7406',
-		error: '#DA2B06',
-		info: '#44BF72',
-		success: '#008030',
-		warning: '#DA9D06'
-	},
-	customProperties: true,
-	iconfont: 'fa'
-});
-
+Vue.use(Vuetify);
 Vue.use(DatetimePicker);
+
+export default new Vuetify({
+	theme: {
+		dark: true,
+		themes: {
+			dark: {
+				primary: '#096689',
+				secondary: '#0E1F79',
+				accent: '#DA7406',
+				error: '#DA2B06',
+				info: '#44BF72',
+				success: '#008030',
+				warning: '#DA9D06'
+			}
+		},
+		options: {
+			customProperties: true
+		}
+	},
+	icons: {
+		iconfont: 'fa'
+	}
+});

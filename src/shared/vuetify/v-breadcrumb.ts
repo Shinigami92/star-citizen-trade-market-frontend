@@ -1,6 +1,8 @@
-export interface VBreadcrumbItem {
-	text: string;
+export interface VuetifyBreadcrumbItem {
 	disabled?: boolean;
+	exact?: boolean;
 	href?: string;
-	to?: string;
+	link?: boolean;
+	text: string | number;
+	to?: string | object;
 }

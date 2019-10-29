@@ -1,16 +1,12 @@
-export interface VDataTablePagination {
-	descending?: boolean;
-	page?: number;
-	rowsPerPage?: number;
-	sortBy?: string;
-	totalItems?: number;
-}
-
-export interface VDataTableHeader {
+export interface VuetifyTableHeader {
 	text: string;
 	value: string;
-	align?: 'left' | 'center' | 'right';
+	align?: 'start' | 'center' | 'end';
 	sortable?: boolean;
-	class?: string[] | string;
-	width?: string;
+	filterable?: boolean;
+	divider?: boolean;
+	class?: string | string[];
+	width?: string | number;
+	filter?: (value: any, search: string, item: any) => boolean;
+	sort?: (a: any, b: any) => number;
 }

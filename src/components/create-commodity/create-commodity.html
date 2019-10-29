@@ -1,13 +1,13 @@
-<v-dialog v-model="open" persistent max-width="540px">
+<v-dialog v-model="open" persistent max-width="540">
 	<v-card>
-		<v-card-title> <span class="headline">Register new Commodity</span> </v-card-title>
+		<v-card-title class="headline">Register new Commodity</v-card-title>
 		<v-card-text>
-			<v-container grid-list-md>
-				<v-layout row wrap>
-					<v-flex md12>
+			<v-container>
+				<v-row dense>
+					<v-col cols="12">
 						<v-text-field v-model="name" :rules="nameRules" label="Name" required></v-text-field>
-					</v-flex>
-					<v-flex md8>
+					</v-col>
+					<v-col cols="8">
 						<v-autocomplete
 							v-model="selectedCommodityCategory"
 							:items="commodityCategories"
@@ -17,8 +17,8 @@
 							required
 						>
 						</v-autocomplete>
-					</v-flex>
-					<v-flex md4>
+					</v-col>
+					<v-col cols="4">
 						<v-autocomplete
 							v-model="selectedGameVersion"
 							:items="gameVersions"
@@ -28,11 +28,11 @@
 							required
 						>
 						</v-autocomplete>
-					</v-flex>
-					<v-flex md12 v-if="errorMessage">
+					</v-col>
+					<v-col cols="12" v-if="errorMessage">
 						<p class="red--text">{{ errorMessage.message }}</p>
-					</v-flex>
-				</v-layout>
+					</v-col>
+				</v-row>
 			</v-container>
 		</v-card-text>
 		<v-card-actions>

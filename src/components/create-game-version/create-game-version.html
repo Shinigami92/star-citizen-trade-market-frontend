@@ -1,10 +1,10 @@
-<v-dialog v-model="open" persistent max-width="360px">
+<v-dialog v-model="open" persistent max-width="360">
 	<v-card>
-		<v-card-title> <span class="headline">Register new Game Version</span> </v-card-title>
+		<v-card-title class="headline">Register new Game Version</v-card-title>
 		<v-card-text>
-			<v-container grid-list-md>
-				<v-layout row wrap>
-					<v-flex md12>
+			<v-container>
+				<v-row dense>
+					<v-col cols="12">
 						<v-text-field
 							v-model="identifier"
 							:rules="identifierRules"
@@ -12,22 +12,22 @@
 							counter="18"
 							required
 						></v-text-field>
-					</v-flex>
-					<v-flex md12> <p>e.g. 3.0.0-live.695052</p> </v-flex>
-					<v-flex md12>
+					</v-col>
+					<v-col cols="12"> <p>e.g. 3.0.0-live.695052</p> </v-col>
+					<v-col cols="12">
 						<v-datetime-picker v-model="release" label="Release" format="YYYY-MM-DD HH:mm">
-							<template slot="dateIcon">
+							<template v-slot:dateIcon>
 								<v-icon>fas fa-calendar</v-icon>
 							</template>
-							<template slot="timeIcon">
+							<template v-slot:timeIcon>
 								<v-icon>fas fa-clock</v-icon>
 							</template>
 						</v-datetime-picker>
-					</v-flex>
-					<v-flex md12 v-if="errorMessage">
+					</v-col>
+					<v-col cols="12" v-if="errorMessage">
 						<p class="red--text">{{ errorMessage.message }}</p>
-					</v-flex>
-				</v-layout>
+					</v-col>
+				</v-row>
 			</v-container>
 		</v-card-text>
 		<v-card-actions>

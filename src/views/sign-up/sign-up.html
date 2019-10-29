@@ -1,52 +1,54 @@
-<v-layout align-start justify-start column>
-	<h1 class="display-1">Sign Up</h1>
-	<v-layout row wrap>
-		<v-flex md5>
-			<v-form ref="form" v-model="valid" lazy-validation>
-				<v-layout column>
-					<v-text-field
-						v-model="username"
-						:rules="usernameRules"
-						label="Username"
-						autocomplete="off"
-						hint="The username you use to log into the app later"
-						required
-					></v-text-field>
-					<v-text-field
-						v-model="handle"
-						:rules="handleRules"
-						:counter="50"
-						label="Star Citizen Handle"
-						autocomplete="off"
-						required
-					></v-text-field>
-					<v-text-field
-						v-model="email"
-						:rules="emailRules"
-						label="E-Mail"
-						autocomplete="off"
-						required
-						ref="emailInput"
-					></v-text-field>
-					<v-text-field
-						v-model="confirmEmail"
-						:rules="confirmEmailRules"
-						label="Confirm E-Mail"
-						autocomplete="off"
-						required
-					></v-text-field>
-					<v-btn :disabled="!valid" @click="submit">Sign Up</v-btn>
-				</v-layout>
-			</v-form>
-		</v-flex>
-		<v-flex offset-md1 md6>
-			<v-layout column>
+<v-row>
+	<v-col>
+		<h1 class="display-1">Sign Up</h1>
+		<v-row>
+			<v-col md="5" sm="12">
+				<v-form ref="form" v-model="valid" lazy-validation>
+					<v-row>
+						<v-col>
+							<v-text-field
+								v-model="username"
+								:rules="usernameRules"
+								label="Username"
+								autocomplete="off"
+								hint="The username you use to log into the app later"
+								required
+							></v-text-field>
+							<v-text-field
+								v-model="handle"
+								:rules="handleRules"
+								:counter="50"
+								label="Star Citizen Handle"
+								autocomplete="off"
+								required
+							></v-text-field>
+							<v-text-field
+								v-model="email"
+								:rules="emailRules"
+								label="E-Mail"
+								autocomplete="off"
+								required
+								ref="emailInput"
+							></v-text-field>
+							<v-text-field
+								v-model="confirmEmail"
+								:rules="confirmEmailRules"
+								label="Confirm E-Mail"
+								autocomplete="off"
+								required
+							></v-text-field>
+							<v-btn block :disabled="!valid" @click="submit">Sign Up</v-btn>
+						</v-col>
+					</v-row>
+				</v-form>
+			</v-col>
+			<v-col offset-md="1" md="6" sm="12">
 				<p>
 					You will receive the access data with password to your specified E-Mail address. The mail will be
 					sent from <em class="mono">sctrademarket@gmail.com</em>
 				</p>
 				<p v-if="errorMessage && errorMessage.message" class="red--text">{{ errorMessage.message }}</p>
-			</v-layout>
-		</v-flex>
-	</v-layout>
-</v-layout>
+			</v-col>
+		</v-row>
+	</v-col>
+</v-row>

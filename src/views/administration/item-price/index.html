@@ -1,22 +1,36 @@
-<v-layout align-space-between justify-start column>
-	<h1 class="display-1">Item Prices</h1>
-	<v-data-table :headers="headers" :items="elements" :pagination.sync="pagination" class="elevation-1">
-		<template slot="items" slot-scope="props">
-			<td>{{ props.item.item.name }} ({{ props.item.item.type }})</td>
-			<td>
-				{{ props.item.location.name }} ({{ props.item.location.type.name }}) - ({{
-					props.item.location.parentLocation.name
-				}})
-			</td>
-			<td class="text-md-right">{{ props.item.price.toFixed(2) }}</td>
-			<td class="text-md-right">{{ props.item.quantity }}</td>
-			<td class="text-md-right">{{ props.item.unitPrice.toFixed(2) }}</td>
-			<td>{{ props.item.visibility }}</td>
-			<td>{{ props.item.scanTime | moment('LLL') }}</td>
-			<td>{{ props.item.type }}</td>
-			<td>{{ props.item.scannedBy.username }}</td>
-			<td class="mono">{{ props.item.scannedInGameVersion.identifier }}</td>
-			<td class="mono">{{ props.item.id }}</td>
-		</template>
-	</v-data-table>
-</v-layout>
+<v-row>
+	<v-col>
+		<h1 class="display-1 mb-2">Item Prices</h1>
+		<v-data-table
+			:headers="headers"
+			:items="elements"
+			sort-by="scanTime"
+			:sort-desc="true"
+			:items-per-page="25"
+			class="elevation-1"
+			dense
+		>
+			<template v-slot:body="{ items }">
+				<tbody>
+					<tr v-for="item in items" :key="item.id">
+						<td>{{ item.item.name }} ({{ item.item.type }})</td>
+						<td>
+							{{ item.location.name }} ({{ item.location.type.name }}) - ({{
+								item.location.parentLocation.name
+							}})
+						</td>
+						<td class="text-right">{{ item.price.toFixed(2) }}</td>
+						<td class="text-right">{{ item.quantity }}</td>
+						<td class="text-right">{{ item.unitPrice.toFixed(2) }}</td>
+						<td>{{ item.visibility }}</td>
+						<td>{{ item.scanTime | moment('LLL') }}</td>
+						<td>{{ item.type }}</td>
+						<td>{{ item.scannedBy.username }}</td>
+						<td class="mono">{{ item.scannedInGameVersion.identifier }}</td>
+						<td class="mono">{{ item.id }}</td>
+					</tr>
+				</tbody>
+			</template>
+		</v-data-table>
+	</v-col>
+</v-row>

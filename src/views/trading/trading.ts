@@ -4,7 +4,7 @@ import CreateLocation from '@/components/create-location/create-location.vue';
 import ReportPrice from '@/components/report-prices/report-prices.vue';
 import { CurrentUser, currentUser } from '@/shared/current-user';
 import { Commodity, GameVersion, Location, LocationSearchInput, Trade } from '@/shared/graphql.schema';
-import { VDataTableHeader, VDataTablePagination } from '@/shared/vuetify/v-data-table';
+import { VuetifyTableHeader } from '@/shared/vuetify/v-data-table';
 import { SELECTED_GAME_VERSION } from '@/store/constant';
 import { ApolloQueryResult, FetchPolicy } from 'apollo-client';
 import { DocumentNode } from 'graphql';
@@ -88,22 +88,17 @@ export default class TradingDashboard extends Vue {
 	public createGameVersionModal: boolean = false;
 	public createLocationModal: boolean = false;
 
-	public pagination: VDataTablePagination = {
-		rowsPerPage: 25,
-		sortBy: 'profit',
-		descending: true
-	};
-
-	public headers: VDataTableHeader[] = [
-		{ text: 'Commodity ', value: 'item.name' },
-		{ text: 'Start ', value: 'startLocation.name' },
-		{ text: 'End ', value: 'endLocation.name' },
-		{ text: 'Buy Price ', value: 'buyItemPrice.unitPrice' },
-		{ text: 'Sell Price ', value: 'sellItemPrice.unitPrice' },
-		{ text: 'Profit ', value: 'profit' },
-		{ text: 'Margin ', value: 'margin' },
-		{ text: 'Scanned ', value: 'scanTime' }
+	public readonly headers: VuetifyTableHeader[] = [
+		{ text: 'Commodity', width: 300, value: 'item.name' },
+		{ text: 'Start', width: 350, value: 'startLocation.name' },
+		{ text: 'End', width: 350, value: 'endLocation.name' },
+		{ text: 'Buy Price', width: 100, value: 'buyItemPrice.unitPrice' },
+		{ text: 'Sell Price', width: 100, value: 'sellItemPrice.unitPrice' },
+		{ text: 'Profit', width: 80, value: 'profit' },
+		{ text: 'Margin', width: 100, value: 'margin' },
+		{ text: 'Scanned', width: 240, value: 'scanTime' }
 	];
+
 	constructor() {
 		super();
 	}

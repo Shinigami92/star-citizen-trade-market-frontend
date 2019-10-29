@@ -18,7 +18,7 @@
 			}
 		}
 
-		&.v-table {
+		&.v-data-table {
 			background-color: #0a2332;
 			background-color: rgba(13, 46, 66, 0.5);
 			color: #0a89bb;
@@ -34,7 +34,7 @@
 			color: #0a89bb;
 		}
 
-		&.v-tabs__bar {
+		&.v-tabs-bar {
 			background-color: #096689;
 		}
 
@@ -56,9 +56,15 @@
 
 	.mono {
 		font-family: Consolas, 'Courier New', Courier, monospace;
+		font-weight: bold;
 	}
 }
 
 .cursor-pointer {
 	cursor: pointer;
+}
+
+input:-webkit-autofill {
+	-webkit-text-fill-color: #fff;
+	transition: background-color 5000s ease-in-out 0s;
 }

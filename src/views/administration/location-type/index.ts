@@ -1,4 +1,4 @@
-import { VDataTableHeader, VDataTablePagination } from '@/shared/vuetify/v-data-table';
+import { VuetifyTableHeader } from '@/shared/vuetify/v-data-table';
 import gql from 'graphql-tag';
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
@@ -16,12 +16,11 @@ import { Component } from 'vue-property-decorator';
 	}
 })
 export default class Index extends Vue {
-	public pagination: VDataTablePagination = {
-		rowsPerPage: 10,
-		sortBy: 'name'
-	};
+	public readonly headers: VuetifyTableHeader[] = [
+		{ text: 'Name', value: 'name' },
+		{ text: 'ID', width: 340, value: 'id' }
+	];
 
-	public headers: VDataTableHeader[] = [{ text: 'Name ', value: 'name' }, { text: 'ID ', value: 'id', width: '306' }];
 	constructor() {
 		super();
 	}
