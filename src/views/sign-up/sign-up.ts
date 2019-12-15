@@ -3,7 +3,7 @@ import { ValidationRule } from '@/shared/validation-rule';
 import { FetchResult } from 'apollo-link';
 import { GraphQLError } from 'graphql';
 import gql from 'graphql-tag';
-import { isEmail } from 'validator';
+import isEmail from 'validator/lib/isEmail';
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 
