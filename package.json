@@ -10,7 +10,12 @@
 	"scripts": {
 		"serve": "vue-cli-service serve",
 		"build": "vue-cli-service build",
-		"lint": "vue-cli-service lint"
+		"lint": "vue-cli-service lint",
+		"format": "yarn format:ts && yarn format:html && yarn format:scss && yarn format:vue",
+		"format:ts": "prettier --write **/*.ts",
+		"format:html": "prettier --write **/*.html",
+		"format:scss": "prettier --write **/*.scss",
+		"format:vue": "prettier --write **/*.vue"
 	},
 	"dependencies": {
 		"@fortawesome/fontawesome-free": "~5.12.0",
