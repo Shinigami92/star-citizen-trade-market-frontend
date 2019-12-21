@@ -1,40 +1,36 @@
 <v-row>
-	<v-col>
-		<h1 class="display-1 mb-2">Locations</h1>
-		<v-data-table
-			:headers="headers"
-			:items="elements"
-			sort-by="name"
-			:items-per-page="25"
-			class="elevation-1"
-			:height="tableHeight"
-			dense
-		>
-			<template v-slot:body="{ items }">
-				<tbody>
-					<tr v-for="item in items" :key="item.id">
-						<router-link tag="td" :to="'/location/' + item.id">
-							<span class="cursor-pointer">{{ item.name }}</span>
-						</router-link>
-						<td>{{ item.type.name }}</td>
-						<td>
-							<router-link
-								v-if="item.parentLocation"
-								tag="div"
-								:to="'/location/' + item.parentLocation.id"
-							>
-								<span class="cursor-pointer">{{ item.parentLocation.name }}</span>
-							</router-link>
-						</td>
-						<td>
-							<span v-if="item.inGameSince">{{ item.inGameSince | moment('LLL') }}</span>
-						</td>
-						<td class="mono">{{ item.inGameSinceVersion.identifier }}</td>
-						<td>{{ item.canTrade }}</td>
-						<td class="mono">{{ item.id }}</td>
-					</tr>
-				</tbody>
-			</template>
-		</v-data-table>
-	</v-col>
+  <v-col>
+    <h1 class="display-1 mb-2">Locations</h1>
+    <v-data-table
+      :headers="headers"
+      :items="elements"
+      sort-by="name"
+      :items-per-page="25"
+      class="elevation-1"
+      :height="tableHeight"
+      dense
+    >
+      <template v-slot:body="{ items }">
+        <tbody>
+          <tr v-for="item in items" :key="item.id">
+            <router-link tag="td" :to="'/location/' + item.id">
+              <span class="cursor-pointer">{{ item.name }}</span>
+            </router-link>
+            <td>{{ item.type.name }}</td>
+            <td>
+              <router-link v-if="item.parentLocation" tag="div" :to="'/location/' + item.parentLocation.id">
+                <span class="cursor-pointer">{{ item.parentLocation.name }}</span>
+              </router-link>
+            </td>
+            <td>
+              <span v-if="item.inGameSince">{{ item.inGameSince | moment('LLL') }}</span>
+            </td>
+            <td class="mono">{{ item.inGameSinceVersion.identifier }}</td>
+            <td>{{ item.canTrade }}</td>
+            <td class="mono">{{ item.id }}</td>
+          </tr>
+        </tbody>
+      </template>
+    </v-data-table>
+  </v-col>
 </v-row>

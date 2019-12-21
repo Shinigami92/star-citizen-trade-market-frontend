@@ -9,8 +9,8 @@ import router from './router';
 Vue.config.productionTip = false;
 
 new Vue({
-	vuetify,
-	apolloProvider,
-	render: (h: CreateElement): VNode => h(App),
-	router
+  vuetify,
+  apolloProvider,
+  render: (h: CreateElement): VNode => h(App),
+  router
 }).$mount('#app');

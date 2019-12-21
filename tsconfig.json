@@ -1,26 +1,26 @@
 {
-	"compilerOptions": {
-		"baseUrl": ".",
-		"target": "esnext",
-		"module": "esnext",
-		"plugins": [{ "name": "typescript-tslint-plugin" }],
-		"strict": true,
-		"noUnusedLocals": true,
-		"sourceMap": true,
-		"allowSyntheticDefaultImports": true,
-		"emitDecoratorMetadata": false,
-		"experimentalDecorators": true,
-		"removeComments": true,
-		"jsx": "preserve",
-		"importHelpers": true,
-		"moduleResolution": "node",
-		"esModuleInterop": true,
-		"paths": {
-			"@/*": ["src/*"]
-		},
-		"types": ["vuetify", "webpack-env"],
-		"lib": ["esnext", "dom", "dom.iterable", "scripthost"]
-	},
-	"include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "tests/**/*.ts", "tests/**/*.tsx"],
-	"exclude": ["node_modules"]
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "esnext",
+    "module": "esnext",
+    "plugins": [{ "name": "typescript-tslint-plugin" }],
+    "strict": true,
+    "noUnusedLocals": true,
+    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
+    "emitDecoratorMetadata": false,
+    "experimentalDecorators": true,
+    "removeComments": true,
+    "jsx": "preserve",
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "types": ["vuetify", "webpack-env"],
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "tests/**/*.ts", "tests/**/*.tsx"],
+  "exclude": ["node_modules"]
 }

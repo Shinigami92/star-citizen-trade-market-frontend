@@ -1,3 +1,2 @@
 <template src="./sign-in.html"></template>
-<script lang="ts" src="./sign-in.ts">
-</script>
+<script lang="ts" src="./sign-in.ts"></script>

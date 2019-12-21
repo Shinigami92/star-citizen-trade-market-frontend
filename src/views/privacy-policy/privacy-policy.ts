@@ -3,7 +3,7 @@ import { Component } from 'vue-property-decorator';
 
 @Component
 export default class PrivacyPolicy extends Vue {
-	constructor() {
-		super();
-	}
+  constructor() {
+    super();
+  }
 }

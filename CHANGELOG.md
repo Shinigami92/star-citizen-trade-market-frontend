@@ -2,4 +2,4 @@
 
 # [0.1.0](https://github.com/Shinigami92/star-citizen-trade-market-frontend/compare/v0.1.0...v0.1.0) (2018-12-06)
 
--   Initial Version
+- Initial Version

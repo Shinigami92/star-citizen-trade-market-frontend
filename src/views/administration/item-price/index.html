@@ -1,36 +1,35 @@
 <v-row>
-	<v-col>
-		<h1 class="display-1 mb-2">Item Prices</h1>
-		<v-data-table
-			:headers="headers"
-			:items="elements"
-			sort-by="scanTime"
-			:sort-desc="true"
-			:items-per-page="30"
-			class="elevation-1"
-			:height="tableHeight"
-			dense
-		>
-			<template v-slot:body="{ items }">
-				<tbody>
-					<tr v-for="item in items" :key="item.id">
-						<td>{{ item.item.name }} ({{ item.item.type }})</td>
-						<td>
-							{{ item.location.name }} ({{ item.location.type.name }}) - ({{
-							item.location.parentLocation.name }})
-						</td>
-						<td class="text-right">{{ item.price.toFixed(2) }}</td>
-						<td class="text-right">{{ item.quantity }}</td>
-						<td class="text-right">{{ item.unitPrice.toFixed(2) }}</td>
-						<td>{{ item.visibility }}</td>
-						<td>{{ item.scanTime | moment('LLL') }}</td>
-						<td>{{ item.type }}</td>
-						<td>{{ item.scannedBy.username }}</td>
-						<td class="mono">{{ item.scannedInGameVersion.identifier }}</td>
-						<td class="mono">{{ item.id }}</td>
-					</tr>
-				</tbody>
-			</template>
-		</v-data-table>
-	</v-col>
+  <v-col>
+    <h1 class="display-1 mb-2">Item Prices</h1>
+    <v-data-table
+      :headers="headers"
+      :items="elements"
+      sort-by="scanTime"
+      :sort-desc="true"
+      :items-per-page="30"
+      class="elevation-1"
+      :height="tableHeight"
+      dense
+    >
+      <template v-slot:body="{ items }">
+        <tbody>
+          <tr v-for="item in items" :key="item.id">
+            <td>{{ item.item.name }} ({{ item.item.type }})</td>
+            <td>
+              {{ item.location.name }} ({{ item.location.type.name }}) - ({{ item.location.parentLocation.name }})
+            </td>
+            <td class="text-right">{{ item.price.toFixed(2) }}</td>
+            <td class="text-right">{{ item.quantity }}</td>
+            <td class="text-right">{{ item.unitPrice.toFixed(2) }}</td>
+            <td>{{ item.visibility }}</td>
+            <td>{{ item.scanTime | moment('LLL') }}</td>
+            <td>{{ item.type }}</td>
+            <td>{{ item.scannedBy.username }}</td>
+            <td class="mono">{{ item.scannedInGameVersion.identifier }}</td>
+            <td class="mono">{{ item.id }}</td>
+          </tr>
+        </tbody>
+      </template>
+    </v-data-table>
+  </v-col>
 </v-row>

@@ -1,3 +1,2 @@
 <template src="./index.html"></template>
-<script lang="ts" src="./index.ts">
-</script>
+<script lang="ts" src="./index.ts"></script>

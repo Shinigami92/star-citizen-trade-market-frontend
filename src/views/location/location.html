@@ -1,48 +1,48 @@
 <v-row>
-	<v-col>
-		<template v-if="location">
-			<v-breadcrumbs :items="breadcrumbItems" large>
-				<template v-slot:divider>
-					<v-icon>fas fa-chevron-right</v-icon>
-				</template>
-			</v-breadcrumbs>
-			<v-container fluid>
-				<v-row>
-					<v-col cols="12">
-						<v-card>
-							<v-card-title class="headline">{{ location.name }}</v-card-title>
-							<v-card-text>
-								<div>Type: {{ location.type.name }}</div>
-								<div>Can Trade: {{ location.canTrade }}</div>
-								<!-- <div>{{ location.description }}</div> -->
-							</v-card-text>
-						</v-card>
-					</v-col>
-					<v-col cols="4" v-for="child in location.children" :key="child.id">
-						<v-card>
-							<v-card-title class="headline">{{ child.name }}</v-card-title>
-							<v-card-text>
-								<div>Type: {{ child.type.name }}</div>
-								<div>Can Trade: {{ child.canTrade }}</div>
-								<!-- <div>{{ child.description }}</div> -->
-							</v-card-text>
-							<v-card-actions>
-								<v-btn :to="'/location/' + child.id" text color="orange">Details</v-btn>
-							</v-card-actions>
-						</v-card>
-					</v-col>
-				</v-row>
-			</v-container>
-		</template>
-		<template v-else>
-			<v-autocomplete
-				v-model="selectedLocation"
-				:items="locations"
-				return-object
-				:item-text="displayWithLocation"
-				label="Select Location"
-			>
-			</v-autocomplete>
-		</template>
-	</v-col>
+  <v-col>
+    <template v-if="location">
+      <v-breadcrumbs :items="breadcrumbItems" large>
+        <template v-slot:divider>
+          <v-icon>fas fa-chevron-right</v-icon>
+        </template>
+      </v-breadcrumbs>
+      <v-container fluid>
+        <v-row>
+          <v-col cols="12">
+            <v-card>
+              <v-card-title class="headline">{{ location.name }}</v-card-title>
+              <v-card-text>
+                <div>Type: {{ location.type.name }}</div>
+                <div>Can Trade: {{ location.canTrade }}</div>
+                <!-- <div>{{ location.description }}</div> -->
+              </v-card-text>
+            </v-card>
+          </v-col>
+          <v-col cols="4" v-for="child in location.children" :key="child.id">
+            <v-card>
+              <v-card-title class="headline">{{ child.name }}</v-card-title>
+              <v-card-text>
+                <div>Type: {{ child.type.name }}</div>
+                <div>Can Trade: {{ child.canTrade }}</div>
+                <!-- <div>{{ child.description }}</div> -->
+              </v-card-text>
+              <v-card-actions>
+                <v-btn :to="'/location/' + child.id" text color="orange">Details</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
+    </template>
+    <template v-else>
+      <v-autocomplete
+        v-model="selectedLocation"
+        :items="locations"
+        return-object
+        :item-text="displayWithLocation"
+        label="Select Location"
+      >
+      </v-autocomplete>
+    </template>
+  </v-col>
 </v-row>

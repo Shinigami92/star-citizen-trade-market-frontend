@@ -1,128 +1,122 @@
 <v-dialog v-model="open" persistent max-width="800">
-	<v-card>
-		<v-card-title class="headline">Report Prices</v-card-title>
-		<v-card-text>
-			<v-container>
-				<v-row dense>
-					<v-col cols="8">
-						<v-autocomplete
-							v-model="location"
-							:items="locations"
-							return-object
-							:item-text="displayWithLocation"
-							label="Location"
-							required
-						>
-						</v-autocomplete>
-					</v-col>
-					<v-col cols="4">
-						<v-autocomplete
-							v-model="selectedGameVersion"
-							:items="gameVersions"
-							return-object
-							item-text="identifier"
-							label="Game Version"
-							required
-						>
-						</v-autocomplete>
-					</v-col>
-					<v-col cols="4">
-						<v-autocomplete
-							v-model="selectedCommodity"
-							:items="commodities"
-							:item-text="displayWithCommodity"
-							return-object
-							label="Commodity"
-						>
-						</v-autocomplete>
-					</v-col>
-					<v-col cols="2">
-						<v-text-field type="number" min="1" v-model.number="quantity" label="Quantity"></v-text-field>
-					</v-col>
-					<v-col cols="2">
-						<v-text-field
-							type="number"
-							min="0"
-							step="0.01"
-							v-model.number="price"
-							label="Total Price"
-						></v-text-field>
-					</v-col>
-					<v-col>
-						<v-btn-toggle v-model="type" mandatory dense>
-							<v-btn color="success" value="BUY">BUY</v-btn>
-							<v-btn color="accent" value="SELL">SELL</v-btn>
-						</v-btn-toggle>
-					</v-col>
-					<v-col>
-						<v-btn color="accent" @click="addItemPrice()" :disabled="invalidCommodity">Add</v-btn>
-					</v-col>
-					<v-col cols="12">
-						<v-data-table
-							:headers="headers"
-							:items="itemPrices"
-							:items-per-page="-1"
-							sort-by="type"
-							hide-default-footer
-							class="elevation-1"
-						>
-							<template v-slot:body="{ items }">
-								<tbody>
-									<tr v-for="(item, index) in items" :key="index">
-										<td>{{ item.commodity.name }}</td>
-										<td class="text-right">
-											<v-edit-dialog :return-value.sync="item.quantity" persistent large>
-												{{ item.quantity }}
-												<template v-slot:input>
-													<v-text-field
-														type="number"
-														v-model.number="item.quantity"
-														min="1"
-														label="Edit Quantity"
-														single-line
-													></v-text-field>
-												</template>
-											</v-edit-dialog>
-										</td>
-										<td class="text-right">
-											<v-edit-dialog :return-value.sync="item.price" persistent large>
-												{{ item.price }}
-												<template v-slot:input>
-													<v-text-field
-														type="number"
-														v-model.number="item.price"
-														min="0"
-														step="0.01"
-														label="Edit Price"
-														single-line
-													></v-text-field>
-												</template>
-											</v-edit-dialog>
-										</td>
-										<td class="text-right">{{ (item.price / item.quantity).toFixed(2) }}</td>
-										<td class="text-center">
-											<v-btn-toggle v-model="item.type" mandatory dense>
-												<v-btn color="success" value="BUY">BUY</v-btn>
-												<v-btn color="accent" value="SELL">SELL</v-btn>
-											</v-btn-toggle>
-										</td>
-										<td>
-											<v-btn color="warning" text icon @click="removeItemPrice(index)">
-												<v-icon>fas fa-minus</v-icon>
-											</v-btn>
-										</td>
-									</tr>
-								</tbody>
-							</template>
-						</v-data-table>
-					</v-col>
-				</v-row>
-			</v-container>
-		</v-card-text>
-		<v-card-actions>
-			<v-spacer></v-spacer>
-			<v-btn color="warning" @click="$emit('close')">Cancel</v-btn>
-			<v-btn color="success" @click="reportItemPrices()" :disabled="invalid">Report</v-btn>
-		</v-card-actions>
-	</v-card>
+  <v-card>
+    <v-card-title class="headline">Report Prices</v-card-title>
+    <v-card-text>
+      <v-container>
+        <v-row dense>
+          <v-col cols="8">
+            <v-autocomplete
+              v-model="location"
+              :items="locations"
+              return-object
+              :item-text="displayWithLocation"
+              label="Location"
+              required
+            >
+            </v-autocomplete>
+          </v-col>
+          <v-col cols="4">
+            <v-autocomplete
+              v-model="selectedGameVersion"
+              :items="gameVersions"
+              return-object
+              item-text="identifier"
+              label="Game Version"
+              required
+            >
+            </v-autocomplete>
+          </v-col>
+          <v-col cols="4">
+            <v-autocomplete
+              v-model="selectedCommodity"
+              :items="commodities"
+              :item-text="displayWithCommodity"
+              return-object
+              label="Commodity"
+            >
+            </v-autocomplete>
+          </v-col>
+          <v-col cols="2">
+            <v-text-field type="number" min="1" v-model.number="quantity" label="Quantity"></v-text-field>
+          </v-col>
+          <v-col cols="2">
+            <v-text-field type="number" min="0" step="0.01" v-model.number="price" label="Total Price"></v-text-field>
+          </v-col>
+          <v-col>
+            <v-btn-toggle v-model="type" mandatory dense>
+              <v-btn color="success" value="BUY">BUY</v-btn>
+              <v-btn color="accent" value="SELL">SELL</v-btn>
+            </v-btn-toggle>
+          </v-col>
+          <v-col>
+            <v-btn color="accent" @click="addItemPrice()" :disabled="invalidCommodity">Add</v-btn>
+          </v-col>
+          <v-col cols="12">
+            <v-data-table
+              :headers="headers"
+              :items="itemPrices"
+              :items-per-page="-1"
+              sort-by="type"
+              hide-default-footer
+              class="elevation-1"
+            >
+              <template v-slot:body="{ items }">
+                <tbody>
+                  <tr v-for="(item, index) in items" :key="index">
+                    <td>{{ item.commodity.name }}</td>
+                    <td class="text-right">
+                      <v-edit-dialog :return-value.sync="item.quantity" persistent large>
+                        {{ item.quantity }}
+                        <template v-slot:input>
+                          <v-text-field
+                            type="number"
+                            v-model.number="item.quantity"
+                            min="1"
+                            label="Edit Quantity"
+                            single-line
+                          ></v-text-field>
+                        </template>
+                      </v-edit-dialog>
+                    </td>
+                    <td class="text-right">
+                      <v-edit-dialog :return-value.sync="item.price" persistent large>
+                        {{ item.price }}
+                        <template v-slot:input>
+                          <v-text-field
+                            type="number"
+                            v-model.number="item.price"
+                            min="0"
+                            step="0.01"
+                            label="Edit Price"
+                            single-line
+                          ></v-text-field>
+                        </template>
+                      </v-edit-dialog>
+                    </td>
+                    <td class="text-right">{{ (item.price / item.quantity).toFixed(2) }}</td>
+                    <td class="text-center">
+                      <v-btn-toggle v-model="item.type" mandatory dense>
+                        <v-btn color="success" value="BUY">BUY</v-btn>
+                        <v-btn color="accent" value="SELL">SELL</v-btn>
+                      </v-btn-toggle>
+                    </td>
+                    <td>
+                      <v-btn color="warning" text icon @click="removeItemPrice(index)">
+                        <v-icon>fas fa-minus</v-icon>
+                      </v-btn>
+                    </td>
+                  </tr>
+                </tbody>
+              </template>
+            </v-data-table>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-card-text>
+    <v-card-actions>
+      <v-spacer></v-spacer>
+      <v-btn color="warning" @click="$emit('close')">Cancel</v-btn>
+      <v-btn color="success" @click="reportItemPrices()" :disabled="invalid">Report</v-btn>
+    </v-card-actions>
+  </v-card>
 </v-dialog>

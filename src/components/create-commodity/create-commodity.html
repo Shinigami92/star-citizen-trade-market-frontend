@@ -1,44 +1,44 @@
 <v-dialog v-model="open" persistent max-width="540">
-	<v-card>
-		<v-card-title class="headline">Register new Commodity</v-card-title>
-		<v-card-text>
-			<v-container>
-				<v-row dense>
-					<v-col cols="12">
-						<v-text-field v-model="name" :rules="nameRules" label="Name" required></v-text-field>
-					</v-col>
-					<v-col cols="8">
-						<v-autocomplete
-							v-model="selectedCommodityCategory"
-							:items="commodityCategories"
-							return-object
-							item-text="name"
-							label="Category"
-							required
-						>
-						</v-autocomplete>
-					</v-col>
-					<v-col cols="4">
-						<v-autocomplete
-							v-model="selectedGameVersion"
-							:items="gameVersions"
-							return-object
-							item-text="identifier"
-							label="Game Version"
-							required
-						>
-						</v-autocomplete>
-					</v-col>
-					<v-col cols="12" v-if="errorMessage">
-						<p class="red--text">{{ errorMessage.message }}</p>
-					</v-col>
-				</v-row>
-			</v-container>
-		</v-card-text>
-		<v-card-actions>
-			<v-spacer></v-spacer>
-			<v-btn color="warning" @click="$emit('close')">Cancel</v-btn>
-			<v-btn color="success" @click="create()" :disabled="invalid">Create</v-btn>
-		</v-card-actions>
-	</v-card>
+  <v-card>
+    <v-card-title class="headline">Register new Commodity</v-card-title>
+    <v-card-text>
+      <v-container>
+        <v-row dense>
+          <v-col cols="12">
+            <v-text-field v-model="name" :rules="nameRules" label="Name" required></v-text-field>
+          </v-col>
+          <v-col cols="8">
+            <v-autocomplete
+              v-model="selectedCommodityCategory"
+              :items="commodityCategories"
+              return-object
+              item-text="name"
+              label="Category"
+              required
+            >
+            </v-autocomplete>
+          </v-col>
+          <v-col cols="4">
+            <v-autocomplete
+              v-model="selectedGameVersion"
+              :items="gameVersions"
+              return-object
+              item-text="identifier"
+              label="Game Version"
+              required
+            >
+            </v-autocomplete>
+          </v-col>
+          <v-col cols="12" v-if="errorMessage">
+            <p class="red--text">{{ errorMessage.message }}</p>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-card-text>
+    <v-card-actions>
+      <v-spacer></v-spacer>
+      <v-btn color="warning" @click="$emit('close')">Cancel</v-btn>
+      <v-btn color="success" @click="create()" :disabled="invalid">Create</v-btn>
+    </v-card-actions>
+  </v-card>
 </v-dialog>

@@ -1,39 +1,39 @@
 <v-dialog v-model="open" persistent max-width="360">
-	<v-card>
-		<v-card-title class="headline">Register new Game Version</v-card-title>
-		<v-card-text>
-			<v-container>
-				<v-row dense>
-					<v-col cols="12">
-						<v-text-field
-							v-model="identifier"
-							:rules="identifierRules"
-							label="Identifier"
-							counter="18"
-							required
-						></v-text-field>
-					</v-col>
-					<v-col cols="12"> <p>e.g. 3.0.0-live.695052</p> </v-col>
-					<v-col cols="12">
-						<v-datetime-picker v-model="release" label="Release" format="YYYY-MM-DD HH:mm">
-							<template v-slot:dateIcon>
-								<v-icon>fas fa-calendar</v-icon>
-							</template>
-							<template v-slot:timeIcon>
-								<v-icon>fas fa-clock</v-icon>
-							</template>
-						</v-datetime-picker>
-					</v-col>
-					<v-col cols="12" v-if="errorMessage">
-						<p class="red--text">{{ errorMessage.message }}</p>
-					</v-col>
-				</v-row>
-			</v-container>
-		</v-card-text>
-		<v-card-actions>
-			<v-spacer></v-spacer>
-			<v-btn color="warning" @click="$emit('close')">Cancel</v-btn>
-			<v-btn color="success" @click="create()" :disabled="invalid">Create</v-btn>
-		</v-card-actions>
-	</v-card>
+  <v-card>
+    <v-card-title class="headline">Register new Game Version</v-card-title>
+    <v-card-text>
+      <v-container>
+        <v-row dense>
+          <v-col cols="12">
+            <v-text-field
+              v-model="identifier"
+              :rules="identifierRules"
+              label="Identifier"
+              counter="18"
+              required
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12"> <p>e.g. 3.0.0-live.695052</p> </v-col>
+          <v-col cols="12">
+            <v-datetime-picker v-model="release" label="Release" format="YYYY-MM-DD HH:mm">
+              <template v-slot:dateIcon>
+                <v-icon>fas fa-calendar</v-icon>
+              </template>
+              <template v-slot:timeIcon>
+                <v-icon>fas fa-clock</v-icon>
+              </template>
+            </v-datetime-picker>
+          </v-col>
+          <v-col cols="12" v-if="errorMessage">
+            <p class="red--text">{{ errorMessage.message }}</p>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-card-text>
+    <v-card-actions>
+      <v-spacer></v-spacer>
+      <v-btn color="warning" @click="$emit('close')">Cancel</v-btn>
+      <v-btn color="success" @click="create()" :disabled="invalid">Create</v-btn>
+    </v-card-actions>
+  </v-card>
 </v-dialog>
