@@ -67,7 +67,7 @@
 						-->
             <v-col cols="12">
               <v-row class="mx-0">
-                <v-btn color="primary" @click="search({ fetchPolicy: 'network-only' })">Search</v-btn>
+                <v-btn color="primary darken-1" @click="search({ fetchPolicy: 'network-only' })">Search</v-btn>
                 <v-spacer></v-spacer>
                 <v-tooltip bottom :disabled="currentUser && currentUser.hasAnyRole(['USER', 'ADVANCED', 'ADMIN'])">
                   <template v-slot:activator="{ on }">

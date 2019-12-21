@@ -5,26 +5,36 @@
 
   .theme--dark {
     &.v-card {
-      background-color: #0a2433;
+      background-color: #243249;
     }
     &.v-toolbar {
-      background-color: #0a2433;
+      background-color: #243249;
     }
     &.v-navigation-drawer {
-      background: #041524;
+      background: #182436;
 
       .theme--dark.v-list {
-        color: #08658b;
+        .v-list-item__content {
+          color: #b3dbfe;
+        }
+
+        .v-list-item--active {
+          background-color: #0d5798;
+
+          .v-list-item__content {
+            color: #fff;
+          }
+        }
       }
     }
 
     &.v-data-table {
-      background-color: #0a2332;
-      background-color: rgba(13, 46, 66, 0.5);
-      color: #0a89bb;
+      background-color: #243249;
+      background-color: rgba(36, 50, 73, 0.5);
+      color: #d6e3eb;
 
       tbody tr:hover:not(.v-datatable__expand-row) {
-        background: #0a2332;
+        background: #31425b;
       }
     }
 
@@ -35,7 +45,7 @@
     }
 
     &.v-tabs-bar {
-      background-color: #096689;
+      background-color: var(--v-primary-base);
     }
 
     &.v-picker__body {
@@ -44,7 +54,7 @@
   }
 
   .v-toolbar__title {
-    color: #00e7ff;
+    color: var(--v-primary-base);
     text-transform: uppercase;
   }
 
