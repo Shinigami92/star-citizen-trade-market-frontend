@@ -23,7 +23,7 @@
                 :append-icon="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"
                 @click:append="showPassword = !showPassword"
               ></v-text-field>
-              <v-btn block :disabled="!valid" @click="submit">Sign In</v-btn>
+              <v-btn block tile :disabled="!valid" @click="submit">Sign In</v-btn>
             </v-col>
           </v-row>
         </v-form>

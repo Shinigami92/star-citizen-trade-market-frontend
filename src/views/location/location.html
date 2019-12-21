@@ -9,7 +9,7 @@
       <v-container fluid>
         <v-row>
           <v-col cols="12">
-            <v-card>
+            <v-card tile>
               <v-card-title class="headline">{{ location.name }}</v-card-title>
               <v-card-text>
                 <div>Type: {{ location.type.name }}</div>
@@ -19,7 +19,7 @@
             </v-card>
           </v-col>
           <v-col cols="4" v-for="child in location.children" :key="child.id">
-            <v-card>
+            <v-card tile>
               <v-card-title class="headline">{{ child.name }}</v-card-title>
               <v-card-text>
                 <div>Type: {{ child.type.name }}</div>
@@ -27,7 +27,7 @@
                 <!-- <div>{{ child.description }}</div> -->
               </v-card-text>
               <v-card-actions>
-                <v-btn :to="'/location/' + child.id" text color="orange">Details</v-btn>
+                <v-btn :to="'/location/' + child.id" text tile color="orange">Details</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>

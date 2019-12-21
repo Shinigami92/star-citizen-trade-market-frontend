@@ -1,5 +1,5 @@
 <v-dialog v-model="open" persistent max-width="540">
-  <v-card>
+  <v-card tile>
     <v-card-title class="headline">Register new Commodity</v-card-title>
     <v-card-text>
       <v-container>
@@ -37,8 +37,8 @@
     </v-card-text>
     <v-card-actions>
       <v-spacer></v-spacer>
-      <v-btn color="warning" @click="$emit('close')">Cancel</v-btn>
-      <v-btn color="success" @click="create()" :disabled="invalid">Create</v-btn>
+      <v-btn color="warning" tile @click="$emit('close')">Cancel</v-btn>
+      <v-btn color="success" tile @click="create()" :disabled="invalid">Create</v-btn>
     </v-card-actions>
   </v-card>
 </v-dialog>

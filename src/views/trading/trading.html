@@ -1,7 +1,7 @@
 <v-row>
   <v-col>
     <h1 class="display-1">Trading</h1>
-    <v-card class="mt-2">
+    <v-card class="mt-2" tile>
       <v-form ref="filterForm">
         <v-container>
           <v-row>
@@ -67,7 +67,7 @@
 						-->
             <v-col cols="12">
               <v-row class="mx-0">
-                <v-btn color="primary darken-1" @click="search({ fetchPolicy: 'network-only' })">Search</v-btn>
+                <v-btn color="primary darken-1" tile @click="search({ fetchPolicy: 'network-only' })">Search</v-btn>
                 <v-spacer></v-spacer>
                 <v-tooltip bottom :disabled="currentUser && currentUser.hasAnyRole(['USER', 'ADVANCED', 'ADMIN'])">
                   <template v-slot:activator="{ on }">
@@ -75,6 +75,7 @@
                       <v-btn
                         @click="reportPricesModal = true"
                         color="accent"
+                        tile
                         :disabled="currentUser === null || !currentUser.hasAnyRole(['USER', 'ADVANCED', 'ADMIN'])"
                       >
                         Report Prices
@@ -104,6 +105,7 @@
                           <div v-on="on">
                             <v-btn
                               color="secondary"
+                              tile
                               :disabled="currentUser === null || !currentUser.hasAnyRole(['ADVANCED', 'ADMIN'])"
                             >
                               Miss Something?
