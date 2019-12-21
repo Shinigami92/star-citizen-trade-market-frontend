@@ -78,3 +78,29 @@ input:-webkit-autofill {
   -webkit-text-fill-color: #fff;
   transition: background-color 5000s ease-in-out 0s;
 }
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+
+  &-button {
+    width: 0;
+    height: 0;
+  }
+
+  &-corner {
+    background: transparent;
+  }
+
+  &-thumb {
+    background: #597398;
+    border: none;
+    border-radius: 50px;
+  }
+
+  &-track {
+    background: #243249;
+    border: none;
+    border-radius: 0;
+  }
+}
