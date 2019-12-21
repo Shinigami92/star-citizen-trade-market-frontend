@@ -13,50 +13,42 @@ export default new Router({
     {
       path: '/sign-up',
       name: 'sign-up',
-      // @ts-ignore
-      component: (): Promise<any> => import('./views/sign-up/sign-up.vue')
+      component: () => import('./views/sign-up/sign-up.vue')
     },
     {
       path: '/sign-in',
       name: 'sign-in',
-      // @ts-ignore
-      component: (): Promise<any> => import('./views/sign-in/sign-in.vue')
+      component: () => import('./views/sign-in/sign-in.vue')
     },
     {
       path: '/privacy-policy',
       name: 'privacy-policy',
-      // @ts-ignore
-      component: (): Promise<any> => import('./views/privacy-policy/privacy-policy.vue')
+      component: () => import('./views/privacy-policy/privacy-policy.vue')
     },
     {
       path: '/trading',
       name: 'trading',
-      // @ts-ignore
-      component: (): Promise<any> => import('./views/trading/trading.vue')
+      component: () => import('./views/trading/trading.vue')
     },
     {
       path: '/location/:id?',
       name: 'location',
-      // @ts-ignore
-      component: (): Promise<any> => import('./views/location/location.vue')
+      component: () => import('./views/location/location.vue')
     },
     {
       path: '/my-ships',
       name: 'my-ships',
-      // @ts-ignore
-      component: (): Promise<any> => import('./views/my-ships/my-ships.vue')
+      component: () => import('./views/my-ships/my-ships.vue')
     },
     {
       path: '/my-transactions',
       name: 'my-transactions',
-      // @ts-ignore
-      component: (): Promise<any> => import('./views/my-transactions/my-transactions.vue')
+      component: () => import('./views/my-transactions/my-transactions.vue')
     },
     {
       path: '/shout-out',
       name: 'shout-out',
-      // @ts-ignore
-      component: (): Promise<any> => import('./views/shout-out/shout-out.vue')
+      component: () => import('./views/shout-out/shout-out.vue')
     },
     ...administrationRoutes,
     {

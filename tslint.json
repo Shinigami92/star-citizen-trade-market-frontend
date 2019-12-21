@@ -47,8 +47,6 @@
     },
     "typedef": {
       "options": [
-        "arrow-call-signature",
-        "arrow-parameter",
         "call-signature",
         "member-variable-declaration",
         "parameter",

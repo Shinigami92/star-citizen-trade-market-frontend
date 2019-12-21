@@ -20,10 +20,10 @@ export default class SignUp extends Vue {
   public showPassword: boolean = false;
 
   public readonly usernameRules: ValidationRule[] = [
-    (v: string): boolean | string => !!v || 'Username is required',
-    (v: string): boolean | string => v.length >= 3 || 'Username must be greater than or equals 3 characters'
+    (v) => !!v || 'Username is required',
+    (v) => v.length >= 3 || 'Username must be greater than or equals 3 characters'
   ];
-  public readonly passwordRules: ValidationRule[] = [(v: string): boolean | string => !!v || 'Password is required'];
+  public readonly passwordRules: ValidationRule[] = [(v) => !!v || 'Password is required'];
 
   constructor() {
     super();

@@ -1,6 +1,6 @@
 import { InMemoryCache, NormalizedCacheObject } from 'apollo-cache-inmemory';
 import { ApolloClient } from 'apollo-client';
-import { ApolloLink, Operation, split } from 'apollo-link';
+import { ApolloLink, split } from 'apollo-link';
 import { createHttpLink } from 'apollo-link-http';
 import { WebSocketLink } from 'apollo-link-ws';
 import { getMainDefinition } from 'apollo-utilities';
@@ -35,7 +35,7 @@ const wsLink: WebSocketLink = new WebSocketLink({
 // depending on what kind of operation is being sent
 const link: ApolloLink = split(
   // split based on operation type
-  (operation: Operation) => {
+  (operation) => {
     const token: string | null = localStorage.getItem(APOLLO_AUTH_TOKEN);
     if (token) {
       operation.setContext({

@@ -1,5 +1,5 @@
 import '@fortawesome/fontawesome-free/css/all.css';
-import Vue, { CreateElement, VNode } from 'vue';
+import Vue from 'vue';
 import App from './app.vue';
 import { apolloProvider } from './plugins/apollo';
 import './plugins/moment';
@@ -11,6 +11,6 @@ Vue.config.productionTip = false;
 new Vue({
   vuetify,
   apolloProvider,
-  render: (h: CreateElement): VNode => h(App),
+  render: (h) => h(App),
   router
 }).$mount('#app');

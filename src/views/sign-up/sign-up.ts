@@ -19,21 +19,20 @@ export default class SignUp extends Vue {
   public confirmEmail: string = '';
 
   public readonly usernameRules: ValidationRule[] = [
-    (v: string): boolean | string => !!v || 'Username is required',
-    (v: string): boolean | string => v.length >= 3 || 'Username must be greater than or equals 3 characters'
+    (v) => !!v || 'Username is required',
+    (v) => v.length >= 3 || 'Username must be greater than or equals 3 characters'
   ];
   public readonly handleRules: ValidationRule[] = [
-    (v: string): boolean | string => !!v || 'Handle is required',
-    (v: string): boolean | string => v.length <= 50 || 'Handle must be less than 50 characters'
+    (v) => !!v || 'Handle is required',
+    (v) => v.length <= 50 || 'Handle must be less than 50 characters'
   ];
   public readonly emailRules: ValidationRule[] = [
-    (v: string): boolean | string => !!v || 'E-Mail is required',
-    (v: string): boolean | string => isEmail(v) || 'E-Mail must be valid'
+    (v) => !!v || 'E-Mail is required',
+    (v) => isEmail(v) || 'E-Mail must be valid'
   ];
   public readonly confirmEmailRules: ValidationRule[] = [
-    (v: string): boolean | string => !!v || 'Confirm E-Mail is required',
-    (v: string): boolean | string =>
-      v === (this.$refs.emailInput as HTMLInputElement).value || 'Must be equals to E-Mail'
+    (v) => !!v || 'Confirm E-Mail is required',
+    (v) => v === (this.$refs.emailInput as HTMLInputElement).value || 'Must be equals to E-Mail'
   ];
 
   constructor() {

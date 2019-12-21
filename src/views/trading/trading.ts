@@ -151,8 +151,7 @@ export default class TradingDashboard extends Vue {
           startLocationId: this.startLocation ? this.startLocation.id : undefined,
           endLocationId: this.endLocation ? this.endLocation.id : undefined,
           gameVersionId: this.gameVersion ? this.gameVersion.id : undefined,
-          itemIds:
-            this.selectedCommodities.length > 0 ? this.selectedCommodities.map((c: Commodity) => c.id) : undefined
+          itemIds: this.selectedCommodities.length > 0 ? this.selectedCommodities.map((c) => c.id) : undefined
         }
       },
       fetchPolicy

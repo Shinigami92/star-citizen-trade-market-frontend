@@ -21,8 +21,8 @@ export default class CreateLocation extends Vue {
   public gameVersions: GameVersion[] = [];
 
   public readonly nameRules: ValidationRule[] = [
-    (v: string): boolean | string => !!v || 'Name is required',
-    (v: string): boolean | string => v.length >= 3 || 'Name must be greater than or equals 3 characters'
+    (v) => !!v || 'Name is required',
+    (v) => v.length >= 3 || 'Name must be greater than or equals 3 characters'
   ];
 
   public errors: GraphQLError[] | null = null;
