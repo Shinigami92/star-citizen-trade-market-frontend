@@ -39,7 +39,19 @@ export default class Index extends Vue {
 		{ text: 'Can Trade', width: 100, value: 'canTrade' },
 		{ text: 'ID', width: 340, value: 'id' }
 	];
+
+	public tableHeight: number = 0;
+
 	constructor() {
 		super();
+	}
+
+	public updateTableHeight(): void {
+		this.tableHeight = window.innerHeight - this.$vuetify.application.top - 204;
+	}
+
+	protected mounted(): void {
+		this.updateTableHeight();
+		window.addEventListener('resize', () => this.updateTableHeight());
 	}
 }

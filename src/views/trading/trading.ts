@@ -99,6 +99,8 @@ export default class TradingDashboard extends Vue {
 		{ text: 'Scanned', width: 240, value: 'scanTime' }
 	];
 
+	public tableHeight: number = 0;
+
 	constructor() {
 		super();
 	}
@@ -161,6 +163,10 @@ export default class TradingDashboard extends Vue {
 		this.trades.push(...queryResult.data.trades);
 	}
 
+	public updateTableHeight(): void {
+		this.tableHeight = window.innerHeight - this.$vuetify.application.top - 486;
+	}
+
 	protected async beforeMount(): Promise<void> {
 		const queryResult: ApolloQueryResult<{
 			locations: Location[];
@@ -209,6 +215,11 @@ export default class TradingDashboard extends Vue {
 		this.locations.push(...queryResult.data.locations);
 		this.commodities.push(...queryResult.data.commodities);
 		await this.search({ fetchPolicy: 'network-only' });
+	}
+
+	protected mounted(): void {
+		this.updateTableHeight();
+		window.addEventListener('resize', () => this.updateTableHeight());
 	}
 
 	@Watch('startLocation')

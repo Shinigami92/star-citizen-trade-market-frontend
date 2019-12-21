@@ -6,8 +6,9 @@
 			:items="elements"
 			sort-by="scanTime"
 			:sort-desc="true"
-			:items-per-page="25"
+			:items-per-page="30"
 			class="elevation-1"
+			:height="tableHeight"
 			dense
 		>
 			<template v-slot:body="{ items }">
@@ -16,8 +17,7 @@
 						<td>{{ item.item.name }} ({{ item.item.type }})</td>
 						<td>
 							{{ item.location.name }} ({{ item.location.type.name }}) - ({{
-								item.location.parentLocation.name
-							}})
+							item.location.parentLocation.name }})
 						</td>
 						<td class="text-right">{{ item.price.toFixed(2) }}</td>
 						<td class="text-right">{{ item.quantity }}</td>
