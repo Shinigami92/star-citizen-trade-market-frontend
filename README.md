@@ -54,6 +54,21 @@ yarn lint
 
 See [Configuration Reference](https://cli.vuejs.org/config).
 
+## Local setup with docker
+
+```bash
+$ docker build --build-arg VUE_APP_API_URL=http://localhost:3000/graphql --build-arg VUE_APP_GRAPHQL_WS=ws://localhost:3000/graphql -t sctm-frontend .
+$ docker run -it -p 8080:80 --rm --name SCTM_Frontend sctm-frontend
+```
+
+Now you can connect the frontend via http://localhost:8080
+
+### Docker Cleanup
+
+```bash
+$ docker rmi sctm-frontend
+```
+
 ## License
 
 [MIT licensed](LICENSE)
