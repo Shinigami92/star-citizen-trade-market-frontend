@@ -14,5 +14,12 @@ v-row
         tbody
           tr(v-for="item in items", :key="item.id")
             td.mono {{ item.identifier }}
-            td {{ item.release | moment('LLL') }}
+            template(v-if="currentUser.hasRole('ADMIN')")
+              td
+                v-edit-dialog(large, persistent, @open="openEditDialog(item)", @save="updateRelease")
+                  | {{ item.release | moment('LLL') }}
+                  template(v-slot:input)
+                    v-text-field(v-model="release", label="Edit Release", single-line)
+            template(v-else)
+              td {{ item.release | moment('LLL') }}
             td.mono {{ item.id }}
