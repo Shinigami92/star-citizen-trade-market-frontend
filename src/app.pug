@@ -50,7 +50,8 @@ v-app(dark)
     v-spacer
     v-btn(icon)
       img(src="./assets/MadeByTheCommunity_White.png", width="32")
-    // <v-btn icon to="/sign-up"><v-icon>fas fa-user-plus</v-icon></v-btn>
+      //- v-btn(icon, to="/sign-up")
+      //-   v-icon fas fa-user-plus
     template(v-if="!currentUser")
       v-btn(icon, to="/sign-up")
         v-icon fas fa-user-plus

@@ -12,14 +12,14 @@ v-row
               v-card-text
                 div Type: {{ location.type.name }}
                 div Can Trade: {{ location.canTrade }}
-                // <div>{{ location.description }}</div>
+                //- div {{ location.description }}
           v-col(cols="4", v-for="child in location.children", :key="child.id")
             v-card(tile)
               v-card-title.headline {{ child.name }}
               v-card-text
                 div Type: {{ child.type.name }}
                 div Can Trade: {{ child.canTrade }}
-                // <div>{{ child.description }}</div>
+                //- div {{ child.description }}
               v-card-actions
                 v-btn(:to="`/location/${child.id}`", text, tile, color="orange") Details
     template(v-else)
