@@ -1,5 +1,5 @@
 import { CreateAccountInput } from '@/shared/graphql.schema';
-import { ValidationRule } from '@/shared/validation-rule';
+import { checkErrorMessage, ValidationRule } from '@/shared/validation-rule';
 import { FetchResult } from 'apollo-link';
 import { GraphQLError } from 'graphql';
 import gql from 'graphql-tag';
@@ -7,15 +7,10 @@ import isEmail from 'validator/lib/isEmail';
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 
-function checkErrorMessage(message: string | null, expectedMessage: string): string | true {
-  return !message || message !== expectedMessage || message;
-}
-
 @Component
 export default class SignUp extends Vue {
   // Error message must be outside the component, otherwise rules cannot find it
-  public static errorMessage: string | null = null;
-  public errors: GraphQLError[] | null = null;
+  private static errorMessage: string | null = null;
 
   public username: string = '';
   public handle: string = '';
@@ -57,7 +52,6 @@ export default class SignUp extends Vue {
 
   public async submit(): Promise<void> {
     try {
-      this.errors = null;
       SignUp.errorMessage = null;
       const result: FetchResult<any, Record<string, any>, Record<string, any>> = await this.$apollo.mutate({
         mutation: gql`
@@ -79,9 +73,9 @@ export default class SignUp extends Vue {
       console.log(result.data);
       this.$router.push('/sign-in');
     } catch (error) {
-      console.error(error.graphQLErrors);
-      this.errors = error.graphQLErrors as GraphQLError[];
-      SignUp.errorMessage = JSON.parse(JSON.stringify(this.errors[0].message)).message;
+      const errors: GraphQLError[] = error.graphQLErrors;
+      console.error(errors);
+      SignUp.errorMessage = JSON.parse(JSON.stringify(errors[0].message)).message;
       (this.$refs.form as any).validate();
     }
   }

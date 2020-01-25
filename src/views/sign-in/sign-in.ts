@@ -6,13 +6,12 @@ import { ApolloQueryResult } from 'apollo-client';
 import { GraphQLError } from 'graphql';
 import gql from 'graphql-tag';
 import Vue from 'vue';
-import { Component } from 'vue-property-decorator';
+import { Component, Watch } from 'vue-property-decorator';
 
 @Component
-export default class SignUp extends Vue {
-  public valid: boolean = false;
-  public errors: GraphQLError[] | null = null;
-  public errorMessage: any | null = null;
+export default class SignIn extends Vue {
+  // Error message must be outside the component, otherwise rules cannot find it
+  private static errorMessage: string | null = null;
 
   public username: string = '';
   public password: string = '';
@@ -21,7 +20,8 @@ export default class SignUp extends Vue {
 
   public readonly usernameRules: ValidationRule[] = [
     (v) => !!v || 'Username is required',
-    (v) => v.length >= 3 || 'Username must be greater than or equals 3 characters'
+    (v) => v.length >= 3 || 'Username must be greater than or equals 3 characters',
+    (v) => !SignIn.errorMessage || SignIn.errorMessage !== 'Unauthorized' || 'That username or password is incorrect'
   ];
   public readonly passwordRules: ValidationRule[] = [(v) => !!v || 'Password is required'];
 
@@ -29,8 +29,16 @@ export default class SignUp extends Vue {
     super();
   }
 
+  public get invalid(): boolean {
+    return (
+      this.usernameRules.some((rule) => rule(this.username) !== true) ||
+      this.passwordRules.some((rule) => rule(this.password) !== true)
+    );
+  }
+
   public async submit(): Promise<void> {
     try {
+      SignIn.errorMessage = null;
       const result: ApolloQueryResult<{ signIn: AuthToken }> = await this.$apollo.query({
         query: gql`
           query SignIn($username: String!, $password: String!) {
@@ -52,7 +60,15 @@ export default class SignUp extends Vue {
       this.$router.push('/trading');
     } catch (error) {
       console.error(error.graphQLErrors);
-      this.errors = error.graphQLErrors as GraphQLError[];
+      const errors: GraphQLError[] = error.graphQLErrors;
+      SignIn.errorMessage = JSON.parse(JSON.stringify(errors[0].message)).error;
+      (this.$refs.form as any).validate();
     }
+  }
+
+  @Watch('username')
+  @Watch('password')
+  protected clearErrorMessage(): void {
+    SignIn.errorMessage = null;
   }
 }

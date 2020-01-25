@@ -3,7 +3,7 @@ v-row
     h1.display-1 Sign In
     v-row
       v-col(md="5")
-        v-form(ref="form", v-model="valid", lazy-validation)
+        v-form(ref="form")
           v-row
             v-col
               v-text-field(v-model="username", :rules="usernameRules", label="Username", autocomplete="off", required)
@@ -17,4 +17,4 @@ v-row
                 :append-icon="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'",
                 @click:append="(showPassword = !showPassword)"
               )
-              v-btn(block, tile, :disabled="!valid", @click="submit") Sign In
+              v-btn(block, tile, @click="submit", :disabled="invalid") Sign In
