@@ -6,5 +6,14 @@
   "singleQuote": true,
   "trailingComma": "none",
   "tabWidth": 2,
-  "useTabs": false
+  "useTabs": false,
+  "overrides": [
+    {
+      "files": ["*.pug"],
+      "options": {
+        "tabWidth": 2,
+        "singleQuote": false
+      }
+    }
+  ]
 }

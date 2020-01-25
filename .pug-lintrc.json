@@ -1,0 +1,7 @@
+{
+  "maximumNumberOfLines": 400,
+  "validateAttributeSeparator": {
+    "multiLineSeparator": ",\n  ",
+    "separator": ", "
+  }
+}
