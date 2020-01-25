@@ -18,7 +18,7 @@ export default class App extends Vue {
 
   public async signOut(): Promise<void> {
     localStorage.removeItem(CURRENT_USER_DATA);
-    await onLogout(this.$apolloProvider!.defaultClient);
+    await onLogout(this.$apolloProvider.defaultClient);
     this.$router.go(0);
   }
 
