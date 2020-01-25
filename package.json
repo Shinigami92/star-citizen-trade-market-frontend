@@ -8,13 +8,18 @@
     "name": "Christopher Quadflieg"
   },
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "clean": "rimraf yarn.lock dist node_modules",
     "build": "vue-cli-service build",
+    "serve": "vue-cli-service serve",
     "lint": "vue-cli-service lint",
+    "lint:all": "yarn lint:ts && yarn lint:vue",
+    "lint:ts": "eslint src --ext .ts",
+    "lint:ts:cache": "eslint src --ext .ts --cache",
+    "lint:vue": "eslint src --ext .vue",
     "format": "yarn format:ts && yarn format:html && yarn format:scss && yarn format:vue",
-    "format:ts": "prettier --write **/*.ts",
-    "format:html": "prettier --write **/*.html",
-    "format:scss": "prettier --write **/*.scss",
+    "format:ts": "prettier --write 'src/**/*.ts'",
+    "format:html": "prettier --write 'src/**/*.html'",
+    "format:scss": "prettier --write 'src/**/*.scss'",
     "format:vue": "prettier --write **/*.vue"
   },
   "dependencies": {
@@ -48,6 +53,7 @@
     "babel-loader": "~8.0.6",
     "graphql-tag": "~2.10.1",
     "prettier": "1.19.1",
+    "rimraf": "~3.0.0",
     "sass": "~1.24.5",
     "sass-loader": "~8.0.2",
     "stylus": "~0.54.7",
