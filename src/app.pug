@@ -1,0 +1,72 @@
+v-app(dark)
+  v-navigation-drawer(v-model="drawer", clipped, fixed, app)
+    v-list(dense)
+      v-list-item(to="/trading")
+        v-list-item-action
+          v-icon fas fa-chart-bar
+        v-list-item-content Trading
+      v-list-item(to="/location")
+        v-list-item-action
+          v-icon fas fa-globe
+        v-list-item-content Locations
+      template(v-if="currentUser")
+        v-divider
+        v-list-item(to="/my-ships")
+          v-list-item-action
+            v-icon fas fa-space-shuttle
+          v-list-item-content My Ships
+        v-list-item(to="/my-transactions")
+          v-list-item-action
+            v-icon fas fa-list
+          v-list-item-content My Transactions
+        template(v-if="currentUser.hasRole('ADMIN')")
+          v-divider
+          v-list-group
+            template(v-slot:activator)
+              v-list-item-title Administration
+            v-list-item(to="/administration/account")
+              v-list-item-content Accounts
+            v-list-item(to="/administration/game-version")
+              v-list-item-content Game Versions
+            v-list-item(to="/administration/item")
+              v-list-item-content Items
+            v-list-item(to="/administration/item-price")
+              v-list-item-content Item Prices
+            v-list-item(to="/administration/location")
+              v-list-item-content Locations
+            v-list-item(to="/administration/location-type")
+              v-list-item-content Location Types
+      v-divider
+      v-list-item(to="/shout-out")
+        v-list-item-action
+          v-icon fas fa-handshake
+        v-list-item-content Shout Outs
+      .text-md-center.mt-4
+        a(href="https://robertsspaceindustries.com/fankit", target="_blank")
+          img(src="./assets/MadeByTheCommunity_White.png", width="200")
+  v-app-bar(app, fixed, clipped-left)
+    v-app-bar-nav-icon(@click.stop="(drawer = !drawer)")
+    v-toolbar-title Star Citizen Trade Market
+    v-spacer
+    v-btn(icon)
+      img(src="./assets/MadeByTheCommunity_White.png", width="32")
+    // <v-btn icon to="/sign-up"><v-icon>fas fa-user-plus</v-icon></v-btn>
+    template(v-if="!currentUser")
+      v-btn(icon, to="/sign-up")
+        v-icon fas fa-user-plus
+      v-btn(icon, to="/sign-in")
+        v-icon fas fa-sign-in-alt
+    template(v-else)
+      span Sign in as {{ currentUser.username }}
+      v-btn(icon, @click="signOut")
+        v-icon fas fa-sign-in-alt
+  v-content
+    v-container(fluid)
+      router-view
+  v-footer(app, fixed)
+    span Copyright &copy; 2018-2020 Christopher Quadflieg aka Shinigami
+    span.mx-2 |
+    router-link(to="/privacy-policy") Privacy Policy
+    v-spacer
+    v-btn(href="https://github.com/Shinigami92/star-citizen-trade-market-api", target="_blank", text, icon)
+      v-icon fab fa-github

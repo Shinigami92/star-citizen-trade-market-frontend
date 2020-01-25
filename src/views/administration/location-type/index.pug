@@ -1,0 +1,16 @@
+v-row
+  v-col
+    h1.display-1.mb-2 Location Types
+    v-data-table.elevation-1(
+      :headers="headers",
+      :items="elements",
+      sort-by="name",
+      :items-per-page="10",
+      :height="tableHeight",
+      dense
+    )
+      template(v-slot:body="{ items }")
+        tbody
+          tr(v-for="item in items", :key="item.id")
+            td.mono {{ item.name }}
+            td.mono {{ item.id }}

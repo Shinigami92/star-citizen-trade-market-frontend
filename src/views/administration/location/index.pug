@@ -1,0 +1,25 @@
+v-row
+  v-col
+    h1.display-1.mb-2 Locations
+    v-data-table.elevation-1(
+      :headers="headers",
+      :items="elements",
+      sort-by="name",
+      :items-per-page="25",
+      :height="tableHeight",
+      dense
+    )
+      template(v-slot:body="{ items }")
+        tbody
+          tr(v-for="item in items", :key="item.id")
+            router-link(tag="td", :to="`/location/${item.id}`")
+              span.cursor-pointer {{ item.name }}
+            td {{ item.type.name }}
+            td
+              router-link(v-if="item.parentLocation", tag="div", :to="`/location/${item.parentLocation.id}`")
+                span.cursor-pointer {{ item.parentLocation.name }}
+            td
+              span(v-if="item.inGameSince") {{ item.inGameSince | moment('LLL') }}
+            td.mono {{ item.inGameSinceVersion.identifier }}
+            td {{ item.canTrade }}
+            td.mono {{ item.id }}

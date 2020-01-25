@@ -1,0 +1,32 @@
+v-row
+  v-col
+    template(v-if="location")
+      v-breadcrumbs(:items="breadcrumbItems", large)
+        template(v-slot:divider)
+          v-icon fas fa-chevron-right
+      v-container(fluid)
+        v-row
+          v-col(cols="12")
+            v-card(tile)
+              v-card-title.headline {{ location.name }}
+              v-card-text
+                div Type: {{ location.type.name }}
+                div Can Trade: {{ location.canTrade }}
+                // <div>{{ location.description }}</div>
+          v-col(cols="4", v-for="child in location.children", :key="child.id")
+            v-card(tile)
+              v-card-title.headline {{ child.name }}
+              v-card-text
+                div Type: {{ child.type.name }}
+                div Can Trade: {{ child.canTrade }}
+                // <div>{{ child.description }}</div>
+              v-card-actions
+                v-btn(:to="`/location/${child.id}`", text, tile, color="orange") Details
+    template(v-else)
+      v-autocomplete(
+        v-model="selectedLocation",
+        :items="locations",
+        return-object,
+        :item-text="displayWithLocation",
+        label="Select Location"
+      )

@@ -1,0 +1,22 @@
+v-dialog(v-model="open", persistent, max-width="360")
+  v-card(tile)
+    v-card-title.headline Register new Game Version
+    v-card-text
+      v-container
+        v-row(dense)
+          v-col(cols="12")
+            v-text-field(v-model="identifier", :rules="identifierRules", label="Identifier", counter="18", required)
+          v-col(cols="12")
+            p e.g. 3.0.0-live.695052
+          v-col(cols="12")
+            v-datetime-picker(v-model="release", label="Release", format="YYYY-MM-DD HH:mm")
+              template(v-slot:dateicon)
+                v-icon fas fa-calendar
+              template(v-slot:timeicon)
+                v-icon fas fa-clock
+          v-col(cols="12", v-if="errorMessage")
+            p.red--text {{ errorMessage.message }}
+    v-card-actions
+      v-spacer
+      v-btn(color="warning", tile, @click="$emit('close')") Cancel
+      v-btn(color="success", tile, @click="create()", :disabled="invalid") Create

@@ -1,0 +1,19 @@
+v-row
+  v-col
+    h1.display-1.mb-2 Accounts
+    v-data-table.elevation-1(
+      :headers="headers",
+      :items="elements",
+      sort-by="username",
+      :items-per-page="15",
+      :height="tableHeight",
+      dense
+    )
+      template(v-slot:body="{ items }")
+        tbody
+          tr(v-for="item in items", :key="item.id")
+            td.mono {{ item.id }}
+            td {{ item.username }}
+            td {{ item.handle }}
+            // <td>{{ item.email }}</td>
+            td {{ item.roles.join(', ') }}

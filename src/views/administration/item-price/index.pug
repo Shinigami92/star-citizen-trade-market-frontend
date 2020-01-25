@@ -1,0 +1,26 @@
+v-row
+  v-col
+    h1.display-1.mb-2 Item Prices
+    v-data-table.elevation-1(
+      :headers="headers",
+      :items="elements",
+      sort-by="scanTime",
+      :sort-desc="true",
+      :items-per-page="30",
+      :height="tableHeight",
+      dense
+    )
+      template(v-slot:body="{ items }")
+        tbody
+          tr(v-for="item in items", :key="item.id")
+            td {{ item.item.name }} ({{ item.item.type }})
+            td {{ item.location.name }} ({{ item.location.type.name }}) - ({{ item.location.parentLocation.name }})
+            td.text-right {{ item.price.toFixed(2) }}
+            td.text-right {{ item.quantity }}
+            td.text-right {{ item.unitPrice.toFixed(2) }}
+            td {{ item.visibility }}
+            td {{ item.scanTime | moment('LLL') }}
+            td {{ item.type }}
+            td {{ item.scannedBy.username }}
+            td.mono {{ item.scannedInGameVersion.identifier }}
+            td.mono {{ item.id }}

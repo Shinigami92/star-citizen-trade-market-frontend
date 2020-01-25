@@ -1,0 +1,20 @@
+v-row
+  v-col
+    h1.display-1 Sign In
+    v-row
+      v-col(md="5")
+        v-form(ref="form", v-model="valid", lazy-validation)
+          v-row
+            v-col
+              v-text-field(v-model="username", :rules="usernameRules", label="Username", autocomplete="off", required)
+              v-text-field(
+                v-model="password",
+                :type="showPassword ? 'text' : 'password'",
+                :rules="passwordRules",
+                label="Password",
+                autocomplete="off",
+                required,
+                :append-icon="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'",
+                @click:append="(showPassword = !showPassword)"
+              )
+              v-btn(block, tile, :disabled="!valid", @click="submit") Sign In
