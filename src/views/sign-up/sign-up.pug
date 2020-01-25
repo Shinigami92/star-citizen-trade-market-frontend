@@ -3,7 +3,7 @@ v-row
     h1.display-1 Sign Up
     v-row
       v-col(md="5", sm="12")
-        v-form(ref="form", v-model="valid", lazy-validation)
+        v-form(ref="form")
           v-row
             v-col
               v-text-field(
@@ -37,10 +37,9 @@ v-row
                 autocomplete="off",
                 required
               )
-              v-btn(block, tile, :disabled="!valid", @click="submit") Sign Up
+              v-btn(block, tile, :disabled="invalid", @click="submit") Sign Up
       v-col(offset-md="1", md="6", sm="12")
         p
           | You will receive the access data with password to your specified E-Mail address. The mail will be sent from
           |
           em.mono sctrademarket@gmail.com
-        p.red--text(v-if="errorMessage && errorMessage.message") {{ errorMessage.message }}
