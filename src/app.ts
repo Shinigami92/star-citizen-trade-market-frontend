@@ -8,7 +8,7 @@ import { Account } from './shared/graphql.schema';
 
 @Component
 export default class App extends Vue {
-  public readonly currentUser: CurrentUser | null = currentUser();
+  public currentUser: CurrentUser | null = currentUser();
 
   public drawer: boolean = true;
 
@@ -23,6 +23,11 @@ export default class App extends Vue {
   }
 
   protected async beforeMount(): Promise<void> {
+    this.$root.$on('USER_CHANGED', () => this.checkUser());
+    await this.checkUser();
+  }
+
+  private async checkUser(): Promise<void> {
     const cu: CurrentUser | null = currentUser();
     if (cu === null) {
       return;
@@ -47,11 +52,17 @@ export default class App extends Vue {
       this.$router.push('/sign-in');
       this.$router.go(0);
     } else {
-      const account: Account = JSON.parse(localStorage.getItem(CURRENT_USER_DATA)!);
+      const data: string | null = localStorage.getItem(CURRENT_USER_DATA);
+      if (!data) {
+        console.error('LocalStorage:CURRENT_USER_DATA was null');
+        return;
+      }
+      const account: Account = JSON.parse(data);
       account.id = me.id;
       account.roles = me.roles;
       account.username = me.username;
       localStorage.setItem(CURRENT_USER_DATA, JSON.stringify(account));
+      this.currentUser = cu;
     }
   }
 }

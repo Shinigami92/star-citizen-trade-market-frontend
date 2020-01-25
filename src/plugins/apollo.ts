@@ -67,15 +67,15 @@ export const apolloProvider: VueApollo = new VueApollo({
 });
 
 // Manually call this when user log in
-export async function onLogin(apolloClient: ApolloClient<NormalizedCacheObject>, token: string): Promise<void> {
+export async function onLogin(client: ApolloClient<NormalizedCacheObject>, token: string): Promise<void> {
   if (token) {
     localStorage.setItem(APOLLO_AUTH_TOKEN, token);
   }
-  await apolloClient.resetStore();
+  await client.resetStore();
 }
 
 // Manually call this when user log out
-export async function onLogout(apolloClient: ApolloClient<NormalizedCacheObject>): Promise<void> {
+export async function onLogout(client: ApolloClient<NormalizedCacheObject>): Promise<void> {
   localStorage.removeItem(APOLLO_AUTH_TOKEN);
-  await apolloClient.resetStore();
+  await client.resetStore();
 }

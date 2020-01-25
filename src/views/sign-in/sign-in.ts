@@ -57,6 +57,7 @@ export default class SignIn extends Vue {
       });
       localStorage.setItem(CURRENT_USER_DATA, JSON.stringify(result.data.signIn));
       await onLogin(this.$apolloProvider.defaultClient, result.data.signIn.token);
+      this.$root.$emit('USER_CHANGED');
       this.$router.push('/trading');
     } catch (error) {
       console.error(error.graphQLErrors);
