@@ -9,7 +9,7 @@ export class CurrentUser implements Partial<Account> {
   public readonly token: string;
   public readonly roles: Role[];
 
-  constructor({ id, username, token, roles }: { id: string; username: string; token: string; roles: Role[] }) {
+  public constructor({ id, username, token, roles }: { id: string; username: string; token: string; roles: Role[] }) {
     this.id = id;
     this.username = username;
     this.token = token;

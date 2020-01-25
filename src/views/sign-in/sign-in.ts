@@ -25,7 +25,7 @@ export default class SignUp extends Vue {
   ];
   public readonly passwordRules: ValidationRule[] = [(v) => !!v || 'Password is required'];
 
-  constructor() {
+  public constructor() {
     super();
   }
 

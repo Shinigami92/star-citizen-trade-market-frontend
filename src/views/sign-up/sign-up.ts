@@ -35,7 +35,7 @@ export default class SignUp extends Vue {
     (v) => v === (this.$refs.emailInput as HTMLInputElement).value || 'Must be equals to E-Mail'
   ];
 
-  constructor() {
+  public constructor() {
     super();
   }
 

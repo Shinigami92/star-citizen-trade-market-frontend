@@ -101,7 +101,7 @@ export default class TradingDashboard extends Vue {
 
   public tableHeight: number = 0;
 
-  constructor() {
+  public constructor() {
     super();
   }
 

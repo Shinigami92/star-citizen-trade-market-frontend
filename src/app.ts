@@ -12,7 +12,7 @@ export default class App extends Vue {
 
   public drawer: boolean = true;
 
-  constructor() {
+  public constructor() {
     super();
   }
 

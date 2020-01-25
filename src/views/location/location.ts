@@ -22,7 +22,7 @@ export default class LocationDashboard extends Vue {
   public readonly gameVersions: GameVersion[] = [];
   public gameVersion: GameVersion | null = null;
 
-  constructor() {
+  public constructor() {
     super();
   }
 

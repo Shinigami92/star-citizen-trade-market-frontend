@@ -45,7 +45,7 @@ export default class ReportPrice extends Vue {
     { text: '', value: 'action', sortable: false }
   ];
 
-  constructor() {
+  public constructor() {
     super();
   }
 

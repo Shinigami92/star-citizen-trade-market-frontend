@@ -42,7 +42,7 @@ export default class Index extends Vue {
 
   public tableHeight: number = 0;
 
-  constructor() {
+  public constructor() {
     super();
   }
 

@@ -25,7 +25,7 @@ export default class CreateGameVersion extends Vue {
   public errors: GraphQLError[] | null = null;
   public errorMessage: any | null = null;
 
-  constructor() {
+  public constructor() {
     super();
   }
 
