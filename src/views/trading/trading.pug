@@ -5,7 +5,7 @@ v-row
       v-form(ref="filterForm")
         v-container
           v-row
-            v-col(md="5", cols="12")
+            v-col.py-1(md="5", cols="12")
               v-autocomplete(
                 v-model="startLocation",
                 :items="locations",
@@ -13,9 +13,10 @@ v-row
                 :item-text="displayWithLocation",
                 label="Start Location",
                 prepend-icon="fas fa-plane-departure",
-                clearable
+                clearable,
+                dense
               )
-            v-col(md="5", cols="12")
+            v-col.py-1(md="5", cols="12")
               v-autocomplete(
                 v-model="endLocation",
                 :items="locations",
@@ -23,18 +24,20 @@ v-row
                 :item-text="displayWithLocation",
                 label="End Location",
                 prepend-icon="fas fa-plane-arrival",
-                clearable
+                clearable,
+                dense
               )
-            v-col(md="2", cols="4")
+            v-col.py-1(md="2", cols="4")
               v-autocomplete(
                 v-model="gameVersion",
                 :items="gameVersions",
                 return-object,
                 item-text="identifier",
                 label="Game Version",
-                required
+                required,
+                dense
               )
-            v-col(md="5", cols="4")
+            v-col.py-1(md="5", cols="4")
               v-autocomplete(
                 v-model="selectedCommodities",
                 :items="commodities",
@@ -42,18 +45,19 @@ v-row
                 return-object,
                 label="Commodities",
                 multiple,
-                chips,
+                small-chips,
                 deletable-chips,
-                clearable
+                clearable,
+                dense
               )
-            v-col(md="7", cols="4")
+            v-col.py-1(md="7", cols="4")
             //- v-col(cols="12", md="3")
             //-   v-text-field(type="number", min="1", v-model.number="maxScu", label="Max SCU")
             //- v-col(cols="12", md="3")
             //-   v-text-field(type="number", min="1", v-model.number="startCurrency", label="Start aUEC")
-            v-col(cols="12")
+            v-col.py-1(cols="12")
               v-row.mx-0
-                v-btn(color="primary darken-1", tile, @click="search({ fetchPolicy: 'network-only' })") Search
+                v-btn(color="primary darken-1", tile, small, @click="search({ fetchPolicy: 'network-only' })") Search
                 v-spacer
                 v-tooltip(bottom, :disabled="currentUser && currentUser.hasAnyRole(['USER', 'ADVANCED', 'ADMIN'])")
                   template(v-slot:activator="{ on }")
@@ -62,6 +66,7 @@ v-row
                         @click="(reportPricesModal = true)",
                         color="accent",
                         tile,
+                        small,
                         :disabled="currentUser === null || !currentUser.hasAnyRole(['USER', 'ADVANCED', 'ADMIN'])"
                       )
                         | Report Prices
@@ -82,6 +87,7 @@ v-row
                             v-btn(
                               color="secondary",
                               tile,
+                              small,
                               :disabled="currentUser === null || !currentUser.hasAnyRole(['ADVANCED', 'ADMIN'])"
                             )
                               | Miss Something?

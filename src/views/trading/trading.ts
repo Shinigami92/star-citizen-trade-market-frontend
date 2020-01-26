@@ -161,7 +161,8 @@ export default class TradingDashboard extends Vue {
   }
 
   public updateTableHeight(): void {
-    this.tableHeight = window.innerHeight - this.$vuetify.application.top - 486;
+    this.tableHeight =
+      window.innerHeight - this.$vuetify.application.top - (this.$refs.filterForm as Vue).$el.clientHeight - 204;
   }
 
   protected async beforeMount(): Promise<void> {
