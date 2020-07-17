@@ -127,15 +127,15 @@ export default class TradingDashboard extends Vue {
     await this.search({ fetchPolicy: 'network-only' });
   }
 
-  public async createCommodityModalClosed(): Promise<void> {
+  public createCommodityModalClosed(): void {
     this.createCommodityModal = false;
   }
 
-  public async createGameVersionModalClosed(): Promise<void> {
+  public createGameVersionModalClosed(): void {
     this.createGameVersionModal = false;
   }
 
-  public async createLocationModalClosed(): Promise<void> {
+  public createLocationModalClosed(): void {
     this.createLocationModal = false;
   }
 

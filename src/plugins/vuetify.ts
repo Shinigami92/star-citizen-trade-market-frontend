@@ -1,5 +1,5 @@
 import Vue from 'vue';
-// @ts-ignore
+// @ts-expect-error: No type definitions :(
 import DatetimePicker from 'vuetify-datetime-picker';
 import 'vuetify-datetime-picker/src/stylus/main.styl';
 import 'vuetify/dist/vuetify.min.css';

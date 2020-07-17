@@ -541,3 +541,5 @@ export interface Transaction {
   commodityId: string;
   commodity: Commodity;
 }
+
+export type Date = string;
