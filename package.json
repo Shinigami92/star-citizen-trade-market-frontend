@@ -17,11 +17,7 @@
     "lint:ts:cache": "eslint src --ext .ts --cache",
     "lint:vue": "eslint src --ext .vue",
     "lint:pug": "pug-lint src",
-    "format": "yarn format:ts && yarn format:html && yarn format:scss && yarn format:vue",
-    "format:ts": "prettier --write 'src/**/*.ts'",
-    "format:pug": "prettier --write 'src/**/*.pug'",
-    "format:scss": "prettier --write 'src/**/*.scss'",
-    "format:vue": "prettier --write **/*.vue"
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "~5.14.0",

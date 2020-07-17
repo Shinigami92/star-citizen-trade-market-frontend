@@ -15,6 +15,6 @@ v-row
                 autocomplete="off",
                 required,
                 :append-icon="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'",
-                @click:append="(showPassword = !showPassword)"
+                @click:append="showPassword = !showPassword"
               )
               v-btn(block, tile, @click="submit", :disabled="invalid") Sign In
