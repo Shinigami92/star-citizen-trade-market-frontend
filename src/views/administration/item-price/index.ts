@@ -1,7 +1,7 @@
-import { VuetifyTableHeader } from '@/shared/vuetify/v-data-table';
 import gql from 'graphql-tag';
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
+import { DataTableHeader } from 'vuetify';
 
 @Component({
   apollo: {
@@ -46,7 +46,7 @@ import { Component } from 'vue-property-decorator';
   }
 })
 export default class Index extends Vue {
-  public readonly headers: VuetifyTableHeader[] = [
+  public readonly headers: DataTableHeader[] = [
     { text: 'Item', width: 250, value: 'item.name' },
     { text: 'Location', width: 370, value: 'location.name' },
     { text: 'Price', value: 'price' },

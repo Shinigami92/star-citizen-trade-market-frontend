@@ -1,6 +1,6 @@
 import { CurrentUser, currentUser } from '@/shared/current-user';
 import { GameVersion, Location } from '@/shared/graphql.schema';
-import { VuetifyBreadcrumbItem } from '@/shared/vuetify/v-breadcrumb';
+import { VBreadcrumbsItem } from '@/shared/vuetify/v-breadcrumb';
 import { ApolloQueryResult } from 'apollo-client';
 import gql from 'graphql-tag';
 import Vue from 'vue';
@@ -13,7 +13,7 @@ export default class LocationDashboard extends Vue {
 
   public locationId?: string | null = null;
   public location?: Location | null = null;
-  public readonly breadcrumbItems: VuetifyBreadcrumbItem[] = [];
+  public readonly breadcrumbItems: VBreadcrumbsItem[] = [];
 
   public selectedLocation: Location | null = null;
 

@@ -6,13 +6,13 @@ import {
   Location,
   LocationSearchInput
 } from '@/shared/graphql.schema';
-import { VuetifyTableHeader } from '@/shared/vuetify/v-data-table';
 import { SELECTED_GAME_VERSION } from '@/store/constant';
 import { ApolloQueryResult } from 'apollo-client';
 import { FetchResult } from 'apollo-link';
 import gql from 'graphql-tag';
 import Vue from 'vue';
 import { Component, Model, Prop } from 'vue-property-decorator';
+import { DataTableHeader } from 'vuetify';
 
 @Component
 export default class ReportPrice extends Vue {
@@ -36,7 +36,7 @@ export default class ReportPrice extends Vue {
   public readonly gameVersions: GameVersion[] = [];
   public readonly commodities: Commodity[] = [];
 
-  public readonly headers: VuetifyTableHeader[] = [
+  public readonly headers: DataTableHeader[] = [
     { text: 'Commodity ', width: 160, value: 'commodity.name' },
     { text: 'Quantity ', value: 'quantity' },
     { text: 'Price ', value: 'price' },

@@ -4,13 +4,13 @@ import CreateLocation from '@/components/create-location/create-location.vue';
 import ReportPrice from '@/components/report-prices/report-prices.vue';
 import { CurrentUser, currentUser } from '@/shared/current-user';
 import { Commodity, GameVersion, Location, LocationSearchInput, Trade } from '@/shared/graphql.schema';
-import { VuetifyTableHeader } from '@/shared/vuetify/v-data-table';
 import { SELECTED_GAME_VERSION } from '@/store/constant';
 import { ApolloQueryResult, FetchPolicy } from 'apollo-client';
 import { DocumentNode } from 'graphql';
 import gql from 'graphql-tag';
 import Vue from 'vue';
 import { Component, Watch } from 'vue-property-decorator';
+import { DataTableHeader } from 'vuetify';
 
 const TRADE_QUERY: DocumentNode = gql`
   query tradeData($searchInput: TradeSearchInput) {
@@ -88,7 +88,7 @@ export default class TradingDashboard extends Vue {
   public createGameVersionModal: boolean = false;
   public createLocationModal: boolean = false;
 
-  public readonly headers: VuetifyTableHeader[] = [
+  public readonly headers: DataTableHeader[] = [
     { text: 'Commodity', width: 300, value: 'item.name' },
     { text: 'Start', width: 350, value: 'startLocation.name' },
     { text: 'End', width: 350, value: 'endLocation.name' },
