@@ -11,12 +11,12 @@
     "clean": "rimraf yarn.lock dist node_modules",
     "build": "vue-cli-service build",
     "serve": "vue-cli-service serve",
-    "lint": "vue-cli-service lint",
-    "lint:all": "yarn lint:ts && yarn lint:vue",
+    "lint": "yarn lint:ts && yarn lint:pug && yarn lint:vue",
     "lint:ts": "eslint src --ext .ts",
     "lint:ts:cache": "eslint src --ext .ts --cache",
     "lint:vue": "eslint src --ext .vue",
     "lint:pug": "pug-lint src",
+    "lint:vue-cli": "vue-cli-service lint",
     "format": "prettier --write ."
   },
   "dependencies": {
